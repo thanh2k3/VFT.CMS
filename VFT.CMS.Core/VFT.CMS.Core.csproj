@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\VFT.CMS.Application\VFT.CMS.Application.csproj" />
-    <ProjectReference Include="..\VFT.CMS.Repository\VFT.CMS.Repository.csproj" />
-  </ItemGroup>
-
 </Project>

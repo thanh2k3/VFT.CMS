@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VFT.CMS.Application\VFT.CMS.Application.csproj" />
+    <ProjectReference Include="..\VFT.CMS.Core\VFT.CMS.Core.csproj" />
+  </ItemGroup>
+
 </Project>
