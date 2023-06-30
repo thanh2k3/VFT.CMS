@@ -1,4 +1,8 @@
-﻿namespace VFT.CMS.Admin.Starup
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Repository;
+
+namespace VFT.CMS.Admin.Starup
 {
     public class Startup
     {
@@ -13,6 +17,11 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            string connectionString = Configuration.GetConnectionString("MyDatabase");
+            services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -35,6 +44,8 @@
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
