@@ -11,9 +11,4 @@
     <ProjectReference Include="..\VFT.CMS.Repository\VFT.CMS.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Category\Dto\" />
-    <Folder Include="User\Dto\" />
-  </ItemGroup>
-
 </Project>
