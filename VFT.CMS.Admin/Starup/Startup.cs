@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using VFT.CMS.Repository;
+using VFT.CMS.Application.Category;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Starup
 {
@@ -22,6 +23,8 @@ namespace VFT.CMS.Admin.Starup
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

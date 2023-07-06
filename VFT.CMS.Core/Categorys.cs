@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VFT.CMS.Core
 {
-    public class Category
+    public class Categorys
     {
         public int Id { get; set; }
         public string Title { get; set; }

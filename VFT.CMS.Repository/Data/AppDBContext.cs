@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VFT.CMS.Core;
 
-namespace VFT.CMS.Repository
+namespace VFT.CMS.Repository.Data
 {
     public class AppDBContext : IdentityDbContext
     {
@@ -26,7 +26,7 @@ namespace VFT.CMS.Repository
 
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Categorys> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
     }

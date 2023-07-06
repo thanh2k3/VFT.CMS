@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VFT.CMS.Admin.Models;
+using VFT.CMS.Application.Category;
 
 namespace VFT.CMS.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryService _categoryService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICategoryService categoryService)
         {
-            _logger = logger;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var categories = _categoryService.GetAll();
+            return View(categories);
         }
 
         public IActionResult Privacy()
