@@ -12,5 +12,6 @@ namespace VFT.CMS.Repository.GenericRepository
         List<T> Add(T entity);
         List<T> Edit(T entity);
         List<T> Delete(T entity);
+        List<T> Details(T entity);
     }
 }

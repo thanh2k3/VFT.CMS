@@ -19,6 +19,11 @@ namespace VFT.CMS.Application.Post
             throw new NotImplementedException();
         }
 
+        public List<PostDto> Details(PostDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<PostDto> Edit(PostDto entity)
         {
             throw new NotImplementedException();

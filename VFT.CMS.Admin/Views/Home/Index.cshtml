@@ -1,25 +1,13 @@
-﻿@model List<VFT.CMS.Application.Category.Dto.CategoryDto>
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
 
 
 
+
+
 <div class="content-wrapper">
-    <h1>Index</h1>
-
-    @foreach (var category in Model)
-    {
-        <p>@category.Id -- @category.Title -- @category.Description</p>
-    }
-</div>
-
-
-
-
-@*<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -101,4 +89,4 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-</div>*@
+</div>

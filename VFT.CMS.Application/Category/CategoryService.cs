@@ -19,6 +19,11 @@ namespace VFT.CMS.Application.Category
             throw new NotImplementedException();
         }
 
+        public List<CategoryDto> Details(CategoryDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CategoryDto> Edit(CategoryDto entity)
         {
             throw new NotImplementedException();

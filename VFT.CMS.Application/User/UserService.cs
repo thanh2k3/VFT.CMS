@@ -19,6 +19,11 @@ namespace VFT.CMS.Application.User
             throw new NotImplementedException();
         }
 
+        public List<UserDto> Details(UserDto entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<UserDto> Edit(UserDto entity)
         {
             throw new NotImplementedException();
