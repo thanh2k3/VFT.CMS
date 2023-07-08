@@ -29,5 +29,6 @@ namespace VFT.CMS.Repository.Data
         public DbSet<Categorys> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

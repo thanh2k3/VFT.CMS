@@ -9,6 +9,7 @@ namespace VFT.CMS.Repository.GenericRepository
     public interface IGenericRepository<T> where T : class
     {
         List<T> GetAll();
+        Task<T> GetById(int id);
         List<T> Add(T entity);
         List<T> Edit(T entity);
         List<T> Delete(T entity);

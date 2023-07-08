@@ -31,12 +31,12 @@ namespace VFT.CMS.Application.Category
 
         public List<CategoryDto> GetAll()
         {
-            return new List<CategoryDto>
-            {
-                new CategoryDto { Id = 1, Title = "My Dependency Injection - 1", Description = "Hello World - 1"},
-                new CategoryDto { Id = 2, Title = "My Dependency Injection - 2", Description = "Hello World - 2"},
-                new CategoryDto { Id = 3, Title = "My Dependency Injection - 3", Description = "Hello World - 3"},
-            };
+            throw new NotImplementedException();
+        }
+
+        public Task<CategoryDto> GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

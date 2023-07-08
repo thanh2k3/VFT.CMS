@@ -33,5 +33,10 @@ namespace VFT.CMS.Application.User
         {
             throw new NotImplementedException();
         }
+
+        public Task<UserDto> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

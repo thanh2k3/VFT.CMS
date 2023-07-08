@@ -33,5 +33,10 @@ namespace VFT.CMS.Application.PostCategory
         {
             throw new NotImplementedException();
         }
+
+        public Task<PostCategoryDto> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
