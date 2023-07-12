@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VFT.CMS.Application.Product;
-using VFT.CMS.Application.Product.Dto;
+using VFT.CMS.Admin.Models;
+using VFT.CMS.Application.Products;
 using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -17,22 +18,82 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_productService.GetAll());
+            var products = await _productService.GetAll();
+            return View(products);
         }
 
-        [HttpGet("id")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
-            return View(_productService.GetById(id));
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDto productDto)
+        public async Task<IActionResult> Create(Product model)
         {
-            _productService.Create(productDto);
+            if (ModelState.IsValid)
+            {
+                await _productService.Create(model);
+                return RedirectToAction("Index");
+            }
             return View();
         }
-    }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            Product product = await _productService.GetById(id);
+
+            if (product != null)
+            {
+                return View(product);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+            Product product = await _productService.GetById(id);
+
+            if (product != null)
+            {
+                return View(product);
+            }
+            return RedirectToAction("Index");
+		}
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.Edit(model);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product product = await _productService.GetById(id);
+
+            if (product != null)
+            {
+                return View(product);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _productService.Delete(id);
+            return RedirectToAction("Index");
+        }
+	}
+
 }

@@ -1,8 +1,7 @@
-﻿@model List<VFT.CMS.Application.Product.Dto.ProductDto>
-
+﻿@model IEnumerable<VFT.CMS.Core.Product>
 
 @{
-	ViewData["Titel"] = "Index";
+	ViewData["Title"] = "Danh sách sản phẩm";
 	Layout = "_Layout";
 }
 
@@ -14,7 +13,17 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Products</h1>
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="float-sm-right">
+
+                    <a class="btn btn-success btn-sm" asp-area="" asp-controller="Product" asp-action="Create">
+                        <i class="fa-solid fa-square-plus"></i>
+                        Thêm mới
+                    </a>
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -22,63 +31,72 @@
 
     <!-- Main content -->
     <section class="content">
-
         <!-- Default box -->
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Products</h3>
-            </div>
             <div class="card-body p-0">
                 <table class="table projects">
                     <thead>
                         <tr>
                             <th style="width: 5%">
-                                Id
+                                @Html.DisplayNameFor(model => model.Id)
                             </th>
                             <th>
-                                Name
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
                             </th>
                             <th class="text-center" style="width: 20%">
                                 CRUD
                             </th>
                         </tr>
                     </thead>
-                    @foreach (var product in Model)
+                    <tbody>
+                    @if (Model != null && Model.Any())
                     {
-                        <tbody>
+                        @foreach (var product in Model)
+                        {
                             <tr>
-                                <td>
-                                    @product.Id
-                                </td>
-                                <td>
-                                    @product.Name
-                                </td>
+                                <td>@product.Id</td>
+                                <td>@product.Name</td>
+                                <td>@product.Description</td>
+                                <td>@product.Price</td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
+                                    <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-folder"></i>
+                                        Chi tiết
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="#">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Edit
+                                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-info btn-sm">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Sửa 
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
+                                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                        Xóa
                                     </a>
                                 </td>
                             </tr>
-                        </tbody>
+                        }
                     }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                <div>
+                                    No Products avaialble at this moment
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
     </section>
     <!-- /.content -->
 </div>

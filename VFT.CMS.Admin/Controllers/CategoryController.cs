@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VFT.CMS.Application.Category;
+using VFT.CMS.Application.Categories;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -12,11 +12,11 @@ namespace VFT.CMS.Admin.Controllers
             _categoryService = categoryService;
         }
 
-        public IActionResult Index()
-        {
-            var categories = _categoryService.GetAll();
-            return View(categories);
-        }
+        //public IActionResult Index()
+        //{
+        //    var categories = _categoryService.GetAll();
+        //    return View(categories);
+        //}
 
         public IActionResult Create()
         {

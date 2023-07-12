@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFT.CMS.Application.User.Dto
+namespace VFT.CMS.Application.Users.Dto
 {
     public class UserDto : IdentityUser
     {

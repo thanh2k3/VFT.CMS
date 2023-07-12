@@ -1,0 +1,19 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using VFT.CMS.Application.Helpers;
+using VFT.CMS.Application.Products;
+using VFT.CMS.Repository.Data;
+
+namespace VFT.CMS.Admin.Starup
+{
+    public static class RegisterLifeTime
+    {
+        public static void AddScoped(this IServiceCollection services)
+        {
+
+            services.AddScoped<IProductService, ProductService>();
+
+        }
+    }
+}

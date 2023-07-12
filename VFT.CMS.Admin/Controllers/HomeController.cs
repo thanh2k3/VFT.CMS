@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VFT.CMS.Admin.Models;
-using VFT.CMS.Application.Category;
 
 namespace VFT.CMS.Admin.Controllers
 {

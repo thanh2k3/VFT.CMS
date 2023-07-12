@@ -1,0 +1,78 @@
+﻿@model VFT.CMS.Core.Product
+
+@{
+	ViewData["Title"] = "Thông tin sản phẩm";
+	Layout = "_Layout";
+}
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-10">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-9 col-md-9">
+						<div class="card">
+							<div class="tab-content">
+								<div id="Summery" class="">
+									<div class="table-responsive panel">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td class="text-success">
+														<i class="fa fa-user"></i>
+														@Html.DisplayNameFor(model => model.Id)
+													</td>
+													<td>@Model.Id</td>
+												</tr>
+												<tr>
+													<td class="text-success">
+														<i class="fa fa-calendar"></i>
+														@Html.DisplayNameFor(model => model.Name)
+													</td>
+													<td>@Model.Name</td>
+												</tr>
+												<tr>
+													<td class="text-success">
+														<i class="fa fa-list-ol"></i>
+														@Html.DisplayNameFor(model => model.Description)
+													</td>
+													<td>@Model.Description</td>
+												</tr>
+												<tr>
+													<td class="text-success">
+														<i class="fa fa-book"></i>
+														@Html.DisplayNameFor(model => model.Price)
+													</td>
+													<td>@Model.Price</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="float-sm-right">
+							<a href="/Product" class="btn btn-secondary">Trở về</a>
+						</div>
+					</div>
+				</div>
+				<!-- /.table-responsive -->
+			</div>
+		</div>
+	</section>
+</div>

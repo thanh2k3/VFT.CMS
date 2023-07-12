@@ -1,0 +1,61 @@
+﻿@model VFT.CMS.Core.Product
+
+@{
+	ViewData["Title"] = "Sửa đổi thông tin của sản phẩm";
+	Layout = "_Layout";
+}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-10">
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+	<!-- Main content -->
+	<section class="content">
+		<form method="post" action="Edit">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card card-secondary">
+						<div class="card-header">
+							<h3 class="card-title">Sửa</h3>
+						</div>
+						<div class="card-body">
+							<input type="hidden" asp-for="Id" />
+							<div class="form-group">
+								<label asp-for="Name" class="form-label">Name</label>
+								<input asp-for="Name" type="text" class="form-control">
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Description" class="form-label">Description</label>
+								<input asp-for="Description" type="text" class="form-control">
+								<span asp-validation-for="Description" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label asp-for="Price" class="form-label">Price</label>
+								<input asp-for="Price" type="number" class="form-control">
+								<span asp-validation-for="Price" class="text-danger"></span>
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+					<div class="float-sm-right">
+						<a href="/Product" class="btn btn-secondary">Hủy</a>
+						<button type="submit" class="btn btn-success">Sửa</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+	<!-- /.content -->
+</div>

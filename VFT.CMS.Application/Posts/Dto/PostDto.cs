@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VFT.CMS.Application.PostCategory.Dto;
-using VFT.CMS.Application.User.Dto;
+using VFT.CMS.Application.PostCategories.Dto;
+using VFT.CMS.Application.Users.Dto;
 
-namespace VFT.CMS.Application.Post.Dto
+namespace VFT.CMS.Application.Posts.Dto
 {
     public class PostDto
     {
