@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.Models;
 using VFT.CMS.Application.Products;
+using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
 
@@ -31,7 +32,7 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product model)
+        public async Task<IActionResult> Create(ProductDto model)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +45,7 @@ namespace VFT.CMS.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            Product product = await _productService.GetById(id);
+            ProductDto product = await _productService.GetById(id);
 
             if (product != null)
             {
@@ -56,7 +57,7 @@ namespace VFT.CMS.Admin.Controllers
         [HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-            Product product = await _productService.GetById(id);
+            ProductDto product = await _productService.GetById(id);
 
             if (product != null)
             {
@@ -66,7 +67,7 @@ namespace VFT.CMS.Admin.Controllers
 		}
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Product model)
+        public async Task<IActionResult> Edit(ProductDto model)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +80,7 @@ namespace VFT.CMS.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            Product product = await _productService.GetById(id);
+            ProductDto product = await _productService.GetById(id);
 
             if (product != null)
             {
@@ -89,9 +90,9 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(ProductDto model)
         {
-            await _productService.Delete(id);
+            await _productService.Delete(model);
             return RedirectToAction("Index");
         }
 	}

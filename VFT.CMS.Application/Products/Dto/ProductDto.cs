@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VFT.CMS.Application.Products.Dto
+﻿namespace VFT.CMS.Application.Products.Dto
 {
     public class ProductDto
     {
@@ -12,5 +6,5 @@ namespace VFT.CMS.Application.Products.Dto
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
-    }
+	}
 }

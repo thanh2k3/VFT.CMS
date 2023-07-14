@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using VFT.CMS.Application.Helpers;
 using VFT.CMS.Application.Products;
+using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Starup
@@ -25,7 +25,8 @@ namespace VFT.CMS.Admin.Starup
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
 
-            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            //services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+            services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
 
             services.AddScoped();
         }

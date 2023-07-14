@@ -305,7 +305,7 @@ namespace VFT.CMS.Repository.Migrations
                     b.ToTable("PostCategories");
                 });
 
-            modelBuilder.Entity("VFT.CMS.Core.Products.Product", b =>
+            modelBuilder.Entity("VFT.CMS.Core.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -313,9 +313,21 @@ namespace VFT.CMS.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -323,6 +335,14 @@ namespace VFT.CMS.Repository.Migrations
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
+
+                    b.Property<string>("Thumbnail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

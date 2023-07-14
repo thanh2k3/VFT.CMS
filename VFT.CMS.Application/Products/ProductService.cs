@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
@@ -15,50 +9,47 @@ namespace VFT.CMS.Application.Products
     public class ProductService : IProductService
     {
         private readonly AppDBContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductService(AppDBContext context)
+        public ProductService(AppDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<ProductDto>> GetAll()
         {
             var products = await _context.Products.ToListAsync();
-            return products;
+            var productDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+            return productDto;
         }
 
-        public async Task<Product> GetById(int id)
+		public async Task<ProductDto> GetById(int id)
         {
-            return await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
+            var productDto = _mapper.Map<ProductDto>(product);
+            return productDto;
         }
 
-        public async Task Create(Product model)
+        public async Task Create(ProductDto model)
         {
-            await _context.Products.AddAsync(model);
+            var product = _mapper.Map<Product>(model);
+            await _context.Products.AddAsync(product);
             await Save();
         }
 
-        public async Task Edit(Product model)
+        public async Task Edit(ProductDto model)
         {
-            var product = await _context.Products.FindAsync(model.Id);
-            if (product != null)
-            {
-                product.Name = model.Name;
-                product.Description = model.Description;
-                product.Price = model.Price;
-                _context.Update(product);
-                await Save();
-            }
+            var product = _mapper.Map<Product>(model);
+            _context.Products.Update(product);
+            await Save();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(ProductDto model)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                await Save();
-            }
+            var product = _mapper.Map<Product>(model);
+            _context.Products.Remove(product);
+            await Save();
         }
 
         public async Task Save()

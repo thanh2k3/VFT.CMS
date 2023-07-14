@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using VFT.CMS.Application.Helpers;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Repository.Data;
 
