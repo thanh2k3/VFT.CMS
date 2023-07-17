@@ -24,7 +24,7 @@ namespace VFT.CMS.Application.Products
             return productDto;
         }
 
-		public async Task<ProductDto> GetById(int id)
+        public async Task<ProductDto> GetById(int id)
         {
             var product = await _context.Products.FindAsync(id);
             var productDto = _mapper.Map<ProductDto>(product);

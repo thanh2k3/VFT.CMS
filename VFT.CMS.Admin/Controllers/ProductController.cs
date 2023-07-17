@@ -57,8 +57,8 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpGet]
-		public async Task<IActionResult> Edit(int id)
-		{
+        public async Task<IActionResult> Edit(int id)
+        {
             ProductDto product = await _productService.GetById(id);
             var productVM = _mapper.Map<ProductViewModel>(product);
 
@@ -67,7 +67,7 @@ namespace VFT.CMS.Admin.Controllers
                 return View(productVM);
             }
             return RedirectToAction("Index");
-		}
+        }
 
         [HttpPost]
         public async Task<IActionResult> Edit(ProductViewModel model)
@@ -101,5 +101,5 @@ namespace VFT.CMS.Admin.Controllers
             await _productService.Delete(productVM);
             return RedirectToAction("Index");
         }
-	}
+    }
 }

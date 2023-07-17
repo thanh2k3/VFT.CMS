@@ -27,8 +27,17 @@ namespace VFT.CMS.Repository.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Attributes> Attributes { get; set; }
+        public DbSet<AttributesPrice> AttributesPrices { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
+        public DbSet<TransactStatus> TransactStatuss { get; set; }
     }
 }
