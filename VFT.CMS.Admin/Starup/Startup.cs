@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Admin.Models.Products;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Repository.Data;
@@ -27,6 +28,7 @@ namespace VFT.CMS.Admin.Starup
 
             //services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
+            services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
 
             services.AddScoped();
         }

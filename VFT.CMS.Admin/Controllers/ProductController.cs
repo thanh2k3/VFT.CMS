@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using VFT.CMS.Admin.Models;
+using VFT.CMS.Admin.Models.Products;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
-using VFT.CMS.Core;
-using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetAll();
-            return View(products);
+            var productDto = await _productService.GetAll();
+            var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(productDto);
+            return View(productVM);
         }
 
         [HttpGet]
@@ -32,11 +32,12 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDto model)
+        public async Task<IActionResult> Create(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Create(model);
+                var productVM = _mapper.Map<ProductDto>(model);
+                await _productService.Create(productVM);
                 return RedirectToAction("Index");
             }
             return View();
@@ -46,10 +47,11 @@ namespace VFT.CMS.Admin.Controllers
         public async Task<IActionResult> Details(int id)
         {
             ProductDto product = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(product);
 
-            if (product != null)
+            if (productVM != null)
             {
-                return View(product);
+                return View(productVM);
             }
             return RedirectToAction("Index");
         }
@@ -58,20 +60,22 @@ namespace VFT.CMS.Admin.Controllers
 		public async Task<IActionResult> Edit(int id)
 		{
             ProductDto product = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(product);
 
-            if (product != null)
+            if (productVM != null)
             {
-                return View(product);
+                return View(productVM);
             }
             return RedirectToAction("Index");
 		}
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ProductDto model)
+        public async Task<IActionResult> Edit(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Edit(model);
+                var productVM = _mapper.Map<ProductDto>(model);
+                await _productService.Edit(productVM);
                 return RedirectToAction("Index");
             }
             return View();
@@ -81,20 +85,21 @@ namespace VFT.CMS.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             ProductDto product = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(product);
 
-            if (product != null)
+            if (productVM != null)
             {
-                return View(product);
+                return View(productVM);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(ProductDto model)
+        public async Task<IActionResult> DeleteConfirmed(ProductViewModel model)
         {
-            await _productService.Delete(model);
+            var productVM = _mapper.Map<ProductDto>(model);
+            await _productService.Delete(productVM);
             return RedirectToAction("Index");
         }
 	}
-
 }
