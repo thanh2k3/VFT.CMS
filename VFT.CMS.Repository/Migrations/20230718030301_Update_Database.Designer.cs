@@ -12,7 +12,7 @@ using VFT.CMS.Repository.Data;
 namespace VFT.CMS.Repository.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230717120844_Update_Database")]
+    [Migration("20230718030301_Update_Database")]
     partial class Update_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -774,7 +774,7 @@ namespace VFT.CMS.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TransactStatuss");
+                    b.ToTable("TransactStatuses");
                 });
 
             modelBuilder.Entity("VFT.CMS.Core.Role", b =>

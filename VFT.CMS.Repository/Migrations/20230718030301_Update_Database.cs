@@ -203,7 +203,7 @@ namespace VFT.CMS.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TransactStatuss",
+                name: "TransactStatuses",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -213,7 +213,7 @@ namespace VFT.CMS.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransactStatuss", x => x.Id);
+                    table.PrimaryKey("PK_TransactStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,9 +279,9 @@ namespace VFT.CMS.Repository.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_TransactStatuss_TransactStatusId",
+                        name: "FK_Orders_TransactStatuses_TransactStatusId",
                         column: x => x.TransactStatusId,
-                        principalTable: "TransactStatuss",
+                        principalTable: "TransactStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -406,7 +406,7 @@ namespace VFT.CMS.Repository.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "TransactStatuss");
+                name: "TransactStatuses");
 
             migrationBuilder.DropColumn(
                 name: "Active",

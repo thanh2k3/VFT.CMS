@@ -10,6 +10,7 @@ namespace VFT.CMS.Core
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+
 		public ICollection<AttributesPrice> AttributesPrices { get; set; }
 	}
 }

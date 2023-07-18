@@ -26,7 +26,6 @@ namespace VFT.CMS.Admin.Starup
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
 
-            //services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
             services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
 

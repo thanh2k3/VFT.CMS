@@ -772,7 +772,7 @@ namespace VFT.CMS.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TransactStatuss");
+                    b.ToTable("TransactStatuses");
                 });
 
             modelBuilder.Entity("VFT.CMS.Core.Role", b =>
