@@ -16,8 +16,8 @@ namespace VFT.CMS.Core
 		public int Discount { get; set; }
 		public string Thumbnail { get; set; }
 		public string Video { get; set; }
-		public DateTime DateCreated { get; set; }
-		public DateTime DateModified { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public DateTime ModifiedDate { get; set; }
 		public bool BestSellers { get; set; }
 		public bool HomeFlag { get; set; }
 		public bool Active { get; set; }

@@ -18,7 +18,7 @@ namespace VFT.CMS.Core
 		public int LocationId { get; set; }
 		public int District { get; set; }
 		public int Ward { get; set; }
-		public DateTime CreateDate { get; set; }
+		public DateTime CreatedDate { get; set; }
 		public string Password { get; set; }
 		public string Salt { get; set; }
 		public DateTime LastLogin { get; set; }

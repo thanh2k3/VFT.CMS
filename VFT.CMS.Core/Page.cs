@@ -17,7 +17,7 @@ namespace VFT.CMS.Core
 		public string MetaDesc { get; set; }
 		public string MetaKey { get; set; }
 		public string Alias { get; set; }
-		public DateTime CreateDate { get; set; }
+		public DateTime CreatedDate { get; set; }
 		public int Ordering { get; set; }
 	}
 }
