@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.Models.Products;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
+using VFT.CMS.Application.Roles.Dto;
+using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Starup
@@ -24,10 +26,11 @@ namespace VFT.CMS.Admin.Starup
             string connectionString = Configuration.GetConnectionString("MyDatabase");
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+            services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDBContext>();
 
             services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
             services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
+            services.AddAutoMapper(typeof(RoleMapProfile).Assembly);
 
             services.AddScoped();
         }
