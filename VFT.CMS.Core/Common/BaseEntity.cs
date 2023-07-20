@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFT.CMS.Core
+namespace VFT.CMS.Core.Common
 {
-	public class Attributes
+	public class BaseEntity
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
-
-		public ICollection<AttributesPrice> AttributesPrices { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public DateTime ModifiedDate { get; set; }
 	}
 }

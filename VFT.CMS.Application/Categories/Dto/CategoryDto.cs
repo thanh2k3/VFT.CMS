@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFT.CMS.Core
+namespace VFT.CMS.Application.Categories.Dto
 {
-	public class TransactStatus
+	public class CategoryDto
 	{
 		public int Id { get; set; }
-		public string Status { get; set; }
+		public string Name { get; set; }
 		public string Description { get; set; }
-
-		public ICollection<Order> Orders { get; set; }
 	}
 }

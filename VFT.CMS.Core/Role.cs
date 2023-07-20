@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace VFT.CMS.Core
 {
-	public class Role : IdentityRole
+	public class Role : IdentityRole<int>
 	{
-		public string Description { get; set; }
 	}
 }

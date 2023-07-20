@@ -4,7 +4,6 @@ using VFT.CMS.Admin.Models.Products;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Application.Roles;
 using VFT.CMS.Application.Roles.Dto;
-using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFT.CMS.Core.Common;
 
 namespace VFT.CMS.Core
 {
-	public class Customer
+	public class Address
 	{
 		public int Id { get; set; }
 		public string FullName { get; set; }
@@ -16,8 +17,9 @@ namespace VFT.CMS.Core
 		public string Province { get; set; }
 		public string ZipCode { get; set; }
 		public string PhoneNumber { get; set; }
-
-		public ICollection<Address> Addresses { get; set; }
-		public ICollection<Customer> Customers { get; set; }
+		public int UserId { get; set; }
+		public User User { get; set; }
+		public int CustomerId { get; set; }
+		public Customer Customer { get; set; }
 	}
 }

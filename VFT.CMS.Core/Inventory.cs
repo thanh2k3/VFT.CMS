@@ -7,10 +7,9 @@ using VFT.CMS.Core.Common;
 
 namespace VFT.CMS.Core
 {
-	public class Category : BaseEntity
+	public class Inventory : BaseEntity
 	{
-		public string Name { get; set; }
-		public string? Description { get; set; }
+		public int Quantity { get; set; }
 
 		public ICollection<Product> Products { get; set; }
 	}

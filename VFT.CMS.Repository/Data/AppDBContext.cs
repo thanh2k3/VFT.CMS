@@ -9,7 +9,7 @@ using VFT.CMS.Core;
 
 namespace VFT.CMS.Repository.Data
 {
-    public class AppDBContext : IdentityDbContext
+    public class AppDBContext : IdentityDbContext<User, Role, int>
     {
         private readonly DbContextOptions _options;
 
@@ -23,19 +23,18 @@ namespace VFT.CMS.Repository.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Attributes> Attributes { get; set; }
-        public DbSet<AttributesPrice> AttributesPrices { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<News> News { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Page> Pages { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
-        public DbSet<TransactStatus> TransactStatuses { get; set; }
-        public DbSet<User> Users { get; set; }
     }
 }

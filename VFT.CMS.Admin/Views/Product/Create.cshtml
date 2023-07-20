@@ -1,4 +1,4 @@
-﻿@using VFT.CMS.Admin.Models.Products
+﻿@*@using VFT.CMS.Admin.Models.Products
 @model ProductViewModel
 
 @{
@@ -21,7 +21,7 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<form method="post" action="Create">
+		<form asp-controller="Product" asp-action="Create" method="post">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
@@ -32,18 +32,25 @@
 
 						<div class="card-body">
 							<div class="form-group">
-								<label asp-for="Name" class="form-label">Name</label>
+								<label asp-for="Name" class="form-label">Tên sản phẩm</label>
 								<input asp-for="Name" type="text" class="form-control">
 								<span asp-validation-for="Name" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="Description" class="form-label">Description</label>
+								<label asp-for="Description" class="form-label">Mô tả</label>
 								<input asp-for="Description" type="text" class="form-control">
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="Price" class="form-label">Price</label>
+								<label asp-for="Price" class="form-label">Giá</label>
 								<input asp-for="Price" type="number" class="form-control">
+								<span asp-validation-for="Price" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label for="productCategory" class="form-label">Danh mục sản phẩm</label>
+								<select class="custom-select" asp-for="CategoryId" style="min-width: 200px", asp-items="ViewBag.DanhMuc">
+									<option value="" disabled selected>Chọn danh mục</option>
+								</select>
 								<span asp-validation-for="Price" class="text-danger"></span>
 							</div>
 						</div>
@@ -66,4 +73,4 @@
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
 	}
-}
+}*@

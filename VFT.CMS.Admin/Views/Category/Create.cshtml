@@ -1,11 +1,9 @@
-﻿@*@using VFT.CMS.Application.Roles.Dto
-@model RoleDto
+﻿@model VFT.CMS.Admin.Models.Categories.CategoryViewModel
 
 @{
-	ViewData["Title"] = "Sửa đổi thông tin của quyền";
-	Layout = "_Layout";
+    ViewData["Title"] = "Thêm mới danh mục";
+    Layout = "_Layout";
 }
-
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -22,22 +20,21 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<form method="post" action="Edit">
+		<form asp-controller="Category" asp-action="Create" method="post">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
 						<div class="card-header">
-							<h3 class="card-title">Sửa</h3>
+							<h3 class="card-title">Thêm mới</h3>
 						</div>
 						<div class="card-body">
-							<input type="hidden" asp-for="Id" />
 							<div class="form-group">
-								<label asp-for="Name" class="form-label">Name</label>
+								<label asp-for="Name" class="form-label">Tên danh mục</label>
 								<input asp-for="Name" type="text" class="form-control">
 								<span asp-validation-for="Name" class="text-danger"></span>
 							</div>
 							<div class="form-group">
-								<label asp-for="Description" class="form-label">Description</label>
+								<label asp-for="Description" class="form-label">Mô tả</label>
 								<input asp-for="Description" type="text" class="form-control">
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
@@ -46,12 +43,19 @@
 					</div>
 					<!-- /.card -->
 					<div class="float-sm-right">
-						<a href="/Role" class="btn btn-secondary">Hủy</a>
-						<button type="submit" class="btn btn-success">Sửa</button>
+						<a href="/Category" class="btn btn-secondary">Hủy</a>
+						<button type="submit" class="btn btn-success">Thêm</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</section>
 	<!-- /.content -->
-</div>*@
+</div>
+
+
+@section Scripts{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
+	}
+}
