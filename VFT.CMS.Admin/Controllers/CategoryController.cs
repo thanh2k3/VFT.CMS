@@ -42,5 +42,64 @@ namespace VFT.CMS.Admin.Controllers
 			}
             return View();
         }
+
+		[HttpGet]
+		public async Task<IActionResult> Detail(int id)
+		{
+			var categoryDto = await _categoryService.GetById(id);
+			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
+
+			if (categoryVM != null)
+			{
+				return View(categoryVM);
+			}
+			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			CategoryDto categoryDto = await _categoryService.GetById(id);
+			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
+
+			if (categoryVM != null)
+			{
+				return View(categoryVM);
+			}
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(CategoryViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var categoryDto = _mapper.Map<CategoryDto>(model);
+				await _categoryService.Edit(categoryDto);
+				return RedirectToAction("Index");
+			}
+			return View();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
+		{
+			CategoryDto categoryDto = await _categoryService.GetById(id);
+			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
+
+			if (categoryVM != null)
+			{
+				return View(categoryVM);
+			}
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(CategoryViewModel model)
+		{
+			var categoryDto = _mapper.Map<CategoryDto>(model);
+			await _categoryService.Delete(categoryDto);
+			return RedirectToAction("Index");
+		}
     }
 }

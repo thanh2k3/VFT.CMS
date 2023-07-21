@@ -1,13 +1,12 @@
-﻿@model VFT.CMS.Admin.Models.Categories.CategoryViewModel
+﻿@using VFT.CMS.Admin.Models.Categories
+@model CategoryViewModel
 
 @{
-    ViewData["Title"] = "Thêm mới danh mục";
-    Layout = "_Layout";
+	ViewData["Title"] = "Sửa danh mục";
+	Layout = "_Layout";
 }
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
@@ -15,51 +14,46 @@
 					<h1>@ViewData["Title"]</h1>
 				</div>
 			</div>
-		</div><!-- /.container-fluid -->
+		</div>
 	</section>
 
-	<!-- Main content -->
 	<section class="content">
-		<form asp-controller="Category" asp-action="Create" method="post">
+		<form method="post" action="Edit">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
 						<div class="card-header">
-							<h3 class="card-title">Thêm mới</h3>
+							<h3 class="card-title">Sửa</h3>
 						</div>
 						<div class="card-body">
+							<div class="form-group">
+								<label asp-for="Id" class="form-label">
+									@Html.DisplayNameFor(model => model.Id)
+								</label>
+								<input asp-for="Id" type="text" class="form-control" readonly />
+							</div>
 							<div class="form-group">
 								<label asp-for="Name" class="form-label">
 									@Html.DisplayNameFor(model => model.Name)
 								</label>
-								<input asp-for="Name" type="text" class="form-control">
+								<input asp-for="Name" type="text" class="form-control" />
 								<span asp-validation-for="Name" class="text-danger"></span>
 							</div>
 							<div class="form-group">
 								<label asp-for="Description" class="form-label">
 									@Html.DisplayNameFor(model => model.Description)
 								</label>
-								<input asp-for="Description" type="text" class="form-control">
+								<input asp-for="Description" type="text" class="form-control" />
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
 						</div>
-						<!-- /.card-body -->
 					</div>
-					<!-- /.card -->
 					<div class="float-sm-right">
 						<a href="/Category" class="btn btn-secondary">Hủy</a>
-						<button type="submit" class="btn btn-success">Thêm</button>
+						<button type="submit" class="btn btn-success">Sửa</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</section>
-	<!-- /.content -->
 </div>
-
-
-@section Scripts{
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
-	}
-}

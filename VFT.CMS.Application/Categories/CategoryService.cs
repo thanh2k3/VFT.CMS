@@ -30,9 +30,11 @@ namespace VFT.CMS.Application.Categories
             return categoryDto;
         }
 
-        public Task<CategoryDto> GetById(int id)
+        public async Task<CategoryDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            var category = await _context.Categories.FindAsync(id);
+            var categoryDto = _mapper.Map<CategoryDto>(category);
+            return categoryDto;
         }
 
         public async Task Create(CategoryDto model)
@@ -42,14 +44,18 @@ namespace VFT.CMS.Application.Categories
             await Save();
         }
 
-        public Task Delete(CategoryDto model)
+        public async Task Edit(CategoryDto model)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(model);
+            _context.Categories.Update(category);
+			await Save();
         }
 
-        public Task Edit(CategoryDto model)
+        public async Task Delete(CategoryDto model)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(model);
+            _context.Categories.Remove(category);
+			await Save();
         }
 
         public async Task Save()
