@@ -1,111 +1,186 @@
-﻿//using AutoMapper;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using VFT.CMS.Admin.Models.Products;
-//using VFT.CMS.Application.Products;
-//using VFT.CMS.Application.Products.Dto;
-//using VFT.CMS.Repository.Data;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Admin.ViewModels.Categories;
+using VFT.CMS.Admin.ViewModels.Products;
+using VFT.CMS.Application.Categories;
+using VFT.CMS.Application.Categories.Dto;
+using VFT.CMS.Application.Products;
+using VFT.CMS.Application.Products.Dto;
+using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
-//namespace VFT.CMS.Admin.Controllers
-//{
-//    public class ProductController : Controller
-//    {
-//        private readonly IProductService _productService;
-//        private readonly IMapper _mapper;
-//        private readonly AppDBContext _context;
+namespace VFT.CMS.Admin.Controllers
+{
+    public class ProductController : Controller
+    {
+        private readonly IProductService _productService;
+		private readonly IMapper _mapper;
 
-//        public ProductController(IProductService productService, IMapper mapper, AppDBContext context)
-//        {
-//            _productService = productService;
-//            _mapper = mapper;
-//            _context = context;
-//        }
+        public ProductController(IProductService productService, IMapper mapper)
+        {
+            _productService = productService;
+            _mapper = mapper;
+        }
 
-//        [HttpGet]
-//        public async Task<IActionResult> Index()
-//        {
-//            var productDto = await _productService.GetAll();
-//            var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(productDto);
-//            return View(productVM);
-//        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var productDto = await _productService.GetAll();
+            var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(productDto);
+            return View(productVM);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+            return View();
+        }
 
-//        [HttpGet]
-//        public IActionResult Create()
-//        {
-//            return View();
-//        }
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var productDto = _mapper.Map<ProductDto>(model);
+                await _productService.Create(productDto);
+                return RedirectToAction("Index");
+            }
 
-//        [HttpPost]
-//        public async Task<IActionResult> Create(ProductViewModel model)
-//        {
-//            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
-//            if (ModelState.IsValid)
-//            {
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "TutorialId", "Name");
+            return View();
+        }
 
-//                var productVM = _mapper.Map<ProductDto>(model);
-//                await _productService.Create(productVM);
-//                return RedirectToAction("Index");
-//            }
-//            return View();
-//        }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            ProductDto product = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(product);
 
-//        [HttpGet]
-//        public async Task<IActionResult> Details(int id)
-//        {
-//            ProductDto product = await _productService.GetById(id);
-//            var productVM = _mapper.Map<ProductViewModel>(product);
+            if (productVM != null)
+            {
+                return View(productVM);
+            }
+            return RedirectToAction("Index");
+        }
 
-//            if (productVM != null)
-//            {
-//                return View(productVM);
-//            }
-//            return RedirectToAction("Index");
-//        }
 
-//        [HttpGet]
-//        public async Task<IActionResult> Edit(int id)
-//        {
-//            ProductDto product = await _productService.GetById(id);
-//            var productVM = _mapper.Map<ProductViewModel>(product);
 
-//            if (productVM != null)
-//            {
-//                return View(productVM);
-//            }
-//            return RedirectToAction("Index");
-//        }
 
-//        [HttpPost]
-//        public async Task<IActionResult> Edit(ProductViewModel model)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                var productVM = _mapper.Map<ProductDto>(model);
-//                await _productService.Edit(productVM);
-//                return RedirectToAction("Index");
-//            }
-//            return View();
-//        }
 
-//        [HttpGet]
-//        public async Task<IActionResult> Delete(int id)
-//        {
-//            ProductDto product = await _productService.GetById(id);
-//            var productVM = _mapper.Map<ProductViewModel>(product);
+        //[HttpGet]
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    ProductDto productDto = await _productService.GetById(id);
+        //    var productVM = _mapper.Map<ProductViewModel>(productDto);
 
-//            if (productVM != null)
-//            {
-//                return View(productVM);
-//            }
-//            return RedirectToAction("Index");
-//        }
+        //    if (productVM != null)
+        //    {
+        //        return View(productVM);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
-//        [HttpPost, ActionName("Delete")]
-//        public async Task<IActionResult> DeleteConfirmed(ProductViewModel model)
-//        {
-//            var productVM = _mapper.Map<ProductDto>(model);
-//            await _productService.Delete(productVM);
-//            return RedirectToAction("Index");
-//        }
-//    }
-//}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(ProductViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var productVM = _mapper.Map<ProductDto>(model);
+        //        await _productService.Edit(productVM);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ProductDto productDto = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(productDto);
+
+            var data = new ProductViewModel()
+            {
+                Name = productVM.Name,
+                Description = productVM.Description
+            };
+
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+            return View(data);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProductViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var productDto = _mapper.Map<ProductDto>(model);
+
+            ProductDto data = await _productService.GetById(productDto.Id);
+            data.Name = model.Name;
+            data.Description = model.Description;
+            await _productService.Update(data);
+            return RedirectToAction("Index");
+        }
+
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> Create(ProductViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var productDto = _mapper.Map<ProductDto>(model);
+        //        await _productService.Create(productDto);
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    var categoryDto = await _productService.GetAllCategories();
+        //    var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+        //    ViewBag.Categories = new SelectList(categoryVM, "TutorialId", "Name");
+        //    return View();
+        //}
+
+
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            ProductDto productDto = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(productDto);
+
+            if (productVM != null)
+            {
+                return View(productVM);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductViewModel model)
+        {
+            var productDto = _mapper.Map<ProductDto>(model);
+            await _productService.Delete(productDto);
+            return RedirectToAction("Index");
+        }
+    }
+}

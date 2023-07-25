@@ -12,9 +12,9 @@ namespace VFT.CMS.Admin.Starup
     {
         public static void AddScoped(this IServiceCollection services)
         {
-            //services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<IRoleService, RoleService>();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿@*@using VFT.CMS.Admin.Models.Products
-@model ProductViewModel
+﻿@model VFT.CMS.Admin.ViewModels.Products.ProductViewModel
 
 @{
 	ViewData["Title"] = "Sửa đổi thông tin của sản phẩm";
@@ -22,7 +21,7 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<form method="post" action="Edit">
+		<form method="post" asp-controller="Product" asp-action="Edit">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
@@ -41,11 +40,6 @@
 								<input asp-for="Description" type="text" class="form-control">
 								<span asp-validation-for="Description" class="text-danger"></span>
 							</div>
-							<div class="form-group">
-								<label asp-for="Price" class="form-label">Price</label>
-								<input asp-for="Price" type="number" class="form-control">
-								<span asp-validation-for="Price" class="text-danger"></span>
-							</div>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -59,4 +53,4 @@
 		</form>
 	</section>
 	<!-- /.content -->
-</div>*@
+</div>

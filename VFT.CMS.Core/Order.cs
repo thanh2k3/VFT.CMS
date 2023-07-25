@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace VFT.CMS.Core
 {
 	public class Order : BaseEntity
 	{
+		[Key]
+		public int Id { get; set; }
 		public DateTime OrderDate { get; set; }
 		public int Total { get; set; }
 		public string Status { get; set; }

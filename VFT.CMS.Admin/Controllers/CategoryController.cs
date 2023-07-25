@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using VFT.CMS.Admin.Models.Categories;
+using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Application.Categories;
 using VFT.CMS.Application.Categories.Dto;
 
