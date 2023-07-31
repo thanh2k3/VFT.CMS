@@ -13,7 +13,6 @@ namespace VFT.CMS.Application.Products
 		Task Create(ProductDto model);
 
         Task Update(ProductDto model);
-        //Task Edit(ProductDto model);
 
         Task Delete(ProductDto model);
 

@@ -47,20 +47,12 @@ namespace VFT.CMS.Application.Products
             await Save();
         }
 
-        //public async Task Edit(ProductDto model)
-        //{
-        //    var product = _mapper.Map<Product>(model);
-        //    _context.Products.Update(product);
-        //    await Save();
-        //}
-
         public async Task Update(ProductDto model)
         {
             var product = _mapper.Map<Product>(model);
             _context.Products.Update(product);
             await Save();
         }
-
 
         public async Task Delete(ProductDto model)
         {

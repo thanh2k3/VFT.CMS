@@ -53,7 +53,7 @@ namespace VFT.CMS.Admin.Controllers
 
             var categoryDto = await _productService.GetAllCategories();
             var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-            ViewBag.Categories = new SelectList(categoryVM, "TutorialId", "Name");
+            ViewBag.Categories = new SelectList(categoryVM, "CategoryId", "Name");
             return View();
         }
 
@@ -69,38 +69,6 @@ namespace VFT.CMS.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
-
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    ProductDto productDto = await _productService.GetById(id);
-        //    var productVM = _mapper.Map<ProductViewModel>(productDto);
-
-        //    if (productVM != null)
-        //    {
-        //        return View(productVM);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(ProductViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var productVM = _mapper.Map<ProductDto>(model);
-        //        await _productService.Edit(productVM);
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
-
-
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -120,47 +88,21 @@ namespace VFT.CMS.Admin.Controllers
             return View(data);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Edit(ProductViewModel model)
         {
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                var productDto = _mapper.Map<ProductDto>(model);
+                await _productService.Update(productDto);
+                return RedirectToAction("Index");
             }
 
-            var productDto = _mapper.Map<ProductDto>(model);
-
-            ProductDto data = await _productService.GetById(productDto.Id);
-            data.Name = model.Name;
-            data.Description = model.Description;
-            await _productService.Update(data);
-            return RedirectToAction("Index");
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "CategoryId", "Name");
+            return View();
         }
-
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create(ProductViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var productDto = _mapper.Map<ProductDto>(model);
-        //        await _productService.Create(productDto);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    var categoryDto = await _productService.GetAllCategories();
-        //    var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-        //    ViewBag.Categories = new SelectList(categoryVM, "TutorialId", "Name");
-        //    return View();
-        //}
-
-
-
-
-
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
