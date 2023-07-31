@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Admin.ViewModels.Products;
-using VFT.CMS.Application.Categories;
-using VFT.CMS.Application.Categories.Dto;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
-using VFT.CMS.Core;
-using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -31,7 +26,7 @@ namespace VFT.CMS.Admin.Controllers
             var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(productDto);
             return View(productVM);
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -79,7 +74,10 @@ namespace VFT.CMS.Admin.Controllers
             var data = new ProductViewModel()
             {
                 Name = productVM.Name,
-                Description = productVM.Description
+                Description = productVM.Description,
+                CategoryId = productVM.CategoryId,
+                Price = productVM.Price,
+                Quantity = productVM.Quantity,
             };
 
             var categoryDto = await _productService.GetAllCategories();

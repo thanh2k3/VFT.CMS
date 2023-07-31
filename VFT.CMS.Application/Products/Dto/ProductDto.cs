@@ -21,17 +21,17 @@ namespace VFT.CMS.Application.Products.Dto
 		[Required(ErrorMessage = "Please enter article content")]
 		[DisplayName("Mô tả")]
 		public string Description { get; set; }
+		[DisplayName("Giá")]
+		public int Price { get; set; }
+		[DisplayName("Số lượng")]
+		public int Quantity { get; set; }
+		[DisplayName("Danh mục")]
 		public int CategoryId { get; set; }
 
-
-		//[DisplayName("Giá")]
-		//public int Price { get; set; }
 		//[DisplayName("Ảnh")]
 		//public string Image { get; set; }
-		//[DisplayName("Số lượng")]
-		//public int Quantity { get; set; }
 
 
-        public List<Category> categories { get; set; }
+		public List<Category> categories { get; set; }
     }
 }

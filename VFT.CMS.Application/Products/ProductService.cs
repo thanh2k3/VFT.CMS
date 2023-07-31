@@ -40,7 +40,9 @@ namespace VFT.CMS.Application.Products
             {
                 Name = product.Name,
                 Description = product.Description,
-                CategoryId = product.CategoryId
+                CategoryId = product.CategoryId,
+                Price = product.Price,
+                Quantity = product.Quantity,
             };
 
             await _context.Products.AddAsync(newProduct);
