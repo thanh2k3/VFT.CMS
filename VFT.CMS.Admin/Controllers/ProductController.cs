@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Admin.ViewModels.Products;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
+using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -48,9 +51,10 @@ namespace VFT.CMS.Admin.Controllers
 
             var categoryDto = await _productService.GetAllCategories();
             var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-            ViewBag.Categories = new SelectList(categoryVM, "CategoryId", "Name");
+            ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
             return View();
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)

@@ -20,7 +20,7 @@ namespace VFT.CMS.Application.Products
 
         public async Task<IEnumerable<ProductDto>> GetAll()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.Include(x => x.Category).ToListAsync();
             var productDto = _mapper.Map<IEnumerable<ProductDto>>(products);
             return productDto;
         }
