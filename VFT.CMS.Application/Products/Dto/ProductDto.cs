@@ -8,7 +8,6 @@ namespace VFT.CMS.Application.Products.Dto
     {
 		public int Id { get; set; }
 
-		[Required(ErrorMessage = "Please enter article title")]
 		[DisplayName("Tên sản phẩm")]
 		public string Name { get; set; }
 
@@ -24,7 +23,6 @@ namespace VFT.CMS.Application.Products.Dto
 		[DisplayName("Tên danh mục")]
 		public int CategoryId { get; set; }
         public Category Category { get; set; }
-
 
         [DisplayName("Ảnh")]
 		public string? Image { get; set; }

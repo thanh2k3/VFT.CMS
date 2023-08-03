@@ -24,7 +24,7 @@
 	<section class="content">
 		<div class="container-fluid">
 			<div class="panel-body">
-				<form method="post" action="Delete">
+				<form asp-controller="Product" asp-action="Delete" method="post">
 					<div class="row">
 						<div class="col-lg-9 col-md-9">
 							<div class="card">
@@ -51,6 +51,13 @@
 													<tr>
 														<td class="text-success">
 															<i class="fa fa-list-ol"></i>
+															@Html.DisplayNameFor(model => model.CategoryId)
+														</td>
+														<td>@Model.CategoryId</td>
+													</tr>
+													<tr>
+														<td class="text-success">
+															<i class="fa fa-list-ol"></i>
 															@Html.DisplayNameFor(model => model.Description)
 														</td>
 														<td>@Model.Description</td>
@@ -68,14 +75,7 @@
 															@Html.DisplayNameFor(model => model.Quantity)
 														</td>
 														<td>@Model.Quantity</td>
-													</tr>
-													@*<tr>
-														<td class="text-success">
-															<i class="fa fa-list-ol"></i>
-															@Html.DisplayNameFor(model => model.CategoryId)
-														</td>
-														<td>@Model.CategoryId</td>
-													</tr>*@
+													</tr>												
 												</tbody>
 											</table>
 										</div>

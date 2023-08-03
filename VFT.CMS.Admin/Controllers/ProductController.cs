@@ -68,62 +68,62 @@ namespace VFT.CMS.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    ProductDto productDto = await _productService.GetById(id);
-        //    var productVM = _mapper.Map<ProductViewModel>(productDto);
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ProductDto productDto = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(productDto);
 
-        //    var data = new ProductViewModel()
-        //    {
-        //        Name = productVM.Name,
-        //        Description = productVM.Description,
-        //        CategoryId = productVM.CategoryId,
-        //        Price = productVM.Price,
-        //        Quantity = productVM.Quantity,
-        //    };
+            var data = new ProductViewModel()
+            {
+                Name = productVM.Name,
+                Description = productVM.Description,
+                CategoryId = productVM.CategoryId,
+                Price = productVM.Price,
+                Quantity = productVM.Quantity,
+            };
 
-        //    var categoryDto = await _productService.GetAllCategories();
-        //    var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-        //    ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
-        //    return View(data);
-        //}
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+            return View(data);
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(ProductViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var ePDto = _mapper.Map<EditProductDto>(model);
-        //        await _productService.Update(ePDto);
-        //        return RedirectToAction("Index");
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var ePDto = _mapper.Map<EditProductDto>(model);
+                await _productService.Update(ePDto);
+                return RedirectToAction("Index");
+            }
 
-        //    var categoryDto = await _productService.GetAllCategories();
-        //    var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-        //    ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
-        //    return View();
-        //}
+            var categoryDto = await _productService.GetAllCategories();
+            var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+            ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+            return View();
+        }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    ProductDto productDto = await _productService.GetById(id);
-        //    var productVM = _mapper.Map<ProductViewModel>(productDto);
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            ProductDto productDto = await _productService.GetById(id);
+            var productVM = _mapper.Map<ProductViewModel>(productDto);
 
-        //    if (productVM != null)
-        //    {
-        //        return View(productVM);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            if (productVM != null)
+            {
+                return View(productVM);
+            }
+            return RedirectToAction("Index");
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(ProductViewModel model)
-        //{
-        //    var productDto = _mapper.Map<ProductDto>(model);
-        //    await _productService.Delete(productDto);
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Delete(ProductViewModel model)
+        {
+            var productDto = _mapper.Map<ProductDto>(model);
+            await _productService.Delete(productDto);
+            return RedirectToAction("Index");
+        }
     }
 }

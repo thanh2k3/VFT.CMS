@@ -11,8 +11,8 @@ namespace VFT.CMS.Application.Products.Dto
 
 			CreateMap<Product, CreateProductDto>().ReverseMap();
 
-            //CreateMap<Product, EditProductDto>().ReverseMap();
+			CreateMap<Product, EditProductDto>().ReverseMap();
 
-        }
+		}
     }
 }

@@ -64,6 +64,13 @@
 								<input asp-for="Quantity" type="text" class="form-control">
 								<span asp-validation-for="Quantity" class="text-danger"></span>
 							</div>
+							<div class="form-group">
+								<label asp-for="Image" class="form-label">
+									@Html.DisplayNameFor(model => model.Image)
+								</label>
+								<input asp-for="Image" type="text" class="form-control">
+								<span asp-validation-for="Image" class="text-danger"></span>
+							</div>
 						</div>
 						<!-- /.card-body -->
 					</div>
