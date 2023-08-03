@@ -16,9 +16,5 @@ namespace VFT.CMS.Core
 		public DateTime CreatedDate { get; set; }
 		public DateTime ModifiedDate { get; set; }
 
-		public ICollection<Address> Addresses { get; set; }
-		public ICollection<Cart> Carts { get; set; }
-		public ICollection<Order> Orders { get; set; }
-
 	}
 }

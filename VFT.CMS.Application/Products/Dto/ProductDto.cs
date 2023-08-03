@@ -8,12 +8,6 @@ namespace VFT.CMS.Application.Products.Dto
     {
 		public int Id { get; set; }
 
-		//public ProductDto()
-		//{
-		//	Categories = new List<Category>();
-		//}
-
-
 		[Required(ErrorMessage = "Please enter article title")]
 		[DisplayName("Tên sản phẩm")]
 		public string Name { get; set; }
@@ -27,13 +21,12 @@ namespace VFT.CMS.Application.Products.Dto
 		[DisplayName("Số lượng")]
 		public int? Quantity { get; set; }
 
-		[DisplayName("Danh mục")]
+		[DisplayName("Tên danh mục")]
 		public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
-		[DisplayName("Ảnh")]
+
+        [DisplayName("Ảnh")]
 		public string? Image { get; set; }
-
-
-		//public List<Category> Categories { get; set; }
 	}
 }

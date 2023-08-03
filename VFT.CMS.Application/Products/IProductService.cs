@@ -10,9 +10,11 @@ namespace VFT.CMS.Application.Products
 
 		Task<ProductDto> GetById(int id);
 
-		Task Create(ProductDto model);
+		//Task Create(ProductDto model);
+		Task Create(CreateProductDto model);
 
-        Task Update(ProductDto model);
+        //Task Update(ProductDto model);
+		Task Update(EditProductDto model);
 
         Task Delete(ProductDto model);
 

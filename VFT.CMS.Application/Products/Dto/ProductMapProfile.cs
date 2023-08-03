@@ -7,8 +7,12 @@ namespace VFT.CMS.Application.Products.Dto
 	{
 		public ProductMapProfile()
 		{
-			CreateMap<Product, ProductDto>();
-			CreateMap<ProductDto, Product>();
-		}
-	}
+			CreateMap<Product, ProductDto>().ReverseMap();
+
+			CreateMap<Product, CreateProductDto>().ReverseMap();
+
+            //CreateMap<Product, EditProductDto>().ReverseMap();
+
+        }
+    }
 }

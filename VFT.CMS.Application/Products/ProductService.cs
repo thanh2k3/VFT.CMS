@@ -32,24 +32,25 @@ namespace VFT.CMS.Application.Products
             return productDto;
         }
 
-        public async Task Create(ProductDto model)
+        public async Task Create(CreateProductDto model)
         {
             var product = _mapper.Map<Product>(model);
 
-            var newProduct = new Product()
+            var data = new Product()
             {
                 Name = product.Name,
                 Description = product.Description,
                 CategoryId = product.CategoryId,
                 Price = product.Price,
                 Quantity = product.Quantity,
+                Image = product.Image,
             };
 
-            await _context.Products.AddAsync(newProduct);
+            await _context.Products.AddAsync(data);
             await Save();
         }
 
-        public async Task Update(ProductDto model)
+        public async Task Update(EditProductDto model)
         {
             var product = _mapper.Map<Product>(model);
             _context.Products.Update(product);

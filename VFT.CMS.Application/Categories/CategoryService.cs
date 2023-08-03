@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace VFT.CMS.Application.Categories
             await Save();
         }
 
-        public async Task Edit(CategoryDto model)
+        public async Task Update(CategoryDto model)
         {
             var category = _mapper.Map<Category>(model);
             _context.Categories.Update(category);
@@ -55,7 +56,7 @@ namespace VFT.CMS.Application.Categories
         {
             var category = _mapper.Map<Category>(model);
             _context.Categories.Remove(category);
-			await Save();
+            await Save();
         }
 
         public async Task Save()

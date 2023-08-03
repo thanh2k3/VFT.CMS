@@ -34,13 +34,14 @@ namespace VFT.CMS.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoryViewModel model)
         {
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
-				var categoryDto = _mapper.Map<CategoryDto>(model);
-				await _categoryService.Create(categoryDto);
-				return RedirectToAction("Index");
+				return View();
 			}
-            return View();
+			var categoryDto = _mapper.Map<CategoryDto>(model);
+			await _categoryService.Create(categoryDto);
+            TempData["msg"] = "Thêm thành công!";
+            return RedirectToAction("Create");
         }
 
 		[HttpGet]
@@ -75,7 +76,7 @@ namespace VFT.CMS.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				var categoryDto = _mapper.Map<CategoryDto>(model);
-				await _categoryService.Edit(categoryDto);
+				await _categoryService.Update(categoryDto);
 				return RedirectToAction("Index");
 			}
 			return View();

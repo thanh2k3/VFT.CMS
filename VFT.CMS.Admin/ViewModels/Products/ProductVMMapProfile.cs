@@ -8,6 +8,12 @@ namespace VFT.CMS.Admin.ViewModels.Products
 		public ProductVMMapProfile()
 		{
 			CreateMap<ProductViewModel, ProductDto>().ReverseMap();
-		}
-	}
+
+            //CreateMap<ProductViewModel, CreateProductDto>().ReverseMap();
+
+            //CreateMap<ProductViewModel, EditProductDto>().ReverseMap();
+
+			CreateMap<CreateProductViewModel, CreateProductDto>().ReverseMap();
+        }
+    }
 }

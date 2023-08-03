@@ -16,8 +16,5 @@ namespace VFT.CMS.Application.Categories.Dto
 		[Required]
 		[DisplayName("Tên danh mục")]
 		public string Name { get; set; }
-
-		[DisplayName("Mô tả")]
-		public string? Description { get; set; }
 	}
 }

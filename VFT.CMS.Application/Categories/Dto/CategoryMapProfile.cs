@@ -12,8 +12,7 @@ namespace VFT.CMS.Application.Categories.Dto
     {
         public CategoryMapProfile()
         {
-            CreateMap<Category, CategoryDto>();
-            CreateMap<CategoryDto, Category>();
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }

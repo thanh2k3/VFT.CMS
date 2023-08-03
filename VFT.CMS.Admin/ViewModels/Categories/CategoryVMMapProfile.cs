@@ -7,8 +7,7 @@ namespace VFT.CMS.Admin.ViewModels.Categories
 	{
 		public CategoryVMMapProfile()
 		{
-			CreateMap<CategoryViewModel, CategoryDto>();
-			CreateMap<CategoryDto, CategoryViewModel>();
+			CreateMap<CategoryDto, CategoryViewModel>().ReverseMap();
 		}
 	}
 }

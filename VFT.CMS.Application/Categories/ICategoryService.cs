@@ -12,7 +12,7 @@ namespace VFT.CMS.Application.Categories
 		Task<IEnumerable<CategoryDto>> GetAll();
         Task<CategoryDto> GetById(int id);
         Task Create(CategoryDto model);
-        Task Edit(CategoryDto model);
+        Task Update(CategoryDto model);
         Task Delete(CategoryDto model);
     }
 }

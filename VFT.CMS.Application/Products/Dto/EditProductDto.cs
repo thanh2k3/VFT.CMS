@@ -9,9 +9,11 @@ using VFT.CMS.Core;
 
 namespace VFT.CMS.Application.Products.Dto
 {
-    public class CreateProductDto
+    public class EditProductDto
     {
-		[Required(ErrorMessage = "Tên sản phẩm không được để trống")]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please enter article title")]
         [DisplayName("Tên sản phẩm")]
         public string Name { get; set; }
 
@@ -24,11 +26,11 @@ namespace VFT.CMS.Application.Products.Dto
         [DisplayName("Số lượng")]
         public int? Quantity { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn danh mục phù hợp!")]
-        [DisplayName("Danh mục")]
-        public int CategoryId { get; set; }
+        //[DisplayName("Danh mục")]
+        //public int CategoryId { get; set; }
+
 
         [DisplayName("Ảnh")]
         public string? Image { get; set; }
-	}
+    }
 }

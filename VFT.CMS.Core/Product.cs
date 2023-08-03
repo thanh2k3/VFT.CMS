@@ -9,7 +9,7 @@ using VFT.CMS.Core.Common;
 
 namespace VFT.CMS.Core
 {
-	public class Product : BaseEntity
+	public class Product
 	{
 		[Key]
 		public int Id { get; set; }
@@ -19,25 +19,15 @@ namespace VFT.CMS.Core
 
 		public string? Description { get; set; }
 
+		[Required]
 		[ForeignKey("Category")]
 		public int CategoryId { get; set; }
 		public Category Category { get; set; }
-        //public virtual Category Category { get; set; }
 
         public int? Price { get; set; }
 
 		public int? Quantity { get; set; }
 
 		public string? Image { get; set; }
-
-		public int? DiscountId { get; set; }
-		public Discount? Discount { get; set; }
-
-		public int? InventoryId { get; set; }
-		public Inventory? Inventory { get; set; }
-
-
-		public ICollection<Cart> Carts { get; set; }
-		public ICollection<OrderDetail> OrderDetails { get; set; }
 	}
 }
