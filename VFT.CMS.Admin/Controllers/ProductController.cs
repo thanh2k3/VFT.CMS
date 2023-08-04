@@ -44,7 +44,19 @@ namespace VFT.CMS.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var cPDto = _mapper.Map<CreateProductDto>(model);
+                // Kiểm tra xem sản phẩm đã tồn tại hay chưa
+                var data = _mapper.Map<CreateProductDto>(model);
+                var findProduct = _productService.FindProduct(data);
+                if (findProduct)
+                {
+					ViewBag.message = "Sản phẩm đã tồn tại";
+					var categoryDtos = await _productService.GetAllCategories();
+					var categoryVMs = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDtos);
+					ViewBag.Categories = new SelectList(categoryVMs, "Id", "Name");
+					return View(model);
+				}
+
+				var cPDto = _mapper.Map<CreateProductDto>(model);
                 await _productService.Create(cPDto);
                 return RedirectToAction("Index");
             }

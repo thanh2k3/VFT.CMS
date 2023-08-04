@@ -71,7 +71,18 @@ namespace VFT.CMS.Application.Products
             return categoryDto;
         }
 
-        public async Task Save()
+		public bool FindProduct(CreateProductDto model)
+		{
+			var product = _mapper.Map<Product>(model);
+			var searchProduct = _context.Products.FirstOrDefault(x => x.Name == product.Name);
+            if (searchProduct != null)
+            {
+                return true;
+            }
+            return false;
+		}
+
+		public async Task Save()
         {
             await _context.SaveChangesAsync();
         }
