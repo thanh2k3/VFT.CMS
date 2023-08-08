@@ -1,4 +1,5 @@
-﻿using VFT.CMS.Application.Categories.Dto;
+﻿using Microsoft.AspNetCore.Http;
+using VFT.CMS.Application.Categories.Dto;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
 
@@ -10,9 +11,9 @@ namespace VFT.CMS.Application.Products
 
 		Task<ProductDto> GetById(int id);
 
-		Task Create(CreateProductDto model);
+		Task Create(CreateProductDto model, IFormFile? image);
 
-		Task Update(EditProductDto model);
+		Task Update(EditProductDto model, IFormFile? image);
 
         Task Delete(ProductDto model);
 

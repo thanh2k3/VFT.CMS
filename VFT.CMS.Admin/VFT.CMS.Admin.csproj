@@ -25,4 +25,8 @@
     <ProjectReference Include="..\VFT.CMS.Core\VFT.CMS.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\product\" />
+  </ItemGroup>
+
 </Project>

@@ -22,7 +22,7 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<form asp-controller="Product" asp-action="Create" method="post">
+		<form asp-controller="Product" asp-action="Create" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
@@ -65,16 +65,12 @@
 								</label>
 								<input asp-for="Quantity" type="text" class="form-control">
 							</div>
-							
-							<form action="/action_page.php">
-								<p>Custom file:</p>
-								<div class="custom-file mb-3">
-									<input type="file" class="custom-file-input" id="customFile" name="filename">
-									<label class="custom-file-label" for="customFile">Choose file</label>
-								</div>
-							</form>
-
-
+							<div class="form-group">
+								<label asp-for="Image" class="form-label">
+									@Html.DisplayNameFor(model => model.Image)
+								</label>
+								<input asp-for="Image" type="file" class="form-control">
+							</div>
 						</div>
 						<!-- /.card-body -->
 					</div>

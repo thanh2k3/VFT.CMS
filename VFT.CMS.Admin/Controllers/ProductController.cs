@@ -40,7 +40,7 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateProductViewModel model)
+        public async Task<IActionResult> Create(CreateProductViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)
             {
@@ -49,15 +49,15 @@ namespace VFT.CMS.Admin.Controllers
                 var findProduct = _productService.FindProduct(data);
                 if (findProduct)
                 {
-					ViewBag.message = "Sản phẩm đã tồn tại";
-					var categoryDtos = await _productService.GetAllCategories();
-					var categoryVMs = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDtos);
-					ViewBag.Categories = new SelectList(categoryVMs, "Id", "Name");
-					return View(model);
-				}
+                    ViewBag.message = "Sản phẩm đã tồn tại";
+                    var categoryDtos = await _productService.GetAllCategories();
+                    var categoryVMs = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDtos);
+                    ViewBag.Categories = new SelectList(categoryVMs, "Id", "Name");
+                    return View(model);
+                }
 
-				var cPDto = _mapper.Map<CreateProductDto>(model);
-                await _productService.Create(cPDto);
+                var cPDto = _mapper.Map<CreateProductDto>(model);
+                await _productService.Create(cPDto, image);
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +67,7 @@ namespace VFT.CMS.Admin.Controllers
             return View(model);
         }
 
-		[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             ProductDto product = await _productService.GetById(id);
@@ -83,8 +83,18 @@ namespace VFT.CMS.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             ProductDto productDto = await _productService.GetById(id);
             var productVM = _mapper.Map<ProductViewModel>(productDto);
+
+            if (productVM == null)
+            {
+                return NotFound();
+            }
 
             var data = new ProductViewModel()
             {
@@ -93,6 +103,7 @@ namespace VFT.CMS.Admin.Controllers
                 CategoryId = productVM.CategoryId,
                 Price = productVM.Price,
                 Quantity = productVM.Quantity,
+                Image = productVM.Image,
             };
 
             var categoryDto = await _productService.GetAllCategories();
@@ -102,12 +113,12 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditProductViewModel model)
+        public async Task<IActionResult> Edit(EditProductViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)
             {
                 var ePDto = _mapper.Map<EditProductDto>(model);
-                await _productService.Update(ePDto);
+                await _productService.Update(ePDto, image);
                 return RedirectToAction("Index");
             }
 
