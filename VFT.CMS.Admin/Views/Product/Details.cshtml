@@ -22,71 +22,81 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<div class="container-fluid">
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-lg-9 col-md-9">
-						<div class="card">
-							<div class="tab-content">
-								<div id="Summery" class="">
-									<div class="table-responsive panel">
-										<table class="table">
-											<tbody>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-user"></i>
-														@Html.DisplayNameFor(model => model.Id)
-													</td>
-													<td>@Model.Id</td>
-												</tr>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-calendar"></i>
-														@Html.DisplayNameFor(model => model.Name)
-													</td>
-													<td>@Model.Name</td>
-												</tr>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-list-ol"></i>
-														@Html.DisplayNameFor(model => model.CategoryId)
-													</td>
-													<td>@Model.CategoryId</td>
-												</tr>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-list-ol"></i>
-														@Html.DisplayNameFor(model => model.Description)
-													</td>
-													<td>@Model.Description</td>
-												</tr>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-list-ol"></i>
-														@Html.DisplayNameFor(model => model.Price)
-													</td>
-													<td>@Model.Price</td>
-												</tr>
-												<tr>
-													<td class="text-success">
-														<i class="fa fa-list-ol"></i>
-														@Html.DisplayNameFor(model => model.Quantity)
-													</td>
-													<td>@Model.Quantity</td>
-												</tr>
-											</tbody>
-										</table>
+		<form asp-controller="Product" asp-action="Details" method="post" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col">
+					<div class="card card-secondary">
+						@*<div class="card-header">
+						<h3 class="card-title"></h3>
+						</div>*@
+						<div class="card-body row">
+							<div class="col-6">
+								<input type="hidden" asp-for="Id" />
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Name" class="form-label">
+											@Html.DisplayNameFor(model => model.Name):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Name" type="text" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Description" class="form-label">
+											@Html.DisplayNameFor(model => model.Description):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Description" type="text" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="CategoryId">
+											@Html.DisplayNameFor(model => model.CategoryId):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="CategoryId" class="form-control" readonly="readonly" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Price" class="form-label">
+											@Html.DisplayNameFor(model => model.Price):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Price" type="number" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Quantity" class="form-label">
+											@Html.DisplayNameFor(model => model.Quantity):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Quantity" type="number" class="form-control" readonly="readonly">
 									</div>
 								</div>
 							</div>
+							<div class="col-2"></div>
+							<div class="col-4">
+								<img src="~/@Model.Image" style="width: 100%; border-radius: 5px; border: 1px solid #efefef" />
+							</div>
 						</div>
-						<div class="float-sm-right">
-							<a href="/Product" class="btn btn-secondary">Trở về</a>
-						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+					<div class="float-sm-right">
+						<a href="/Product" class="btn btn-secondary">Quay lại</a>
 					</div>
 				</div>
-				<!-- /.table-responsive -->
 			</div>
-		</div>
+		</form>
 	</section>
+	<!-- /.content -->
 </div>

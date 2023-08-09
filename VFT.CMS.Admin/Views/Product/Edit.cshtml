@@ -25,48 +25,72 @@
 			<div class="row">
 				<div class="col">
 					<div class="card card-secondary">
-						<div class="card-header">
+						@*<div class="card-header">
 							<h3 class="card-title">Sửa</h3>
-						</div>
+						</div>*@
 						<div class="card-body row">
 							<div class="col-6">
 								<input type="hidden" asp-for="Id" />
-								<div class="form-group">
-									<label asp-for="Name" class="form-label">
-										@Html.DisplayNameFor(model => model.Name)
-									</label>
-									<input asp-for="Name" type="text" class="form-control">
-									<span asp-validation-for="Name" class="text-danger"></span>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Name" class="form-label">
+											@Html.DisplayNameFor(model => model.Name):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Name" type="text" class="form-control">
+										<span asp-validation-for="Name" class="text-danger"></span>
+									</div>
 								</div>
-								<div class="form-group">
-									<label asp-for="Description" class="form-label">
-										@Html.DisplayNameFor(model => model.Description)
-									</label>
-									<input asp-for="Description" type="text" class="form-control">
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Description" class="form-label">
+											@Html.DisplayNameFor(model => model.Description):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Description" type="text" class="form-control">
+									</div>
 								</div>
-								<div class="form-group">
-									<label asp-for="CategoryId">
-										@Html.DisplayNameFor(model => model.CategoryId)
-									</label>
-									<select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="CategoryId" class="form-label">
+											@Html.DisplayNameFor(model => model.CategoryId):
+										</label>
+									</div>
+									<div class="col-8">
+										<select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>
+									</div>
 								</div>
-								<div class="form-group">
-									<label asp-for="Price" class="form-label">
-										@Html.DisplayNameFor(model => model.Price)
-									</label>
-									<input asp-for="Price" type="number" class="form-control">
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Price" class="form-label">
+											@Html.DisplayNameFor(model => model.Price):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Price" type="number" class="form-control">
+									</div>
 								</div>
-								<div class="form-group">
-									<label asp-for="Quantity" class="form-label">
-										@Html.DisplayNameFor(model => model.Quantity)
-									</label>
-									<input asp-for="Quantity" type="number" class="form-control">
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Quantity" class="form-label">
+											@Html.DisplayNameFor(model => model.Quantity):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Quantity" type="number" class="form-control">
+									</div>
 								</div>
-								<div class="form-group">
-									<label asp-for="Image" class="form-label">
-										@Html.DisplayNameFor(model => model.Image)
-									</label>
-									<input asp-for="Image" type="file" class="form-control">
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Image" class="form-label">
+											@Html.DisplayNameFor(model => model.Image):
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Image" type="file" class="form-control">
+									</div>
 								</div>
 							</div>
 							<div class="col-2"></div>

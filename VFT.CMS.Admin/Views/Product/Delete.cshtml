@@ -8,7 +8,7 @@
 
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+@*<div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<div class="container-fluid">
@@ -75,7 +75,7 @@
 															@Html.DisplayNameFor(model => model.Quantity)
 														</td>
 														<td>@Model.Quantity</td>
-													</tr>												
+													</tr>
 												</tbody>
 											</table>
 										</div>
@@ -92,6 +92,116 @@
 				</form>
 			</div>
 		</div>
+	</section>
+	<!-- /.content -->
+</div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-10">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<form asp-controller="Product" asp-action="Delete" method="post" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col">
+					<div class="card card-secondary">
+						@*<div class="card-header">
+						<h3 class="card-title"></h3>
+						</div>*@
+						<div class="card-body row">
+							<div class="col-6">
+								<input type="hidden" asp-for="Id" />
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Name" class="form-label">
+											@Html.DisplayNameFor(model => model.Name)
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Name" type="text" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Description" class="form-label">
+											@Html.DisplayNameFor(model => model.Description)
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Description" type="text" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="CategoryId">
+											@Html.DisplayNameFor(model => model.CategoryId)
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="CategoryId" class="form-control" readonly="readonly" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Price" class="form-label">
+											@Html.DisplayNameFor(model => model.Price)
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Price" type="number" class="form-control" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-4">
+										<label asp-for="Quantity" class="form-label">
+											@Html.DisplayNameFor(model => model.Quantity)
+										</label>
+									</div>
+									<div class="col-8">
+										<input asp-for="Quantity" type="number" class="form-control" readonly="readonly">
+									</div>
+								</div>
+							</div>
+							<div class="col-2"></div>
+							<div class="col-4">
+								<img src="~/@Model.Image" style="width: 100%; border-radius: 5px; border: 1px solid #efefef" />
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+					<div class="float-sm-right">
+						<h3 class="text-danger">Bạn có chắc là muốn xóa sản phẩm này?</h3>
+						<div class="float-sm-right">
+							<a href="/Product" class="btn btn-secondary">Hủy</a>
+							<button type="submit" class="btn btn-danger">Xóa</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
 	</section>
 	<!-- /.content -->
 </div>

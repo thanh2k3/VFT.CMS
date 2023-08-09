@@ -32,9 +32,6 @@
                 <table class="table projects">
                     <thead>
                         <tr>
-                            <th style="width: 5%">
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
@@ -62,7 +59,6 @@
                             @foreach (var product in Model)
                             {
                                 <tr>
-                                    <td>@product.Id</td>
                                     <td>@product.Name</td>
                                     <td>@product.Category.Name</td>
                                     <td>
