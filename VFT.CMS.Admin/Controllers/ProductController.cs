@@ -23,29 +23,19 @@ namespace VFT.CMS.Admin.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index(int pg = 1)
+		public async Task<IActionResult> Index(string SearchText = "", int pg = 1, int pageSize = 5)
 		{
-			var productDto = await _productService.GetAll();
-			var productVM = _mapper.Map<IEnumerable<ProductViewModel>>(productDto);
+			PaginatedList<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
 
-			int pageSize = 5;
-			if (pg < 1)
-			{
-                pg = 1;
-			}
+			//List<ProductViewModel> productVM = _mapper.Map<List<ProductViewModel>>(productDto);
 
-			int recsCount = productVM.Count();
+			//PaginatedList<ProductViewModel> retProductVM = new PaginatedList<ProductViewModel>(productVM, pg, pageSize);
 
-			var pageVM = new PageViewModel(recsCount, pg, pageSize);
-			
-			int recSkip = (pg - 1) * pageSize;
-
-			var data = productVM.Skip(recSkip).Take(pageVM.PageSize).ToList();
-
+			var pageVM = new PageViewModel(productDto.TotalRecords, pg, pageSize);
 			ViewBag.PageViewModel = pageVM;
 
 
-			return View(data);
+			return View(productDto);
 		}
 
 		[HttpGet]

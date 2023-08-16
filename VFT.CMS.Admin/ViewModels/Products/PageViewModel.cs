@@ -1,4 +1,6 @@
-﻿namespace VFT.CMS.Admin.ViewModels.Products
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace VFT.CMS.Admin.ViewModels.Products
 {
 	public class PageViewModel
 	{
@@ -11,7 +13,8 @@
 		public int StartRecord { get; set; }
 		public int EndRecord { get; set; }
 
-
+		public string Action { get; set; } = "Index";
+		public string SearchText { get; set; }
 
 
 		public PageViewModel() { }
@@ -68,6 +71,29 @@
 			TotalPages = totalPages;
 			StartPage = startPage;
 			EndPage = endPage;
+		}
+
+
+
+
+
+
+		public List<SelectListItem> GetPageSize()
+		{
+			var pageSizes = new List<SelectListItem>();
+
+			for (int i = 5; i <= 50;  i += 5)
+			{
+				if (i == this.PageSize)
+				{
+					pageSizes.Add(new SelectListItem(i.ToString(), i.ToString(), true));
+				}
+				else
+				{
+					pageSizes.Add(new SelectListItem(i.ToString(), i.ToString()));
+				}
+			}
+			return pageSizes;
 		}
 	}
 }

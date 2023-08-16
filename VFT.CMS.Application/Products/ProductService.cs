@@ -12,111 +12,131 @@ using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Application.Products
 {
-	public class ProductService : IProductService
-	{
-		private readonly AppDBContext _context;
-		private readonly IMapper _mapper;
-		private readonly IHostingEnvironment _environment;
+    public class ProductService : IProductService
+    {
+        private readonly AppDBContext _context;
+        private readonly IMapper _mapper;
+        private readonly IHostingEnvironment _environment;
 
-		public ProductService(AppDBContext context, IMapper mapper, IHostingEnvironment environment)
+        public ProductService(AppDBContext context, IMapper mapper, IHostingEnvironment environment)
+        {
+            _context = context;
+            _mapper = mapper;
+            _environment = environment;
+        }
+
+        //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
+		public async Task<PaginatedList<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
 		{
-			_context = context;
-			_mapper = mapper;
-			_environment = environment;
-		}
+            List<Product> products;
 
-		public async Task<IEnumerable<ProductDto>> GetAll()
-		{
-			var products = await _context.Products.Include(x => x.Category).ToListAsync();
-			var productDto = _mapper.Map<IEnumerable<ProductDto>>(products);
-			return productDto;
-		}
+            if (SearchText != "" && SearchText != null)
+            {
+                products = await _context.Products
+                    .Include(x => x.Category)
+                    .Where(x => x.Name.Contains(SearchText) || x.Description.Contains(SearchText))
+                    .ToListAsync();
+            }
+            else
+            {
+                products = await _context.Products
+                    .Include(x => x.Category)
+                    .ToListAsync();
+            }
 
-		public async Task<ProductDto> GetById(int id)
-		{
-			var product = await _context.Products.Include(x => x.Category)
-												 .FirstOrDefaultAsync(x => x.Id == id);
-			var productDto = _mapper.Map<ProductDto>(product);
-			return productDto;
-		}
+			//PaginatedList<Product> retProducts = new PaginatedList<Product>(products, pageIndex, pageSize);
+			List<ProductDto> productDto = _mapper.Map<List<ProductDto>>(products);
 
-		public async Task Create(CreateProductDto model, IFormFile? image)
-		{
-			var product = _mapper.Map<Product>(model);
+			PaginatedList<ProductDto> retProducts = new PaginatedList<ProductDto>(productDto, pageIndex, pageSize);
 
-			if (image != null)
-			{
-				var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
-				await image.CopyToAsync(new FileStream(name, FileMode.Create));
-				product.Image = "images/product/" + image.FileName;
-			}
-			if (image == null)
-			{
-				product.Image = "images/product/noimage.PNG";
-			}
+            return retProducts;
+        }
 
-			var data = new Product()
-			{
-				Name = product.Name,
-				Description = product.Description,
-				CategoryId = product.CategoryId,
-				Price = product.Price,
-				Quantity = product.Quantity,
-				Image = product.Image,
-			};
+        public async Task<ProductDto> GetById(int id)
+        {
+            var product = await _context.Products.Include(x => x.Category)
+                                                 .FirstOrDefaultAsync(x => x.Id == id);
+            var productDto = _mapper.Map<ProductDto>(product);
+            return productDto;
+        }
 
-			await _context.Products.AddAsync(data);
-			await Save();
-		}
+        public async Task Create(CreateProductDto model, IFormFile? image)
+        {
+            var product = _mapper.Map<Product>(model);
 
-		public async Task Update(EditProductDto model, IFormFile? image)
-		{
-			var product = _mapper.Map<Product>(model);
+            if (image != null)
+            {
+                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
+                await image.CopyToAsync(new FileStream(name, FileMode.Create));
+                product.Image = "images/product/" + image.FileName;
+            }
+            if (image == null)
+            {
+                product.Image = "images/product/noimage.PNG";
+            }
 
-			if (image != null)
-			{
-				var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
-				await image.CopyToAsync(new FileStream(name, FileMode.Create));
-				product.Image = "images/product/" + image.FileName;
-			}
-			if(image == null)
-			{
-				product.Image = "images/product/noimage.PNG";
-			}
+            var data = new Product()
+            {
+                Name = product.Name,
+                Description = product.Description,
+                CategoryId = product.CategoryId,
+                Price = product.Price,
+                Quantity = product.Quantity,
+                Image = product.Image,
+            };
 
-			_context.Products.Update(product);
-			await Save();
-		}
+            await _context.Products.AddAsync(data);
+            await Save();
+        }
 
-		public async Task Delete(ProductDto model)
-		{
-			var product = _mapper.Map<Product>(model);
-			_context.Products.Remove(product);
-			await Save();
-		}
+        public async Task Update(EditProductDto model, IFormFile? image)
+        {
+            var product = _mapper.Map<Product>(model);
 
-		public async Task<IEnumerable<CategoryDto>> GetAllCategories()
-		{
-			var categories = await _context.Categories.ToListAsync();
-			var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
-			return categoryDto;
-		}
+            if (image != null)
+            {
+                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
+                await image.CopyToAsync(new FileStream(name, FileMode.Create));
+                product.Image = "images/product/" + image.FileName;
+            }
+            if (image == null)
+            {
+                product.Image = "images/product/noimage.PNG";
+            }
 
-		// Check sản phẩm đã tồn tại hay chưa
-		public bool FindProduct(CreateProductDto model)
-		{
-			var product = _mapper.Map<Product>(model);
-			var searchProduct = _context.Products.FirstOrDefault(x => x.Name == product.Name);
-			if (searchProduct != null)
-			{
-				return true;
-			}
-			return false;
-		}
+            _context.Products.Update(product);
+            await Save();
+        }
 
-		public async Task Save()
-		{
-			await _context.SaveChangesAsync();
-		}
-	}
+        public async Task Delete(ProductDto model)
+        {
+            var product = _mapper.Map<Product>(model);
+            _context.Products.Remove(product);
+            await Save();
+        }
+
+        public async Task<IEnumerable<CategoryDto>> GetAllCategories()
+        {
+            var categories = await _context.Categories.ToListAsync();
+            var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            return categoryDto;
+        }
+
+        // Check sản phẩm đã tồn tại hay chưa
+        public bool FindProduct(CreateProductDto model)
+        {
+            var product = _mapper.Map<Product>(model);
+            var searchProduct = _context.Products.FirstOrDefault(x => x.Name == product.Name);
+            if (searchProduct != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+        }
+    }
 }

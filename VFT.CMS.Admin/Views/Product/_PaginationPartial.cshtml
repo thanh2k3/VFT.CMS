@@ -2,43 +2,93 @@
 
 @*<div class="float-sm-right">*@
 <div class="card-footer clearfix">
-    @if (Model.TotalPages > 0)
-    {
-        @*<ul class="pagination pagination-sm m-0 float-right">*@
-        <ul class="pagination m-0 float-right">
-            @if (Model.CurrentPage > 1)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="1">Đầu</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="@(Model.CurrentPage - 1)">«</a>
-                </li>
-            }
+	@if (Model.TotalPages > 0)
+	{
+		@*<ul class="pagination pagination-sm m-0 float-right">*@
+		<ul class="pagination m-0 float-right">
+			@if (Model.CurrentPage > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="Product" asp-action="Index"
+					   asp-route-pg="1"
+					   asp-route-pageSize="@Model.PageSize"
+					   asp-route-SearchText="@Model.SearchText">
+						Đầu
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" asp-controller="Product" asp-action="Index"
+					   asp-route-pg="@(Model.CurrentPage - 1)"
+					   asp-route-pageSize="@Model.PageSize"
+					   asp-route-SearchText="@Model.SearchText">
+						«
+					</a>
+				</li>
+			}
 
-            @for (var pge = Model.StartPage; pge <= Model.EndPage; pge++)
-            {
-                <li class="page-item @(pge == Model.CurrentPage ? "active" : "")">
-                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="@pge">@pge</a>
-                </li>
-            }
+			@for (var pge = Model.StartPage; pge <= Model.EndPage; pge++)
+			{
+				<li class="page-item @(pge == Model.CurrentPage ? "active" : "")">
+					@if (pge != Model.CurrentPage)
+					{
+						<a class="page-link" asp-controller="Product" asp-action="Index"
+						   asp-route-pg="@pge"
+						   asp-route-pageSize="@Model.PageSize"
+						   asp-route-SearchText="@Model.SearchText">
+							@pge
+						</a>
+					}
+					else
+					{
+						<span class="page-link">@pge</span>
+					}
+				</li>
+			}
 
-            @if (Model.CurrentPage < Model.TotalPages)
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="@(Model.CurrentPage + 1)">»</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" asp-controller="Product" asp-action="Index" asp-route-pg="@(Model.TotalPages)">Cuối</a>
-                </li>
-            }
-        </ul>
-    }
+			@if (Model.CurrentPage < Model.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="Product" asp-action="Index"
+					   asp-route-pg="@(Model.CurrentPage + 1)"
+					   asp-route-pageSize="@Model.PageSize"
+					   asp-route-SearchText="@Model.SearchText">
+						»
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" asp-controller="Product" asp-action="Index"
+					   asp-route-pg="@(Model.TotalPages)"
+					   asp-route-pageSize="@Model.PageSize"
+					   asp-route-SearchText="@Model.SearchText">
+						Cuối
+					</a>
+				</li>
+			}
+		</ul>
+	}
 
+	<div class="col-4 btn-group justify-content-left mt-2 m-0">
+		<p class="m-0">
+			Đang hiển thị trang @Model.CurrentPage / @Model.TotalPages trang
+		</p>
+	</div>
 
-    <div class="col-4 btn-group justify-content-left mt-2 m-0">
-        <p class="m-0">
-            Đang hiển thị trang @Model.CurrentPage / @Model.TotalPages trang
-        </p>
-    </div>
+	<div class="col-3 btn-group justify-content-end">
+		<span class="col-7 mt-2 p-0">
+			Row per page
+		</span>
+
+		<span class="col-5 p-1">
+			<select class="form-control" id="pageSelector" asp-items="Model.GetPageSize();" onchange="ChangePageSize(this);"></select>
+		</span>
+	</div>
 </div>
+
+<script>
+	function ChangePageSize(obj)
+	{
+		var controllerName = '@this.ViewContext.RouteData.Values["controller"].ToString()';
+
+		window.location.href = "/" + controllerName + "/@Model.Action" + "?pageSize=" + obj.value + "&SearchText@Model.SearchText";
+	}
+</script>
