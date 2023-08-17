@@ -8,13 +8,13 @@ namespace VFT.CMS.Application.Products
     public interface IProductService
     {
 		//Task<IEnumerable<ProductDto>> GetAll(string SearchText="");
-		Task<PaginatedList<ProductDto>> GetAll(string SearchText="", int pg = 1, int pageSize = 5);
+		Task<List<ProductDto>> GetAll(string SearchText="", int pg = 1, int pageSize = 5);
 
 		Task<ProductDto> GetById(int id);
 
 		Task Create(CreateProductDto model, IFormFile? image);
 
-		Task Update(EditProductDto model, IFormFile? image);
+		Task Update(EditProductDto model);
 
         Task Delete(ProductDto model);
 

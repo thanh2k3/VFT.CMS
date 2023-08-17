@@ -17,13 +17,15 @@ namespace VFT.CMS.Admin.ViewModels.Products
 		public string SearchText { get; set; }
 
 
-		public PageViewModel() { }
-
-
-		public PageViewModel(int totalItems, int page, int pageSize = 5)
+		public PageViewModel(int totalItems, int currentPage, int pageSize = 5)
 		{
+			this.TotalItems = totalItems;
+			this.CurrentPage = currentPage;
+			this.PageSize = pageSize;
+
 			int totalPages = (int)Math.Ceiling((decimal)totalItems / (decimal)pageSize);
-			int currentPage = page;
+
+			TotalPages = totalPages;
 
 			int startPage = currentPage - 5;
 			int endPage = currentPage + 4;
@@ -44,6 +46,7 @@ namespace VFT.CMS.Admin.ViewModels.Products
 			}
 
 			StartRecord = (CurrentPage - 1) * PageSize + 1;
+
 			EndRecord = StartRecord - 1 + PageSize;
 
 			if (EndRecord > TotalItems)
@@ -63,14 +66,6 @@ namespace VFT.CMS.Admin.ViewModels.Products
 				StartPage = startPage;
 				EndPage = endPage;
 			}
-
-
-			TotalItems = totalItems;
-			CurrentPage = currentPage;
-			PageSize = pageSize;
-			TotalPages = totalPages;
-			StartPage = startPage;
-			EndPage = endPage;
 		}
 
 

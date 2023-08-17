@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VFT.CMS.Core;
+using Microsoft.AspNetCore.Http;
 
 namespace VFT.CMS.Application.Products.Dto
 {
@@ -31,5 +32,7 @@ namespace VFT.CMS.Application.Products.Dto
 
 		[DisplayName("Ảnh")]
 		public string? Image { get; set; }
+		public IFormFile? ImageFile { get; set; }
+
 	}
 }

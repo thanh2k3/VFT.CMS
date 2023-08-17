@@ -6,5 +6,7 @@ namespace VFT.CMS.Admin.ViewModels.Products
 {
 	public class ProductViewModel : ProductDto
 	{
-    }
+		//public string TotalRecords { get; set; }
+
+	}
 }

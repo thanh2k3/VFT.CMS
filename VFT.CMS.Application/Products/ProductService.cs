@@ -26,7 +26,7 @@ namespace VFT.CMS.Application.Products
         }
 
         //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
-		public async Task<PaginatedList<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
+		public async Task<List<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
 		{
             List<Product> products;
 
@@ -47,9 +47,9 @@ namespace VFT.CMS.Application.Products
 			//PaginatedList<Product> retProducts = new PaginatedList<Product>(products, pageIndex, pageSize);
 			List<ProductDto> productDto = _mapper.Map<List<ProductDto>>(products);
 
-			PaginatedList<ProductDto> retProducts = new PaginatedList<ProductDto>(productDto, pageIndex, pageSize);
+			//PaginatedList<ProductDto> retProducts = new PaginatedList<ProductDto>(productDto, pageIndex, pageSize);
 
-            return retProducts;
+            return productDto;
         }
 
         public async Task<ProductDto> GetById(int id)
@@ -89,19 +89,15 @@ namespace VFT.CMS.Application.Products
             await Save();
         }
 
-        public async Task Update(EditProductDto model, IFormFile? image)
+        public async Task Update(EditProductDto model)
         {
             var product = _mapper.Map<Product>(model);
 
-            if (image != null)
+            if (model.ImageFile != null)
             {
-                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
-                await image.CopyToAsync(new FileStream(name, FileMode.Create));
-                product.Image = "images/product/" + image.FileName;
-            }
-            if (image == null)
-            {
-                product.Image = "images/product/noimage.PNG";
+                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(model.ImageFile.FileName));
+                await model.ImageFile.CopyToAsync(new FileStream(name, FileMode.Create));
+                product.Image = "images/product/" + model.ImageFile.FileName;
             }
 
             _context.Products.Update(product);

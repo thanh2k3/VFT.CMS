@@ -6,17 +6,15 @@
 	ViewData["Title"] = "Sản phẩm";
 
 
-	//PageViewModel pageVM = new PageViewModel();
-
 	PageViewModel pageVM = ViewBag.PageViewModel;
 
-	int pageNo = 0;
+	//int pageNo = 0;
 
-	if (ViewBag.PageViewModel != null)
-	{
-		pageVM = ViewBag.PageViewModel;
-		pageNo = pageVM.CurrentPage;
-	}
+	//if (ViewBag.PageViewModel != null)
+	//{
+	//	pageVM = ViewBag.PageViewModel;
+	//	pageNo = pageVM.CurrentPage;
+	//}
 }
 
 
@@ -42,23 +40,11 @@
 
 	<section class="content">
 		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">Responsive Hover Table</h3>
-				<div class="card-tools">
-					<form asp-action="Index" method="get">
-						<div class="input-group input-group-sm">
-							<input type="text" name="SearchText" class="form-control float-right" placeholder="Tìm kiếm...">
-							<div class="input-group-append">
-								<button class="btn btn-default">
-									<i class="fas fa-search"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+
+			<partial name="_Topbar" model="@pageVM" />
+
 			<div class="card-body p-0">
-				<table class="table projects">
+				<table class="table table-striped projects">
 					<thead>
 						<tr>
 							<th>

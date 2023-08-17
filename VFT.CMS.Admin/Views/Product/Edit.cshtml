@@ -1,4 +1,4 @@
-﻿@model VFT.CMS.Admin.ViewModels.Products.ProductViewModel
+﻿@model VFT.CMS.Admin.ViewModels.Products.EditProductViewModel
 
 @{
 	ViewData["Title"] = "Sửa đổi thông tin của sản phẩm";
@@ -89,7 +89,10 @@
 										</label>
 									</div>
 									<div class="col-8">
-										<input asp-for="Image" type="file" class="form-control">
+										<input asp-for="ImageFile" type="file" class="form-control">
+									</div>
+									<div class="col-8">
+										<input asp-for="Image" type="text" class="form-control"  hidden>
 									</div>
 								</div>
 							</div>

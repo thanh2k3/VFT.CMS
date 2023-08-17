@@ -25,17 +25,15 @@ namespace VFT.CMS.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Index(string SearchText = "", int pg = 1, int pageSize = 5)
 		{
-			PaginatedList<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
+			List<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
+			List<ProductViewModel> productVM = _mapper.Map<List<ProductViewModel>>(productDto);
 
-			//List<ProductViewModel> productVM = _mapper.Map<List<ProductViewModel>>(productDto);
+			PaginatedList<ProductViewModel> retProductVM = new PaginatedList<ProductViewModel>(productVM, pg, pageSize);
 
-			//PaginatedList<ProductViewModel> retProductVM = new PaginatedList<ProductViewModel>(productVM, pg, pageSize);
-
-			var pageVM = new PageViewModel(productDto.TotalRecords, pg, pageSize);
+			var pageVM = new PageViewModel(retProductVM.TotalRecords, pg, pageSize);
 			ViewBag.PageViewModel = pageVM;
 
-
-			return View(productDto);
+			return View(retProductVM);
 		}
 
 		[HttpGet]
@@ -102,43 +100,43 @@ namespace VFT.CMS.Admin.Controllers
 			}
 
 			ProductDto productDto = await _productService.GetById(id);
-			var productVM = _mapper.Map<ProductViewModel>(productDto);
+			var productVM = _mapper.Map<EditProductViewModel>(productDto);
 
 			if (productVM == null)
 			{
 				return NotFound();
 			}
 
-			var data = new ProductViewModel()
-			{
-				Name = productVM.Name,
-				Description = productVM.Description,
-				CategoryId = productVM.CategoryId,
-				Price = productVM.Price,
-				Quantity = productVM.Quantity,
-				Image = productVM.Image,
-			};
+			//var data = new ProductViewModel()
+			//{
+			//	Name = productVM.Name,
+			//	Description = productVM.Description,
+			//	CategoryId = productVM.CategoryId,
+			//	Price = productVM.Price,
+			//	Quantity = productVM.Quantity,
+			//	Image = productVM.Image,
+			//};
 
 			var categoryDto = await _productService.GetAllCategories();
 			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 			ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
-			return View(data);
+			return View(productVM);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(EditProductViewModel model, IFormFile? image)
+		public async Task<IActionResult> Edit(EditProductViewModel model)
 		{
-			if (ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
-				var ePDto = _mapper.Map<EditProductDto>(model);
-				await _productService.Update(ePDto, image);
-				return RedirectToAction("Index");
+				var categoryDto = await _productService.GetAllCategories();
+				var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+				ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+				return View(model);
 			}
 
-			var categoryDto = await _productService.GetAllCategories();
-			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-			ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
-			return View();
+			var ePDto = _mapper.Map<EditProductDto>(model);
+			await _productService.Update(ePDto);
+			return RedirectToAction("Index");
 		}
 
 		[HttpGet]
