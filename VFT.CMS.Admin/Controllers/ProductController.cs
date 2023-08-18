@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Admin.ViewModels.Products;
+using VFT.CMS.Application.Common.Dto;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
@@ -25,15 +26,14 @@ namespace VFT.CMS.Admin.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Index(string SearchText = "", int pg = 1, int pageSize = 5)
 		{
-			List<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
-			List<ProductViewModel> productVM = _mapper.Map<List<ProductViewModel>>(productDto);
+			PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
 
-			PaginatedList<ProductViewModel> retProductVM = new PaginatedList<ProductViewModel>(productVM, pg, pageSize);
-
-			var pageVM = new PageViewModel(retProductVM.TotalRecords, pg, pageSize);
+			var pageVM = new PagedViewModel(productDto.TotalRecords, pg, pageSize);
 			ViewBag.PageViewModel = pageVM;
 
-			return View(retProductVM);
+			var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
+
+			return View(productVM);
 		}
 
 		[HttpGet]

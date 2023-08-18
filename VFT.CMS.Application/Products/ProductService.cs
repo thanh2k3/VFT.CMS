@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Web.Mvc;
 using VFT.CMS.Application.Categories.Dto;
+using VFT.CMS.Application.Common.Dto;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
@@ -26,7 +27,7 @@ namespace VFT.CMS.Application.Products
         }
 
         //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
-		public async Task<List<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
+		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
 		{
             List<Product> products;
 
@@ -44,12 +45,11 @@ namespace VFT.CMS.Application.Products
                     .ToListAsync();
             }
 
-			//PaginatedList<Product> retProducts = new PaginatedList<Product>(products, pageIndex, pageSize);
 			List<ProductDto> productDto = _mapper.Map<List<ProductDto>>(products);
 
-			//PaginatedList<ProductDto> retProducts = new PaginatedList<ProductDto>(productDto, pageIndex, pageSize);
+			PagedResultRequestDto<ProductDto> retProducts = new PagedResultRequestDto<ProductDto>(productDto, pageIndex, pageSize);
 
-            return productDto;
+            return retProducts;
         }
 
         public async Task<ProductDto> GetById(int id)

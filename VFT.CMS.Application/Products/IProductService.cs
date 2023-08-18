@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using VFT.CMS.Application.Categories.Dto;
+using VFT.CMS.Application.Common.Dto;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Core;
 
@@ -8,7 +9,7 @@ namespace VFT.CMS.Application.Products
     public interface IProductService
     {
 		//Task<IEnumerable<ProductDto>> GetAll(string SearchText="");
-		Task<List<ProductDto>> GetAll(string SearchText="", int pg = 1, int pageSize = 5);
+		Task<PagedResultRequestDto<ProductDto>> GetAll(string SearchText="", int pg = 1, int pageSize = 5);
 
 		Task<ProductDto> GetById(int id);
 

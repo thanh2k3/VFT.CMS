@@ -1,4 +1,7 @@
-﻿namespace VFT.CMS.Client.Startup
+﻿using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Repository.Data;
+
+namespace VFT.CMS.Client.Startup
 {
     public class Startup
     {
@@ -13,7 +16,10 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-        }
+
+			string connectionString = Configuration.GetConnectionString("MyDatabase");
+			services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

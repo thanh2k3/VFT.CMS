@@ -14,6 +14,6 @@ namespace VFT.CMS.Admin.ViewModels.Products
 			CreateMap<ProductDto, EditProductViewModel>().ReverseMap();
 
 			CreateMap<EditProductDto, EditProductViewModel>().ReverseMap();
-        }
-    }
+		}
+	}
 }

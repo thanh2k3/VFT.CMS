@@ -1,20 +1,11 @@
-﻿@*@model IEnumerable<VFT.CMS.Admin.ViewModels.Products.ProductViewModel>*@
-@model IEnumerable<VFT.CMS.Application.Products.Dto.ProductDto>
+﻿@model IEnumerable<VFT.CMS.Admin.ViewModels.Products.ProductViewModel>
 @using VFT.CMS.Admin.ViewModels.Products;
 
 @{
 	ViewData["Title"] = "Sản phẩm";
 
 
-	PageViewModel pageVM = ViewBag.PageViewModel;
-
-	//int pageNo = 0;
-
-	//if (ViewBag.PageViewModel != null)
-	//{
-	//	pageVM = ViewBag.PageViewModel;
-	//	pageNo = pageVM.CurrentPage;
-	//}
+	PagedViewModel pageVM = ViewBag.PageViewModel;
 }
 
 

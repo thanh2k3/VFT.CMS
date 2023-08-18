@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VFT.CMS.Application.Products.Dto
+namespace VFT.CMS.Application.Common.Dto
 {
-	public class PaginatedList<T> : List<T>
+	public class PagedResultRequestDto<T> : List<T>
 	{
+		public PagedResultRequestDto() { }
+
 		public int TotalRecords { get; set; }
 
-		public PaginatedList(List<T> source, int pageIndex, int pageSize)
+		public PagedResultRequestDto(List<T> source, int pageIndex, int pageSize)
 		{
 			TotalRecords = source.Count;
 

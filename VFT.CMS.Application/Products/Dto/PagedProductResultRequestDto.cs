@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
-namespace VFT.CMS.Admin.ViewModels.Products
+namespace VFT.CMS.Application.Products.Dto
 {
-	public class PageViewModel
+	public class PagedProductResultRequestDto
 	{
 		public int TotalItems { get; set; }
 		public int CurrentPage { get; set; }
@@ -17,7 +22,7 @@ namespace VFT.CMS.Admin.ViewModels.Products
 		public string SearchText { get; set; }
 
 
-		public PageViewModel(int totalItems, int currentPage, int pageSize = 5)
+		public PagedProductResultRequestDto(int totalItems, int currentPage, int pageSize = 5)
 		{
 			this.TotalItems = totalItems;
 			this.CurrentPage = currentPage;
@@ -66,29 +71,6 @@ namespace VFT.CMS.Admin.ViewModels.Products
 				StartPage = startPage;
 				EndPage = endPage;
 			}
-		}
-
-
-
-
-
-
-		public List<SelectListItem> GetPageSize()
-		{
-			var pageSizes = new List<SelectListItem>();
-
-			for (int i = 5; i <= 50;  i += 5)
-			{
-				if (i == this.PageSize)
-				{
-					pageSizes.Add(new SelectListItem(i.ToString(), i.ToString(), true));
-				}
-				else
-				{
-					pageSizes.Add(new SelectListItem(i.ToString(), i.ToString()));
-				}
-			}
-			return pageSizes;
 		}
 	}
 }
