@@ -81,8 +81,8 @@ namespace VFT.CMS.Admin.Controllers
 				return NotFound();
 			}
 
-			ProductDto product = await _productService.GetById(id);
-			var productVM = _mapper.Map<ProductViewModel>(product);
+			ProductDto productDto = await _productService.GetById(id);
+			var productVM = _mapper.Map<ProductViewModel>(productDto);
 
 			if (productVM == null)
 			{

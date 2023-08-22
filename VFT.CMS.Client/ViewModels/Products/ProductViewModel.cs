@@ -1,6 +1,8 @@
-﻿namespace VFT.CMS.Client.ViewModels.Products
+﻿using VFT.CMS.Application.Products.Dto;
+
+namespace VFT.CMS.Client.ViewModels.Products
 {
-	public class ProductViewModel
+	public class ProductViewModel : ProductDto
 	{
 	}
 }

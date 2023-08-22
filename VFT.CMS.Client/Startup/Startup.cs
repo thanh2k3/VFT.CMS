@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Application.Products.Dto;
+using VFT.CMS.Client.ViewModels.Products;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Client.Startup
@@ -19,6 +21,11 @@ namespace VFT.CMS.Client.Startup
 
 			string connectionString = Configuration.GetConnectionString("MyDatabase");
 			services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
+
+            services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
+            services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
+
+            services.AddScoped();
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
