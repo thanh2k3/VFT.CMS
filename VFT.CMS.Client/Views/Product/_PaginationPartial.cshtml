@@ -35,7 +35,7 @@
 			@if (Model.CurrentPage > 1)
 			{
 				<li class="page-item">
-					<a class="page-link" asp-controller="Home" asp-action="Index"
+					<a class="page-link" asp-controller="Product" asp-action="Index"
 					   asp-route-page="1"
 					   asp-route-pageSize="@Model.PageSize"
 					   asp-route-searchText="@Model.SearchText">
@@ -43,7 +43,7 @@
 					</a>
 				</li>
 				<li class="page-item">
-					<a class="page-link" asp-controller="Home" asp-action="Index"
+					<a class="page-link" asp-controller="Product" asp-action="Index"
 					   asp-route-page="@(Model.CurrentPage - 1)"
 					   asp-route-pageSize="@Model.PageSize"
 					   asp-route-searchText="@Model.SearchText">
@@ -57,7 +57,7 @@
 				<li class="page-item @(pge == Model.CurrentPage ? "active" : "")">
 					@if (pge != Model.CurrentPage)
 					{
-						<a class="page-link" asp-controller="Home" asp-action="Index"
+						<a class="page-link" asp-controller="Product" asp-action="Index"
 						   asp-route-page="@pge"
 						   asp-route-pageSize="@Model.PageSize"
 						   asp-route-searchText="@Model.SearchText">
@@ -74,7 +74,7 @@
 			@if (Model.CurrentPage < Model.TotalPages)
 			{
 				<li class="page-item">
-					<a class="page-link" asp-controller="Home" asp-action="Index"
+					<a class="page-link" asp-controller="Product" asp-action="Index"
 					   asp-route-page="@(Model.CurrentPage + 1)"
 					   asp-route-pageSize="@Model.PageSize"
 					   asp-route-searchText="@Model.SearchText">
@@ -82,7 +82,7 @@
 					</a>
 				</li>
 				<li class="page-item">
-					<a class="page-link" asp-controller="Home" asp-action="Index"
+					<a class="page-link" asp-controller="Product" asp-action="Index"
 					   asp-route-page="@(Model.TotalPages)"
 					   asp-route-pageSize="@Model.PageSize"
 					   asp-route-searchText="@Model.SearchText">

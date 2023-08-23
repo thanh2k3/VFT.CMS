@@ -1,48 +1,32 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using VFT.CMS.Application.Common.Dto;
-using VFT.CMS.Application.Products;
-using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Client.Models;
-using VFT.CMS.Client.ViewModels.Products;
 
 namespace VFT.CMS.Client.Controllers
 {
-    public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
-        public readonly IProductService _productService;
-        public readonly IMapper _mapper;
+	public class HomeController : Controller
+	{
+		private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService, IMapper mapper)
-        {
-            _logger = logger;
-            _productService = productService;
-            _mapper = mapper;
-        }
+		public HomeController(ILogger<HomeController> logger)
+		{
+			_logger = logger;
+		}
 
-        public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 10)
-        {
-            PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, page, pageSize);
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-            var pageVM = new PagedViewModel(productDto.TotalRecords, page, pageSize);
-            ViewBag.PagedViewModel = pageVM;
+		public IActionResult Privacy()
+		{
+			return View();
+		}
 
-            var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
-
-            return View(productVM);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
