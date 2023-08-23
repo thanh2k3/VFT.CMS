@@ -5,9 +5,21 @@
 		border-bottom-left-radius: 0.25rem;
 		border-bottom-right-radius: 0.25rem;
 	}
+
+	.page-link {
+		color: black;
+	}
+
+	.page-item.active .page-link {
+		z-index: 3;
+		color: #fff;
+		background-color: red !important;
+		border-color: red;
+	}
 </style>
 
-<div class="d-flex align-items-center justify-content-between mt-4">
+
+<div class="d-flex align-items-center justify-content-between mt-4 p-2 bg-dark text-white" style="border-radius: 10px;">
 	<div class="">
 		@if (Model.StartRecord < Model.EndRecord)
 		{
@@ -93,7 +105,7 @@
 		</ul>
 	}
 </div>
-
+	
 <script>
 	function ChangePageSize(obj) {
 		var controllerName = '@this.ViewContext.RouteData.Values["controller"].ToString()';

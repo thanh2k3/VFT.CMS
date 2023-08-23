@@ -9,7 +9,7 @@ namespace VFT.CMS.Application.Products
     public interface IProductService
     {
 		//Task<IEnumerable<ProductDto>> GetAll(string SearchText="");
-		Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText="", int pg = 1, int pageSize = 5);
+		Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText, int pg, int pageSize);
 
 		Task<ProductDto> GetById(int id);
 

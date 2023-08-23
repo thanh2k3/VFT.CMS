@@ -20,7 +20,7 @@ namespace VFT.CMS.Client.Controllers
 			_mapper = mapper;
 		}
 
-		public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 10)
+		public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 12)
 		{
 			PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, page, pageSize);
 
@@ -29,6 +29,23 @@ namespace VFT.CMS.Client.Controllers
 
 			var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
 
+			return View(productVM);
+		}
+
+		public async Task<IActionResult> Details(int id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			ProductDto productDto = await _productService.GetById(id);
+			var productVM = _mapper.Map<ProductViewModel>(productDto);
+
+			if (productVM == null)
+			{
+				return NotFound();
+			}
 			return View(productVM);
 		}
 	}

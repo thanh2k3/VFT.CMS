@@ -22,7 +22,7 @@ namespace VFT.CMS.Application.Products.Dto
 		public string SearchText { get; set; }
 
 
-		public PagedProductResultRequestDto(int totalItems, int currentPage, int pageSize = 10)
+		public PagedProductResultRequestDto(int totalItems, int currentPage, int pageSize)
 		{
 			this.TotalItems = totalItems;
 			this.CurrentPage = currentPage;

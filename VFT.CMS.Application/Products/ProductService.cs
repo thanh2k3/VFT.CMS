@@ -27,7 +27,7 @@ namespace VFT.CMS.Application.Products
         }
 
         //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
-		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText = "", int pageIndex = 1, int pageSize = 10)
+		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText, int pageIndex, int pageSize)
 		{
             List<Product> products;
 
