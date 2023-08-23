@@ -12,7 +12,7 @@ namespace VFT.CMS.Admin.ViewModels.Products
 		{
 			var pageSizes = new List<SelectListItem>();
 
-			for (int i = 5; i <= 50;  i += 5)
+			for (int i = 10; i <= 100;  i += 10)
 			{
 				if (i == this.PageSize)
 				{

@@ -27,15 +27,15 @@ namespace VFT.CMS.Application.Products
         }
 
         //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
-		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string SearchText = "", int pageIndex = 1, int pageSize = 5)
+		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText = "", int pageIndex = 1, int pageSize = 10)
 		{
             List<Product> products;
 
-            if (SearchText != "" && SearchText != null)
+            if (searchText != "" && searchText != null)
             {
                 products = await _context.Products
                     .Include(x => x.Category)
-                    .Where(x => x.Name.Contains(SearchText) || x.Description.Contains(SearchText))
+                    .Where(x => x.Name.Contains(searchText) || x.Description.Contains(searchText))
                     .ToListAsync();
             }
             else

@@ -1,21 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VFT.CMS.Application.Common.Dto;
+using VFT.CMS.Application.Products;
+using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Client.Models;
+using VFT.CMS.Client.ViewModels.Products;
 
 namespace VFT.CMS.Client.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public readonly IProductService _productService;
+        public readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IProductService productService, IMapper mapper)
         {
             _logger = logger;
+            _productService = productService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 10)
         {
-            return View();
+            PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, page, pageSize);
+
+            var pageVM = new PagedViewModel(productDto.TotalRecords, page, pageSize);
+            ViewBag.PagedViewModel = pageVM;
+
+            var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
+
+            return View(productVM);
         }
 
         public IActionResult Privacy()

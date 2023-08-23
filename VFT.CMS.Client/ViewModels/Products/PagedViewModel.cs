@@ -5,15 +5,13 @@ namespace VFT.CMS.Client.ViewModels.Products
 {
 	public class PagedViewModel : PagedProductResultRequestDto
 	{
-		public PagedViewModel(int totalItems, int currentPage, int pageSize) : base(totalItems, currentPage, pageSize)
-		{
-		}
+		public PagedViewModel(int totalItems, int currentPage, int pageSize) : base(totalItems, currentPage, pageSize) { }
 
 		public List<SelectListItem> GetPageSize()
 		{
 			var pageSizes = new List<SelectListItem>();
 
-			for (int i = 5; i <= 50; i += 5)
+			for (int i = 10; i <= 100; i += 10)
 			{
 				if (i == this.PageSize)
 				{

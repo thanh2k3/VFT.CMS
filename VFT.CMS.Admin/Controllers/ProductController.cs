@@ -24,9 +24,9 @@ namespace VFT.CMS.Admin.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index(string SearchText = "", int pg = 1, int pageSize = 5)
+		public async Task<IActionResult> Index(string searchText = "", int pg = 1, int pageSize = 10)
 		{
-			PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(SearchText, pg, pageSize);
+			PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, pg, pageSize);
 
 			var pageVM = new PagedViewModel(productDto.TotalRecords, pg, pageSize);
 			ViewBag.PageViewModel = pageVM;
