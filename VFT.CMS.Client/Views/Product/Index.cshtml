@@ -6,6 +6,9 @@
 	Layout = "_Layout";
 
 	PagedViewModel pageVM = ViewBag.PagedViewModel;
+
+	// define format VND
+	var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
 <style>
@@ -50,7 +53,7 @@
 									@product.Name
 								</a>
 								<p class="card-text">@product.Description</p>
-								<p class="card-text">@product.Price vnđ</p>
+								<p class="card-text">@String.Format(format, "{0:c0}", product.Price)</p>
 								<a href="#" class="btn btn-success">Thêm</a>
 							</div>
 						</div>

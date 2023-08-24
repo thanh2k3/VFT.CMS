@@ -1,6 +1,9 @@
 ﻿@{
 	ViewData["Title"] = "Thông tin sản phẩm";
 	Layout = "_Layout";
+
+	// define format VND
+	var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
 <style>
@@ -22,7 +25,7 @@
 				<div class="small mb-1">SKU: BST-498</div>
 				<h1 class="display-5 fw-bolder">@Model.Name</h1>
 				<div class="fs-5 mb-5">
-					<span>@Model.Price vnđ</span>
+					<span>@String.Format(format, "{0:c0}", Model.Price)</span>
 				</div>
 				<p class="lead mb-5">@Model.Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
 				<div class="d-flex mb-2">
