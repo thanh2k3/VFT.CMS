@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VFT.CMS.Client.Models;
+using VFT.CMS.Client.Helpers;
 using VFT.CMS.Client.ViewModels.Carts;
-using VFT.CMS.Repository.Data;
 
-namespace VFT.CMS.Client.Components
+namespace VFT.CMS.Client.ViewComponents
 {
     public class SmallCartViewComponent : ViewComponent
     {

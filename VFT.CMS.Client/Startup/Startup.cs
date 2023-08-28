@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using VFT.CMS.Application.Carts.Dto;
 using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Client.ViewModels.Products;
 using VFT.CMS.Repository.Data;
@@ -25,10 +26,12 @@ namespace VFT.CMS.Client.Startup
 
 			services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
 			services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
+			services.AddAutoMapper(typeof(CartMapProfile).Assembly);
 
 			services.AddScoped();
 
 			services.AddDistributedMemoryCache();
+
 			services.AddSession(options =>
 			{
 				//options.Cookie.Name = "MySession";

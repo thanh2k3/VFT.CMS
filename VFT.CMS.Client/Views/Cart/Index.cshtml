@@ -1,15 +1,15 @@
 ﻿@model VFT.CMS.Client.ViewModels.Carts.CartViewModel
 
 @{
-	ViewData["Title"] = "Giỏ hàng";
-	//Layout = "_Layout";
+    ViewData["Title"] = "Giỏ hàng";
+    //Layout = "_Layout";
 
     // define format VND
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
 
-@if(Model.CartItems.Count > 0)
+@if (Model.CartItems.Count > 0)
 {
     <table class="table">
         <tr>

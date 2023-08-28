@@ -18,8 +18,4 @@
     <ProjectReference Include="..\VFT.CMS.Repository\VFT.CMS.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Carts\Dto\" />
-  </ItemGroup>
-
 </Project>

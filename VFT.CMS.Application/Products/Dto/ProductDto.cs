@@ -15,7 +15,7 @@ namespace VFT.CMS.Application.Products.Dto
 		public string? Description { get; set; }
 
 		[DisplayName("Giá")]
-		public int? Price { get; set; }
+		public int Price { get; set; }
 
 		[DisplayName("Số lượng")]
 		public int? Quantity { get; set; }

@@ -1,57 +1,54 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using VFT.CMS.Application.Products.Dto;
-using VFT.CMS.Client.Models;
+using VFT.CMS.Client.Helpers;
 using VFT.CMS.Client.ViewModels.Carts;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Client.Controllers
 {
-	public class CartController : Controller
-	{
-		public readonly AppDBContext _context;
-		
-		public CartController(AppDBContext context)
-		{
-			_context = context;
-		}
+    public class CartController : Controller
+    {
+        public readonly AppDBContext _context;
+
+        public CartController(AppDBContext context)
+        {
+            _context = context;
+        }
 
         public ActionResult Index()
         {
-			List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
 
-			CartViewModel cartVM = new()
-			{
-				CartItems = cart,
-				GrandTotal = cart.Sum(x => x.Quantity * x.Price)
-			};
+            CartViewModel cartVM = new()
+            {
+                CartItems = cart,
+                GrandTotal = cart.Sum(x => x.Quantity * x.Price)
+            };
 
             return View(cartVM);
         }
 
-		public async Task<IActionResult> Add(int id)
-		{
-			Product product = await _context.Products.FindAsync(id);
+        public async Task<IActionResult> Add(int id)
+        {
+            Product product = await _context.Products.FindAsync(id);
 
-			List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
 
-			CartItem cartItem = cart.Where(c => c.ProductId == id).FirstOrDefault();
+            CartItem cartItem = cart.Where(c => c.ProductId == id).FirstOrDefault();
 
-			if (cartItem == null)
-			{
-				cart.Add(new CartItem(product));
-			}
-			else
-			{
-				cartItem.Quantity += 1;
-			}
+            if (cartItem == null)
+            {
+                cart.Add(new CartItem(product));
+            }
+            else
+            {
+                cartItem.Quantity += 1;
+            }
 
-			HttpContext.Session.SetJson("Cart", cart);
+            HttpContext.Session.SetJson("Cart", cart);
 
-			return Redirect(Request.Headers["Referer"].ToString());
-		}
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
 
         public async Task<IActionResult> Decrease(long id)
         {

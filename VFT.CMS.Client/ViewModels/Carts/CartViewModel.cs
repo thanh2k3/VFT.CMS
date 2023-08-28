@@ -1,6 +1,4 @@
-﻿using VFT.CMS.Client.Models;
-
-namespace VFT.CMS.Client.ViewModels.Carts
+﻿namespace VFT.CMS.Client.ViewModels.Carts
 {
     public class CartViewModel
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using VFT.CMS.Application.Carts;
 using VFT.CMS.Application.Categories;
 using VFT.CMS.Application.Products;
 using VFT.CMS.Application.Roles;

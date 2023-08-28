@@ -1,4 +1,6 @@
-﻿using VFT.CMS.Application.Products;
+﻿using VFT.CMS.Application.Carts;
+using VFT.CMS.Application.Products;
+//using VFT.CMS.Application.Sessions;
 
 namespace VFT.CMS.Client.Startup
 {
@@ -7,6 +9,7 @@ namespace VFT.CMS.Client.Startup
 		public static void AddScoped(this IServiceCollection services)
 		{
 			services.AddScoped<IProductService, ProductService>();
-		}
+            services.AddScoped<ICartService, CartService>();
+        }
 	}
 }

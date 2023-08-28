@@ -1,6 +1,6 @@
 ﻿using VFT.CMS.Core;
 
-namespace VFT.CMS.Client.Models
+namespace VFT.CMS.Client.ViewModels.Carts
 {
     public class CartItem
     {

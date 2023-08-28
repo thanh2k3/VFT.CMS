@@ -54,7 +54,6 @@
 								</a>
 								<p class="card-text">@product.Description</p>
 								<p class="card-text">@String.Format(format, "{0:c0}", product.Price)</p>
-								@*<a href="#" class="btn btn-success">Thêm</a>*@
 								<a asp-controller="Cart"
 								   asp-action="Add"
 								   asp-route-id="@product.Id"
