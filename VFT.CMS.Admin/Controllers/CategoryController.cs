@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Application.Categories;
@@ -6,6 +7,7 @@ using VFT.CMS.Application.Categories.Dto;
 
 namespace VFT.CMS.Admin.Controllers
 {
+	[Authorize]
 	public class CategoryController : Controller
 	{
 		private readonly ICategoryService _categoryService;

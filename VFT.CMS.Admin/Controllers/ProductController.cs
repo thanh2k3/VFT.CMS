@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,8 @@ using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
-	public class ProductController : Controller
+    [Authorize]
+    public class ProductController : Controller
 	{
 		private readonly IProductService _productService;
 		private readonly IMapper _mapper;

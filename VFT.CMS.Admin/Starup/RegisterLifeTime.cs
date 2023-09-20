@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using VFT.CMS.Application.Carts;
+﻿using VFT.CMS.Application.Account;
 using VFT.CMS.Application.Categories;
 using VFT.CMS.Application.Products;
-using VFT.CMS.Application.Roles;
-using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Starup
 {
@@ -15,7 +10,7 @@ namespace VFT.CMS.Admin.Starup
         {
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
-            //services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IAccountService, AccountService>();
         }
     }
 }

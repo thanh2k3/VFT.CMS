@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using VFT.CMS.Admin.ViewModels.Account;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Admin.ViewModels.Products;
 using VFT.CMS.Application.Categories.Dto;
@@ -23,18 +25,29 @@ namespace VFT.CMS.Admin.Starup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
             string connectionString = Configuration.GetConnectionString("MyDatabase");
             services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
 
-            services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDBContext>();
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<AppDBContext>()
+                    .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                // Xóa cookie
+                options.Cookie.MaxAge = TimeSpan.FromMinutes(30);
+                // Không xóa cookie
+                //options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
+            });
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
             services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
             services.AddAutoMapper(typeof(CategoryMapProfile).Assembly);
             services.AddAutoMapper(typeof(CategoryVMMapProfile).Assembly);
-            //services.AddAutoMapper(typeof(RoleMapProfile).Assembly);
+            services.AddAutoMapper(typeof(AccountVMMapProfile).Assembly);
 
             services.AddScoped();
         }
@@ -58,9 +71,8 @@ namespace VFT.CMS.Admin.Starup
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
