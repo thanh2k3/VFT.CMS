@@ -8,6 +8,8 @@ namespace VFT.CMS.Admin.ViewModels.Account
         public AccountVMMapProfile()
         {
             CreateMap<LoginViewModel, LoginDto>();
+            CreateMap<AccountDto, AccountViewModel>();
+            CreateMap<RegisterViewModel, RegisterDto>();
         }
     }
 }

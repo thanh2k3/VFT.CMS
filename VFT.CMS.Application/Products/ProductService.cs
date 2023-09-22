@@ -26,7 +26,6 @@ namespace VFT.CMS.Application.Products
             _environment = environment;
         }
 
-        //public async Task<IEnumerable<ProductDto>> GetAll(string SearchText = "")
 		public async Task<PagedResultRequestDto<ProductDto>> GetAll(string searchText, int pageIndex, int pageSize)
 		{
             List<Product> products;
@@ -57,6 +56,7 @@ namespace VFT.CMS.Application.Products
             var product = await _context.Products.Include(x => x.Category)
                                                  .FirstOrDefaultAsync(x => x.Id == id);
             var productDto = _mapper.Map<ProductDto>(product);
+
             return productDto;
         }
 
@@ -115,6 +115,7 @@ namespace VFT.CMS.Application.Products
         {
             var categories = await _context.Categories.ToListAsync();
             var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+
             return categoryDto;
         }
 
@@ -127,6 +128,7 @@ namespace VFT.CMS.Application.Products
             {
                 return true;
             }
+
             return false;
         }
 

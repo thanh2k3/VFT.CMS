@@ -24,6 +24,7 @@ namespace VFT.CMS.Admin.Controllers
 		{
 			var categoryDto = await _categoryService.GetAll();
 			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
+
 			return View(categoryVM);
 		}
 
@@ -43,6 +44,7 @@ namespace VFT.CMS.Admin.Controllers
 			var categoryDto = _mapper.Map<CategoryDto>(model);
 			await _categoryService.Create(categoryDto);
             TempData["msg"] = "Thêm thành công!";
+
             return RedirectToAction("Create");
         }
 
@@ -56,6 +58,7 @@ namespace VFT.CMS.Admin.Controllers
 			{
 				return View(categoryVM);
 			}
+
 			return RedirectToAction("Index");
 		}
 
@@ -69,6 +72,7 @@ namespace VFT.CMS.Admin.Controllers
 			{
 				return View(categoryVM);
 			}
+
 			return RedirectToAction("Index");
 		}
 
@@ -79,8 +83,10 @@ namespace VFT.CMS.Admin.Controllers
 			{
 				var categoryDto = _mapper.Map<CategoryDto>(model);
 				await _categoryService.Update(categoryDto);
+
 				return RedirectToAction("Index");
 			}
+
 			return View();
 		}
 
@@ -94,6 +100,7 @@ namespace VFT.CMS.Admin.Controllers
 			{
 				return View(categoryVM);
 			}
+
 			return RedirectToAction("Index");
 		}
 
@@ -102,6 +109,7 @@ namespace VFT.CMS.Admin.Controllers
 		{
 			var categoryDto = _mapper.Map<CategoryDto>(model);
 			await _categoryService.Delete(categoryDto);
+
 			return RedirectToAction("Index");
 		}
     }

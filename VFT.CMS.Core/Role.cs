@@ -12,5 +12,5 @@ namespace VFT.CMS.Core
         public Role() : base() { }
 
         public Role(string roleName) : base(roleName) { }
-    }
+	}
 }

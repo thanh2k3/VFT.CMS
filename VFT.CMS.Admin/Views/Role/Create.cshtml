@@ -1,5 +1,4 @@
-﻿@*@using VFT.CMS.Application.Roles.Dto
-@model RoleDto
+﻿@model VFT.CMS.Admin.ViewModels.Roles.RoleViewModel
 
 @{
 	ViewData["Title"] = "Thêm mới quyền";
@@ -21,28 +20,31 @@
 
 	<!-- Main content -->
 	<section class="content">
-		<form method="post" action="Create">
+		<form asp-controller="Role" asp-action="Create" method="post">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card card-secondary">
 						<div class="card-header">
 							<h3 class="card-title">Thêm mới</h3>
 						</div>
-
-
 						<div class="card-body">
 							<div class="form-group">
-								<label asp-for="Name" class="form-label">Name</label>
-								<input asp-for="Name" type="text" class="form-control">
+								<label asp-for="Name" class="form-label">
+									@Html.DisplayNameFor(model => model.Name)
+								</label>
+								<input asp-for="Name" type="text" class="form-control" placeholder="Tên quyền">
 								<span asp-validation-for="Name" class="text-danger"></span>
 							</div>
-							<div class="form-group">
-								<label asp-for="Description" class="form-label">Description</label>
-								<input asp-for="Description" type="text" class="form-control">
-								<span asp-validation-for="Description" class="text-danger"></span>
-							</div>
+
+							@if (TempData["msg"] != null)
+							{
+								<div class="mt-4">
+									<span class="text-danger">@TempData["msg"]</span>
+								</div>
+							}
 						</div>
 						<!-- /.card-body -->
+
 					</div>
 					<!-- /.card -->
 					<div class="float-sm-right">
@@ -51,13 +53,15 @@
 					</div>
 				</div>
 			</div>
+
+			
 		</form>
 	</section>
 	<!-- /.content -->
 </div>
 
 
-@section Scripts{
+@*@section Scripts{
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");
 	}

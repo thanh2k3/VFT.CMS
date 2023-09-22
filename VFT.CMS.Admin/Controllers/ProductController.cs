@@ -44,6 +44,7 @@ namespace VFT.CMS.Admin.Controllers
 			var categoryDto = await _productService.GetAllCategories();
 			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 			ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+
 			return View();
 		}
 
@@ -61,17 +62,20 @@ namespace VFT.CMS.Admin.Controllers
 					var categoryDtos = await _productService.GetAllCategories();
 					var categoryVMs = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDtos);
 					ViewBag.Categories = new SelectList(categoryVMs, "Id", "Name");
+
 					return View(model);
 				}
 
 				var cPDto = _mapper.Map<CreateProductDto>(model);
 				await _productService.Create(cPDto, image);
+
 				return RedirectToAction("Index");
 			}
 
 			var categoryDto = await _productService.GetAllCategories();
 			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 			ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+
 			return View(model);
 		}
 
@@ -109,19 +113,10 @@ namespace VFT.CMS.Admin.Controllers
 				return NotFound();
 			}
 
-			//var data = new ProductViewModel()
-			//{
-			//	Name = productVM.Name,
-			//	Description = productVM.Description,
-			//	CategoryId = productVM.CategoryId,
-			//	Price = productVM.Price,
-			//	Quantity = productVM.Quantity,
-			//	Image = productVM.Image,
-			//};
-
 			var categoryDto = await _productService.GetAllCategories();
 			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 			ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+
 			return View(productVM);
 		}
 
@@ -133,11 +128,13 @@ namespace VFT.CMS.Admin.Controllers
 				var categoryDto = await _productService.GetAllCategories();
 				var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 				ViewBag.Categories = new SelectList(categoryVM, "Id", "Name");
+
 				return View(model);
 			}
 
 			var ePDto = _mapper.Map<EditProductDto>(model);
 			await _productService.Update(ePDto);
+
 			return RedirectToAction("Index");
 		}
 
@@ -156,6 +153,7 @@ namespace VFT.CMS.Admin.Controllers
 			{
 				return NotFound();
 			}
+
 			return View(productVM);
 		}
 
@@ -164,6 +162,7 @@ namespace VFT.CMS.Admin.Controllers
 		{
 			var productDto = _mapper.Map<ProductDto>(model);
 			await _productService.Delete(productDto);
+
 			return RedirectToAction("Index");
 		}
 	}

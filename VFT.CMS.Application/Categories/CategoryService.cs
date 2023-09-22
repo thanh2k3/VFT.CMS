@@ -28,6 +28,7 @@ namespace VFT.CMS.Application.Categories
         {
             var categories = await _context.Categories.ToListAsync();
             var categoryDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
+
             return categoryDto;
         }
 
@@ -35,6 +36,7 @@ namespace VFT.CMS.Application.Categories
         {
             var category = await _context.Categories.FindAsync(id);
             var categoryDto = _mapper.Map<CategoryDto>(category);
+
             return categoryDto;
         }
 
