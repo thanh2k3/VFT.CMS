@@ -9,7 +9,7 @@ namespace VFT.CMS.Application.Categories
 {
 	public interface ICategoryService
 	{
-		Task<IEnumerable<CategoryDto>> GetAll();
+        Task<IEnumerable<CategoryDto>> GetAll();
         Task<CategoryDto> GetById(int id);
         Task Create(CategoryDto model);
         Task Update(CategoryDto model);

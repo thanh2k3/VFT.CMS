@@ -36,7 +36,8 @@ namespace VFT.CMS.Admin.Starup
             {
                 options.LoginPath = "/Account/Login";
                 // Xóa cookie
-                options.Cookie.MaxAge = TimeSpan.FromMinutes(30);
+                //options.Cookie.MaxAge = TimeSpan.FromMinutes(30);
+                options.Cookie.MaxAge = TimeSpan.FromHours(1);
                 // Không xóa cookie
                 //options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
             });

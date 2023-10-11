@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Application.Categories;
 using VFT.CMS.Application.Categories.Dto;
+using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -19,98 +21,76 @@ namespace VFT.CMS.Admin.Controllers
 			_mapper = mapper;
 		}
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
-		{
-			var categoryDto = await _categoryService.GetAll();
-			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
-
-			return View(categoryVM);
-		}
-
-		[HttpGet]
-		public IActionResult Create()
+		public IActionResult Index()
 		{
 			return View();
 		}
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CategoryViewModel model)
-        {
-			if (!ModelState.IsValid)
-			{
-				return View();
-			}
-			var categoryDto = _mapper.Map<CategoryDto>(model);
-			await _categoryService.Create(categoryDto);
-            TempData["msg"] = "Thêm thành công!";
+		[HttpGet]
+		public async Task<JsonResult> GetData()
+		{
+			var categoryDto = await _categoryService.GetAll();
+			var categoryVM = _mapper.Map<IEnumerable<CategoryViewModel>>(categoryDto);
 
-            return RedirectToAction("Create");
-        }
+			return Json(categoryVM);
+		}
+
+		[HttpPost]
+		public async Task<JsonResult> Create(CategoryViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var categoryDto = _mapper.Map<CategoryDto>(model);
+				await _categoryService.Create(categoryDto);
+
+				return Json(new { success = true, message = "Tạo danh mục thành công" });
+			}
+
+			return Json(new { success = false, message = "Tạo danh mục thất bại" });
+		}
 
 		[HttpGet]
-		public async Task<IActionResult> Detail(int id)
+		public async Task<JsonResult> Edit(int id)
 		{
 			var categoryDto = await _categoryService.GetById(id);
 			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
 
-			if (categoryVM != null)
-			{
-				return View(categoryVM);
-			}
-
-			return RedirectToAction("Index");
-		}
-
-		[HttpGet]
-		public async Task<IActionResult> Edit(int id)
-		{
-			CategoryDto categoryDto = await _categoryService.GetById(id);
-			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
-
-			if (categoryVM != null)
-			{
-				return View(categoryVM);
-			}
-
-			return RedirectToAction("Index");
+			return Json(categoryVM);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(CategoryViewModel model)
+		public async Task<JsonResult> Edit(CategoryViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
 				var categoryDto = _mapper.Map<CategoryDto>(model);
 				await _categoryService.Update(categoryDto);
 
-				return RedirectToAction("Index");
+				return Json(new { success = true, message = "Cập nhật dữ liệu thành công" });
 			}
-
-			return View();
+			return Json(new { success = false, message = "Cập nhật dữ liệu thất bại" });
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<JsonResult> Delete(int id)
 		{
-			CategoryDto categoryDto = await _categoryService.GetById(id);
+			var categoryDto = await _categoryService.GetById(id);
 			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
 
-			if (categoryVM != null)
-			{
-				return View(categoryVM);
-			}
-
-			return RedirectToAction("Index");
+			return Json(categoryVM);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Delete(CategoryViewModel model)
+		public async Task<JsonResult> Delete(CategoryViewModel model)
 		{
-			var categoryDto = _mapper.Map<CategoryDto>(model);
-			await _categoryService.Delete(categoryDto);
+			if (ModelState.IsValid)
+			{
+				var categoryDto = _mapper.Map<CategoryDto>(model);
+				await _categoryService.Delete(categoryDto);
 
-			return RedirectToAction("Index");
+				return Json(new { success = true, message = "Xóa dữ liệu thành công" });
+			}
+			return Json(new { success = false, message = "Xóa dữ liệu thất bại" });
 		}
-    }
+	}
 }

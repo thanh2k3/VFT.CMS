@@ -13,7 +13,7 @@ namespace VFT.CMS.Application.Categories.Dto
 	{
 		public int Id { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Tên danh mục không được để trống")]
 		[DisplayName("Tên danh mục")]
 		public string Name { get; set; }
 	}

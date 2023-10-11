@@ -13,6 +13,10 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+#errorIcon {
+    color: red;
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    display: none;
 }

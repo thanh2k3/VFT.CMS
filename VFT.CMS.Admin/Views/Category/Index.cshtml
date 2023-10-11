@@ -1,87 +1,63 @@
 ﻿@using VFT.CMS.Admin.ViewModels.Categories
-@model IEnumerable<CategoryViewModel>
-
+@model CategoryViewModel
 
 @{
-    ViewData["Title"] = "Danh sách danh mục";
-    Layout = "_Layout";
+	ViewData["Title"] = "Danh sách danh mục";
 }
 
+@section scripts {
+	<!-- Index.js -->
+	<script src="~/view-resources/Views/Category/Index.js" asp-append-version="true"></script>
+}
 
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>@ViewData["Title"]</h1>
-                </div>
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+				<div class="col-sm-6">
+					<div class="float-sm-right">
+						<div>
+							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#CategoryCreateModal">
+								<i class="fa fa-plus-square"></i>
+								Thêm mới
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-                <div class="col-sm-6">
-                    <div class="float-sm-right">
+	<section class="content">
+		<div class="card">
+			<div class="card-body p-0">
+				<table class="table projects">
+					<thead>
+						<tr>
+							<th>
+								@Html.DisplayNameFor(model => model.Name)
+							</th>
+							<th class="text-center" style="width: 20%">Tác vụ</th>
+						</tr>
+					</thead>
+					<tbody id="tblBody"></tbody>
+				</table>
 
-                        <a class="btn btn-success btn-sm" asp-area="" asp-controller="Category" asp-action="Create">
-                            <i class="fa-solid fa-square-plus"></i>
-                            Thêm mới
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+				<div id="divcontent">
+				</div>
 
-    <section class="content">
-        <div class="card">
-            <div class="card-body p-0">
-                <table class="table projects">
-                    <thead>
-                        <tr>
-                            <th style="width: 5%">
-                                @Html.DisplayNameFor(model => model.Id)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th class="text-center" style="width: 20%">CRUD</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Any())
-                        {
-                            @foreach (var category in Model)
-                            {
-                                <tr>
-                                    <td>@category.Id</td>
-                                    <td>@category.Name</td>
-                                    <td class="project-actions text-right">
-                                        <a asp-controller="Category" asp-action="Detail" asp-route-id="@category.Id" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-folder"></i>
-                                            Chi tiết
-                                        </a>
-                                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-info btn-sm">
-                                            <i class="fas fa-pencil-alt"></i>
-                                            Sửa
-                                        </a>
-                                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                            Xóa
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="4">
-                                    <div>
-                                        No Products avaialble at this moment
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>
+	</section>
 </div>
+
+
+
+@await Html.PartialAsync("~/Views/Category/_CreateModal.cshtml", Model)
+
+@await Html.PartialAsync("~/Views/Category/_EditModal.cshtml", Model)
+
+@await Html.PartialAsync("~/Views/Category/_DeleteModal.cshtml", Model)
