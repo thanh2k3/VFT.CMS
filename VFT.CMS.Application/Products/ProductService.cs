@@ -66,13 +66,13 @@ namespace VFT.CMS.Application.Products
 
             if (image != null)
             {
-                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(image.FileName));
+                var name = Path.Combine(_environment.WebRootPath + "/image/product", Path.GetFileName(image.FileName));
                 await image.CopyToAsync(new FileStream(name, FileMode.Create));
-                product.Image = "images/product/" + image.FileName;
+                product.Image = "image/product/" + image.FileName;
             }
             if (image == null)
             {
-                product.Image = "images/product/noimage.PNG";
+                product.Image = "image/product/noimage.PNG";
             }
 
             var data = new Product()
@@ -95,9 +95,9 @@ namespace VFT.CMS.Application.Products
 
             if (model.ImageFile != null)
             {
-                var name = Path.Combine(_environment.WebRootPath + "/images/product", Path.GetFileName(model.ImageFile.FileName));
+                var name = Path.Combine(_environment.WebRootPath + "/image/product", Path.GetFileName(model.ImageFile.FileName));
                 await model.ImageFile.CopyToAsync(new FileStream(name, FileMode.Create));
-                product.Image = "images/product/" + model.ImageFile.FileName;
+                product.Image = "image/product/" + model.ImageFile.FileName;
             }
 
             _context.Products.Update(product);
