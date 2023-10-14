@@ -1,27 +1,7 @@
-﻿// View Edit
-function GetCategoryEditData(id) {
-    $.ajax({
-        url: '/Category/Edit?id=' + id,
-        type: 'GET',
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json',
-        success: function (res) {
-            if (res != null || res != undefined) {
-                $('#CategoryEditModal').modal('show');
-                $('#CategoryEditModal #Title').text('Sửa danh mục');
-                $('#CategoryEditModal #Id').val(res.id);
-                $('#CategoryEditModal #Name').val(res.name);
-            } else {
-                toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
-            }
-        }
-    });
-}
-
-// Update
+﻿// Update
 function UpdateCategory() {
-    var result = ValidateUpdate();
-    if (result == false) {
+    var res = ValidateUpdate();
+    if (res == false) {
         return false;
     }
 
@@ -33,13 +13,13 @@ function UpdateCategory() {
         url: '/Category/Edit',
         data: objData,
         type: 'POST',
-        success: function (res) {
-            if (res.success === true) {
+        success: function (result) {
+            if (result.success === true) {
                 HideEditModal();
                 ShowCategoryData();
-                toastr.info(res.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
+                toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             } else {
-                toastr.error(res.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
+                toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             }
         }
     });

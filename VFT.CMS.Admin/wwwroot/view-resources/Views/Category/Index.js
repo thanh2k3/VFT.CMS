@@ -18,15 +18,14 @@
     });
 })
 
+// View
 function ShowCategoryData() {
-    debugger
     $.ajax({
         url: "/Category/GetData",
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
         success: function (result) {
-            debugger
             var object = '';
             $.each(result, function (index, item) {
                 object += '<tr>';
@@ -39,6 +38,44 @@ function ShowCategoryData() {
         },
         error: function () {
             alert("Không thể lấy dữ liệu");
+        }
+    });
+}
+
+// View Edit
+function GetCategoryEditData(id) {
+    $.ajax({
+        url: '/Category/Edit?id=' + id,
+        type: 'GET',
+        contentType: 'application/html;charset=utf-8',
+        dataType: 'html',
+        success: function (result) {
+            if (result != null || result != undefined) {
+                $('#CategoryEditModal').find('.modal-content').html(result);
+                $('#CategoryEditModal #Title').text('Sửa danh mục');
+                $('#CategoryEditModal').modal('show');
+            } else {
+                toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
+            }
+        }
+    });
+}
+
+// View Delete
+function GetCategoryDeleteData(id) {
+    $.ajax({
+        url: '/Category/Delete?id=' + id,
+        type: 'GET',
+        contentType: 'application/html;charset=utf-8',
+        dataType: 'html',
+        success: function (result) {
+            if (result != null || result != undefined) {
+                $('#CategoryDeleteModal').find('.modal-content').html(result);
+                $('#CategoryDeleteModal #Title').text('Xác nhận xóa danh mục');
+                $('#CategoryDeleteModal').modal('show');
+            } else {
+                toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
+            }
         }
     });
 }

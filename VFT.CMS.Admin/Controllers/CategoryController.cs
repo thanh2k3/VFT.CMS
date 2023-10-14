@@ -49,13 +49,12 @@ namespace VFT.CMS.Admin.Controllers
 			return Json(new { success = false, message = "Tạo danh mục thất bại" });
 		}
 
-		[HttpGet]
-		public async Task<JsonResult> Edit(int id)
+		public async Task<ActionResult> Edit(int id)
 		{
 			var categoryDto = await _categoryService.GetById(id);
 			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
 
-			return Json(categoryVM);
+			return PartialView("_EditModal", categoryVM);
 		}
 
 		[HttpPost]
@@ -71,13 +70,12 @@ namespace VFT.CMS.Admin.Controllers
 			return Json(new { success = false, message = "Cập nhật dữ liệu thất bại" });
 		}
 
-		[HttpGet]
-		public async Task<JsonResult> Delete(int id)
+		public async Task<ActionResult> Delete(int id)
 		{
 			var categoryDto = await _categoryService.GetById(id);
 			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
 
-			return Json(categoryVM);
+			return PartialView("_DeleteModal", categoryVM);
 		}
 
 		[HttpPost]

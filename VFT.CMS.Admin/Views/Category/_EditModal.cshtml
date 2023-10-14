@@ -2,36 +2,30 @@
 @model CategoryViewModel
 
 <!-- Modal -->
-<div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="CategoryEditModalLabel" onkeydown="CloseCategoryEditModal(event)">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header btn-warning align-items-center">
-				<i class="fas fa-pencil-alt"></i>
-				<h5 class="modal-title ml-2" id="Title">
-				</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="HideEditModal()">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="post" onsubmit="return EnterNoLoad();">
-					<input type="hidden" asp-for="Id" value="0" />
-					<div class="form-group">
-						<label asp-for="Name">
-							@Html.DisplayNameFor(model => model.Name)
-						</label>
-						<input type="text" asp-for="Name" class="form-control" onkeyup="OnKeyUpEdit()" required placeholder="Nhập tên danh mục..." autocomplete="off" />
-						<i class="fa-solid fa-circle-exclamation" id="errorIcon"></i>
-						@*<span id="error" class="text-danger"></span>*@
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="HideEditModal()">Hủy</button>
-				<button class="btn btn-success btn-sm" onclick="UpdateCategory();">Lưu</button>
-			</div>
-		</div>
-	</div>
+<div class="modal-header btn-warning align-items-center">
+	<i class="fas fa-pencil-alt"></i>
+	<h5 class="modal-title ml-2" id="Title">
+	</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="HideEditModal()">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
+<div class="modal-body">
+	<form method="post" onsubmit="return EnterNoLoad();">
+		<input type="hidden" asp-for="Id" />
+		<div class="form-group">
+			<label asp-for="Name">
+				@Html.DisplayNameFor(model => model.Name)
+			</label>
+			<input type="text" asp-for="Name" class="form-control" onkeyup="OnKeyUpEdit()" required placeholder="Nhập tên danh mục..." autocomplete="off" />
+			<i class="fa-solid fa-circle-exclamation" id="errorIcon"></i>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="HideEditModal()">Hủy</button>
+	<button class="btn btn-success btn-sm" onclick="UpdateCategory();">Lưu</button>
+</div>
+
 
 <script src="~/view-resources/Views/Category/_EditModal.js" asp-append-version="true"></script>

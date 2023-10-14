@@ -1,5 +1,5 @@
 ﻿@using VFT.CMS.Admin.ViewModels.Categories
-@model CategoryViewModel
+@model IEnumerable<CategoryViewModel>
 
 @{
 	ViewData["Title"] = "Danh sách danh mục";
@@ -45,10 +45,6 @@
 					</thead>
 					<tbody id="tblBody"></tbody>
 				</table>
-
-				<div id="divcontent">
-				</div>
-
 			</div>
 		</div>
 	</section>
@@ -58,6 +54,16 @@
 
 @await Html.PartialAsync("~/Views/Category/_CreateModal.cshtml", Model)
 
-@await Html.PartialAsync("~/Views/Category/_EditModal.cshtml", Model)
+<div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="CategoryEditModalLabel" onkeydown="CloseCategoryEditModal(event)">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
 
-@await Html.PartialAsync("~/Views/Category/_DeleteModal.cshtml", Model)
+<div class="modal fade" id="CategoryDeleteModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="CategoryDeleteModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>

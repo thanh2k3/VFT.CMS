@@ -1,6 +1,6 @@
 ﻿function CreateCategory() {
-    var result = ValidateCreate();
-    if (result == false) {
+    var res = ValidateCreate();
+    if (res == false) {
         return false;
     }
 
@@ -13,14 +13,14 @@
         type: 'POST',
         data: objData,
         dataType: 'json',
-        success: function (res) {
-            if (res.success === true) {
+        success: function (result) {
+            if (result.success === true) {
                 ShowCategoryData();
                 HideCreateModal();
-                toastr.success(res.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
+                toastr.success(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
             else {
-                toastr.error(res.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
+                toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             }
         }
     });
