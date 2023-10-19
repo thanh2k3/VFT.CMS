@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VFT.CMS.Admin.ViewModels.Products.ProductViewModel>
+﻿@*@model IEnumerable<VFT.CMS.Admin.ViewModels.Products.ProductViewModel>
 @using VFT.CMS.Admin.ViewModels.Products;
 
 @{
@@ -103,4 +103,120 @@
 			<partial name="_PaginationPartial" model="@pageVM" />
 		</div>
 	</section>
+</div>*@
+
+
+
+
+
+
+
+
+@using VFT.CMS.Admin.ViewModels.Products
+@model IEnumerable<ProductViewModel>
+
+@{
+	ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+@section scripts {
+	<!-- Index.js -->
+	<script src="~/view-resources/Views/Product/Index.js" asp-append-version="true"></script>
+
+	@*<script>
+		function displayAlert() {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					alert('Hello');
+					Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success'
+					)
+				}
+			})
+		}
+	</script>*@
+}
+
+<div class="content-wrapper">
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+				<div class="col-sm-6">
+					<div class="float-sm-right">
+						<div>
+							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#ProductCreateModal">
+								<i class="fa fa-plus-square"></i>
+								Thêm mới
+							</button>
+							@*<button class="btn btn-primary" onclick="displayAlert()">basic alert</button>*@
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="content">
+		<div class="card">
+			<div class="card-body p-0">
+				<table class="table projects">
+					<thead>
+						<tr>
+							<th>
+								@Html.DisplayNameFor(model => model.Name)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.CategoryId)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.Image)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.Description)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.Price)
+							</th>
+							<th>
+								@Html.DisplayNameFor(model => model.Quantity)
+							</th>
+							<th class="text-center" style="width: 20%">Action</th>
+						</tr>
+					</thead>
+					<tbody id="tblBody"></tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+
+@await Html.PartialAsync("~/Views/Product/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="ProductViewModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="ProductViewModalLabel">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="ProductEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="ProductEditModalLabel">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
 </div>

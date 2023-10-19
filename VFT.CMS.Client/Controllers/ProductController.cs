@@ -20,17 +20,17 @@ namespace VFT.CMS.Client.Controllers
 			_mapper = mapper;
 		}
 
-		public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 12)
-		{
-			PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, page, pageSize);
+		//public async Task<IActionResult> Index(string searchText = "", int page = 1, int pageSize = 12)
+		//{
+		//	PagedResultRequestDto<ProductDto> productDto = await _productService.GetAll(searchText, page, pageSize);
 
-			var pageVM = new PagedViewModel(productDto.TotalRecords, page, pageSize);
-			ViewBag.PagedViewModel = pageVM;
+		//	var pageVM = new PagedViewModel(productDto.TotalRecords, page, pageSize);
+		//	ViewBag.PagedViewModel = pageVM;
 
-			var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
+		//	var productVM = _mapper.Map<PagedResultRequestDto<ProductViewModel>>(productDto);
 
-			return View(productVM);
-		}
+		//	return View(productVM);
+		//}
 
 		public async Task<IActionResult> Details(int id)
 		{

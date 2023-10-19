@@ -1,0 +1,80 @@
+﻿@using VFT.CMS.Admin.ViewModels.Products
+@model ProductViewModel
+
+<div class="modal-header btn-info align-items-center">
+	<i class="fa-solid fa-eye"></i>
+	<h5 class="modal-title ml-2"></h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="row mb-3">
+		<div class="col-md-4">
+			<img src="~/image/product/noimage.png" style="width: 100%" />
+		</div>
+		<div class="col-md-8">
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<div class="form-group row mb-0 required">
+						<label asp-for="Name" class="col-md col-form-label control-label text-right custom-label">
+							@Html.DisplayNameFor(model => model.Name)
+						</label>
+						<div class="col-sm-8">
+							<input asp-for="Name" disabled class="form-control" type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group row mb-0 required">
+						<label asp-for="CategoryId" class="col-md col-form-label control-label text-right custom-label">
+							@Html.DisplayNameFor(model => model.CategoryId)
+						</label>
+						<div class="col-sm-8">
+							<select asp-for="CategoryId" disabled asp-items="ViewBag.Categories" class="form-control">
+								<option>--Chọn danh mục--</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-6">
+					<div class="form-group row mb-0 required">
+						<label asp-for="Price" class="col-md col-form-label control-label text-right custom-label">
+							@Html.DisplayNameFor(model => model.Price)
+						</label>
+						<div class="col-sm-8">
+							<input asp-for="Price" disabled type="number" class="form-control" >
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group row mb-0 required">
+						<label asp-for="Quantity" class="col-md col-form-label control-label text-right custom-label">
+							@Html.DisplayNameFor(model => model.Quantity)
+						</label>
+						<div class="col-sm-8">
+							<input asp-for="Quantity" disabled type="number" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-12">
+					<div class="form-group row mb-0 required">
+						<label asp-for="Description" class="col-md col-form-label control-label text-right custom-label">
+							@Html.DisplayNameFor(model => model.Description)
+						</label>
+						<div class="col-sm-10">
+							<textarea asp-for="Description" disabled class="form-control" rows="4"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-default btn-sm" data-dismiss="modal">Trờ về</button>
+</div>
