@@ -1,64 +1,54 @@
-﻿//using Microsoft.AspNetCore.Identity;
-//using Microsoft.Extensions.DependencyInjection;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using VFT.CMS.Core;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Helpers;
+using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
-//namespace VFT.CMS.Repository.Seed
-//{
-//    public static class SeedData
-//    {
-//        public static async Task InitializeAsync(IServiceProvider serviceProvider)
-//        {
-//            var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
-//            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+namespace VFT.CMS.Repository.Seed
+{
+    public static class SeedData
+    {
+		public static async Task InitializeAsync(IApplicationBuilder app)
+		{
+			using (var serviceScope = app.ApplicationServices.CreateScope())
+			{
+				var _context = serviceScope.ServiceProvider.GetRequiredService<AppDBContext>();
+				var _roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+				var _userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-//            //string[] roleNames = { "Admin", "User" };
+				var roleExists = await _roleManager.RoleExistsAsync("Admin");
 
-//            //IdentityResult roleResult;
+				if (!roleExists)
+				{
+					await _roleManager.CreateAsync(new Role { Name = "Admin" });
+				}
 
-//            //foreach (var role in roleNames)
-//            //{
-//            //    var roleExists = await roleManager.RoleExistsAsync(role);
+				var userName = "admin@gmail.com";
 
-//            //    if (!roleExists)
-//            //    {
-//            //        roleResult = await roleManager.CreateAsync(new Role(role));
-//            //    }
-//            //}
+				if (!_context.Users.Any(user => user.UserName == userName))
+				{
+					User user = new User()
+					{
+						UserName = userName,
+						NormalizedUserName = userName.ToUpper(),
+						Email = userName,
+						NormalizedEmail = userName.ToUpper(),
+					};
 
+					IdentityResult result = _userManager.CreateAsync(user, "qwer1234QWER!@#$").Result;
 
-//            IdentityResult roleResult;
-
-//            var roleExists = await roleManager.RoleExistsAsync("Admin");
-
-//            if (!roleExists)
-//            {
-//                roleResult = await roleManager.CreateAsync(new Role("Admin"));
-//            }
-
-//            var email = "admin@gmail.com";
-
-//            if (userManager.FindByEmailAsync(email).Result == null)
-//            {
-//                User user = new()
-//                {
-//                    UserName = email,
-//                    NormalizedUserName = email.ToUpper(),
-//                    Email = email,
-//                    NormalizedEmail = email.ToUpper(),
-//                };
-
-//                IdentityResult result = userManager.CreateAsync(user, "qwer1234QWER!@#$").Result;
-
-//                if (result.Succeeded)
-//                {
-//                    userManager.AddToRoleAsync(user, "Admin").Wait();
-//                }
-//            }
-//        }
-//    }
-//}
+					if (result.Succeeded)
+					{
+						_userManager.AddToRoleAsync(user, "Admin").Wait();
+					}
+				}
+			}
+		}
+	}
+}

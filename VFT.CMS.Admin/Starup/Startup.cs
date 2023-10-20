@@ -10,6 +10,7 @@ using VFT.CMS.Application.Products.Dto;
 //using VFT.CMS.Application.Roles.Dto;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
+using VFT.CMS.Repository.Seed;
 
 namespace VFT.CMS.Admin.Starup
 {
@@ -65,6 +66,9 @@ namespace VFT.CMS.Admin.Starup
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // Data Seeding
+                SeedData.InitializeAsync(app);
             }
             else
             {
