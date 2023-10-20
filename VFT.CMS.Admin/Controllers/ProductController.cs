@@ -15,7 +15,7 @@ using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class ProductController : Controller
 	{
 		private readonly IProductService _productService;
@@ -57,9 +57,9 @@ namespace VFT.CMS.Admin.Controllers
 				var productDto = _mapper.Map<CreateProductDto>(model);
 				var product = await _productService.Create(productDto);
 				if (product)
-				{ 
+				{
 					return Json(new { success = true, message = "Lưu sản phẩm thành công" });
-				}	
+				}
 
 				return Json(new { success = false, message = "Sản phẩm đã tồn tại" });
 			}

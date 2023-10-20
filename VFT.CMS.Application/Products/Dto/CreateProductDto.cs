@@ -11,7 +11,7 @@ namespace VFT.CMS.Application.Products.Dto
 {
     public class CreateProductDto
     {
-		[Required(ErrorMessage = "Tên sản phẩm không được để trống")]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         [DisplayName("Tên sản phẩm")]
         public string Name { get; set; }
 
@@ -30,5 +30,5 @@ namespace VFT.CMS.Application.Products.Dto
 
         [DisplayName("Ảnh")]
         public string? Image { get; set; }
-	}
+    }
 }

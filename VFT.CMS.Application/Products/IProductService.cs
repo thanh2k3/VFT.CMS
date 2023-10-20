@@ -4,8 +4,8 @@ using VFT.CMS.Application.Products.Dto;
 
 namespace VFT.CMS.Application.Products
 {
-    public interface IProductService
-    {
+	public interface IProductService
+	{
 		Task<IEnumerable<ProductDto>> GetAll();
 		Task<ProductDto> GetById(int id);
 		Task<bool> Create(CreateProductDto model);

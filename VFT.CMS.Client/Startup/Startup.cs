@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using VFT.CMS.Application.Carts.Dto;
-using VFT.CMS.Application.Products.Dto;
-using VFT.CMS.Client.ViewModels.Products;
+//using VFT.CMS.Application.Carts.Dto;
+//using VFT.CMS.Application.Products.Dto;
+//using VFT.CMS.Client.ViewModels.Products;
 using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Client.Startup
@@ -24,11 +24,11 @@ namespace VFT.CMS.Client.Startup
 			string connectionString = Configuration.GetConnectionString("MyDatabase");
 			services.AddDbContext<AppDBContext>(c => c.UseSqlServer(connectionString));
 
-			services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
-			services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
-			services.AddAutoMapper(typeof(CartMapProfile).Assembly);
+			//services.AddAutoMapper(typeof(ProductMapProfile).Assembly);
+			//services.AddAutoMapper(typeof(ProductVMMapProfile).Assembly);
+			//services.AddAutoMapper(typeof(CartMapProfile).Assembly);
 
-			services.AddScoped();
+			//services.AddScoped();
 
 			services.AddDistributedMemoryCache();
 

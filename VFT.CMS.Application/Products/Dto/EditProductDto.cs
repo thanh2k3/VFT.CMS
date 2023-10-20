@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace VFT.CMS.Application.Products.Dto
 {
-    public class EditProductDto
-    {
+	public class EditProductDto
+	{
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Tên sản phẩm không được để trống")]

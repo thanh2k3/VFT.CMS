@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using VFT.CMS.Admin.ViewModels.Account;
+//using VFT.CMS.Admin.ViewModels.Account;
 using VFT.CMS.Admin.ViewModels.Categories;
 using VFT.CMS.Admin.ViewModels.Products;
-using VFT.CMS.Admin.ViewModels.Roles;
-using VFT.CMS.Application.Account.Dto;
+//using VFT.CMS.Admin.ViewModels.Roles;
+//using VFT.CMS.Application.Account.Dto;
 using VFT.CMS.Application.Categories.Dto;
 using VFT.CMS.Application.Products.Dto;
-using VFT.CMS.Application.Roles.Dto;
+//using VFT.CMS.Application.Roles.Dto;
 using VFT.CMS.Core;
 using VFT.CMS.Repository.Data;
 
@@ -50,11 +50,11 @@ namespace VFT.CMS.Admin.Starup
             services.AddAutoMapper(typeof(CategoryMapProfile).Assembly);
             services.AddAutoMapper(typeof(CategoryVMMapProfile).Assembly);
 
-            services.AddAutoMapper(typeof(AccountMapProfile).Assembly);
-            services.AddAutoMapper(typeof(AccountVMMapProfile).Assembly);
+            //services.AddAutoMapper(typeof(AccountMapProfile).Assembly);
+            //services.AddAutoMapper(typeof(AccountVMMapProfile).Assembly);
 
-            services.AddAutoMapper(typeof(RoleMapProfile).Assembly);
-            services.AddAutoMapper(typeof(RoleVMMapProfile).Assembly);
+            //services.AddAutoMapper(typeof(RoleMapProfile).Assembly);
+            //services.AddAutoMapper(typeof(RoleVMMapProfile).Assembly);
 
             services.AddScoped();
         }

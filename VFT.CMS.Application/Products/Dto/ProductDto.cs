@@ -4,8 +4,8 @@ using VFT.CMS.Core;
 
 namespace VFT.CMS.Application.Products.Dto
 {
-    public class ProductDto
-    {
+	public class ProductDto
+	{
 		public int Id { get; set; }
 
 		[DisplayName("Tên sản phẩm")]
@@ -22,9 +22,9 @@ namespace VFT.CMS.Application.Products.Dto
 
 		[DisplayName("Tên danh mục")]
 		public int CategoryId { get; set; }
-        public Category Category { get; set; }
+		public Category Category { get; set; }
 
-        [DisplayName("Ảnh")]
+		[DisplayName("Ảnh")]
 		public string? Image { get; set; }
 	}
 }
