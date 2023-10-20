@@ -41,11 +41,19 @@ namespace VFT.CMS.Application.Categories
 			return categoryDto;
 		}
 
-		public async Task Create(CategoryDto model)
+		public async Task<bool> Create(CategoryDto model)
 		{
 			var category = _mapper.Map<Category>(model);
-			await _context.Categories.AddAsync(category);
-			await Save();
+			var searchCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Name == category.Name);
+			if (searchCategory == null)
+			{
+				await _context.Categories.AddAsync(category);
+				await Save();
+
+				return true;
+			}
+
+			return false;
 		}
 
 		public async Task Update(CategoryDto model)
@@ -55,9 +63,9 @@ namespace VFT.CMS.Application.Categories
 			await Save();
 		}
 
-		public async Task Delete(CategoryDto model)
+		public async Task Delete(int id)
 		{
-			var category = _mapper.Map<Category>(model);
+			var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
 			_context.Categories.Remove(category);
 			await Save();
 		}

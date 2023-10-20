@@ -31,7 +31,7 @@ function ShowCategoryData() {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
                 object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="GetCategoryEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
-                    ' <a class="btn btn-danger btn-sm" onclick="GetCategoryDeleteData(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
+                    ' <a class="btn btn-danger btn-sm" onclick="DeleteCategory(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
             $('#tblBody').html(object);
@@ -83,4 +83,38 @@ function GetCategoryDeleteData(id) {
 // Bắt sự kiện nhấn nút Enter không load lại trang
 function EnterNoLoad() {
     return false;
+}
+
+
+
+// Delete Product
+function DeleteCategory(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Bạn sẽ không thể hoàn tác khi đã xóa",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy',
+        reverseButtons: true
+    }).then((res) => {
+        if (res.isConfirmed) {
+            $.ajax({
+                url: '/Category/Delete?id=' + id,
+                type: 'POST',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success === true) {
+                        ShowCategoryData();
+                        toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
+                    } else {
+                        toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
+                    }
+                }
+            });
+        }
+    })
 }

@@ -41,9 +41,13 @@ namespace VFT.CMS.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				var categoryDto = _mapper.Map<CategoryDto>(model);
-				await _categoryService.Create(categoryDto);
+				var category = await _categoryService.Create(categoryDto);
+				if (category)
+				{
+					return Json(new { success = true, message = "Tạo danh mục thành công" });
+				}
 
-				return Json(new { success = true, message = "Tạo danh mục thành công" });
+				return Json(new { success = false, message = "Danh mục đã tồn tại" });
 			}
 
 			return Json(new { success = false, message = "Tạo danh mục thất bại" });
@@ -70,25 +74,16 @@ namespace VFT.CMS.Admin.Controllers
 			return Json(new { success = false, message = "Cập nhật dữ liệu thất bại" });
 		}
 
-		public async Task<ActionResult> Delete(int id)
-		{
-			var categoryDto = await _categoryService.GetById(id);
-			var categoryVM = _mapper.Map<CategoryViewModel>(categoryDto);
-
-			return PartialView("_DeleteModal", categoryVM);
-		}
-
 		[HttpPost]
-		public async Task<JsonResult> Delete(CategoryViewModel model)
+		public async Task<JsonResult> Delete(int id)
 		{
 			if (ModelState.IsValid)
 			{
-				var categoryDto = _mapper.Map<CategoryDto>(model);
-				await _categoryService.Delete(categoryDto);
+				await _categoryService.Delete(id);
 
-				return Json(new { success = true, message = "Xóa dữ liệu thành công" });
+				return Json(new { success = true, message = "Xóa thành công" });
 			}
-			return Json(new { success = false, message = "Xóa dữ liệu thất bại" });
+			return Json(new { success = false, message = "Xóa thất bại" });
 		}
 	}
 }
