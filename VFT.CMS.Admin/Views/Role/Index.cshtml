@@ -1,11 +1,14 @@
-﻿@*@using VFT.CMS.Admin.ViewModels.Roles
+﻿@using VFT.CMS.Admin.ViewModels.Roles
 @model IEnumerable<RoleViewModel>
 
 @{
-	ViewData["Title"] = "Phân Quyền";
+	ViewData["Title"] = "Quyền";
 	Layout = "_Layout";
 }
 
+@section scripts {
+    <script src="~/view-resources/Views/Role/Index.js" asp-append-version="true"></script>
+}
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -17,11 +20,10 @@
 
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-
-                        <a class="btn btn-success btn-sm" asp-area="" asp-controller="Role" asp-action="Create">
-                            <i class="fa-solid fa-square-plus"></i>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#RoleCreateModal">
+                            <i class="fa fa-plus-square"></i>
                             Thêm mới
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -38,43 +40,24 @@
                                 @Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th class="text-center" style="width: 20%">
-                                CRUD
+                                Actions
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @if (Model != null && Model.Any())
-                        {
-                            @foreach (var role in Model)
-                            {
-                                <tr>
-                                    <td>@role.Name</td>
-                                    <td class="project-actions text-right">
-                                        <a asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id" class="btn btn-info btn-sm">
-                                            <i class="fas fa-pencil-alt"></i>
-                                            Sửa
-                                        </a>
-                                        <a asp-controller="Role" asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger btn-sm">
-                                            <i class="fas fa-trash"></i>
-                                            Xóa
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="4">
-                                    <div>
-                                        No Products avaialble at this moment
-                                    </div>
-                                </td>
-                            </tr>
-                        }
+                    <tbody id="tblRoleBody">
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-</div>*@
+</div>
+
+
+@await Html.PartialAsync("~/Views/Role/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="RoleEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="RoleEditModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

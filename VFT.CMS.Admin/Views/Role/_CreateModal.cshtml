@@ -1,0 +1,36 @@
+﻿@using VFT.CMS.Admin.ViewModels.Roles
+@model RoleViewModel
+
+<!-- Modal -->
+<div class="modal fade" id="RoleCreateModal" onkeydown="EscRoleCreateModal(event)" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="RoleCreateModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header btn-success align-items-center">
+				<i class="fa fa-plus-square"></i>
+				<h5 class="modal-title ml-2">
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="ClearTextBoxRoleCreate()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" onsubmit="return EnterNoLoad()">
+					<input type="hidden" asp-for="Id" />
+					<div class="form-group">
+						<label asp-for="Name">
+							@Html.DisplayNameFor(model => model.Name)
+						</label>
+						<input asp-for="Name" class="form-control" onkeyup="OnKeyUpRoleCreate()" type="text" placeholder="Nhập tên quyền..." autocomplete="off" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="ClearTextBoxRoleCreate()">Hủy</button>
+				<button class="btn btn-success btn-sm" onclick="CreateRole()">Tạo</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="~/view-resources/Views/Role/_CreateModal.js" asp-append-version="true"></script>

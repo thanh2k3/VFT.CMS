@@ -1,105 +1,75 @@
-﻿//using AutoMapper;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Mvc;
-//using VFT.CMS.Admin.ViewModels.Roles;
-//using VFT.CMS.Application.Products.Dto;
-//using VFT.CMS.Application.Roles;
-//using VFT.CMS.Application.Roles.Dto;
-//using VFT.CMS.Repository.Data;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using VFT.CMS.Admin.ViewModels.Roles;
+using VFT.CMS.Application.Roles;
+using VFT.CMS.Application.Roles.Dto;
 
-//namespace VFT.CMS.Admin.Controllers
-//{
-//	public class RoleController : Controller
-//	{
-//		private readonly IRoleService _roleService;
-//		private readonly IMapper _mapper;
+namespace VFT.CMS.Admin.Controllers
+{
+	public class RoleController : Controller
+	{
+		private readonly IRoleService _roleService;
+		private readonly IMapper _mapper;
 
-//		public RoleController(IRoleService roleService, IMapper mapper)
-//		{
-//			_roleService = roleService;
-//			_mapper = mapper;
-//		}
+		public RoleController(IRoleService roleService, IMapper mapper)
+		{
+			_roleService = roleService;
+			_mapper = mapper;
+		}
 
-//		[HttpGet]
-//		public async Task<IActionResult> Index()
-//		{
-//			var roleDto = await _roleService.GetAll();
-//			var roleVM = _mapper.Map<IEnumerable<RoleViewModel>>(roleDto);
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-//			return View(roleVM);
-//		}
+		public async Task<JsonResult> GetData()
+		{
+			var roleDto = await _roleService.GetAll();
+			var roleVM = _mapper.Map<IEnumerable<RoleViewModel>>(roleDto);
 
-//		[HttpGet]
-//		public IActionResult Create()
-//		{
-//			return View();
-//		}
+			return Json(roleVM);
+		}
 
-//		[HttpPost]
-//		public async Task<IActionResult> Create(RoleViewModel model)
-//		{
-//			if (ModelState.IsValid)
-//			{
-//				var roleDto = _mapper.Map<RoleDto>(model);
-//				var result = await _roleService.Create(roleDto);
+		[HttpPost]
+		public async Task<JsonResult> Create(RoleViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var roleDto = _mapper.Map<RoleDto>(model);
+				var role = await _roleService.Create(roleDto);
 
-//				if (result.StatusCode == 1)
-//				{
-//					return RedirectToAction("Index", "Role");
-//				}
-//				TempData["msg"] = result.Message;
-//			}
+				if (role)
+				{
+					return Json(new { success = true, message = "Thêm mới quyền thành công" });
+				}
 
-//			return View();
-//		}
+				return Json(new { success = false, message = "Quyền này đã tồn tại" });
+            }
 
-//		[HttpGet]
-//		public async Task<IActionResult> Edit(int Id)
-//		{
-//			var roleDto = await _roleService.GetById(Id);
-//			var roleVM = _mapper.Map<RoleViewModel>(roleDto);
+            return Json(new { success = false, message = "Thêm mới quyền thất bại" });
+        }
 
-//			if (roleVM != null)
-//			{
-//				return View(roleVM);
-//			}
+		public async Task<ActionResult> Edit(int Id)
+		{
+			var roleDto = await _roleService.GetById(Id);
+			var roleVM = _mapper.Map<RoleViewModel>(roleDto);
 
-//			return RedirectToAction("Index");
-//		}
+			return PartialView("_EditModal", roleVM);
+		}
 
-//		[HttpPost]
-//		public async Task<IActionResult> Edit(RoleViewModel model)
-//		{
-//			if (ModelState.IsValid)
-//			{
-//				var roleDto = _mapper.Map<RoleDto>(model);
-//				await _roleService.Update(roleDto);
+		[HttpPost]
+		public async Task<JsonResult> Edit(RoleViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var roleDto = _mapper.Map<RoleDto>(model);
+				await _roleService.Update(roleDto);
 
-//				return RedirectToAction("Index");
-//			}
-//			return View();
-//		}
+				return Json(new { success = true, message = "Cập nhật dữ liệu thành công" });
+            }
 
-//		[HttpGet]
-//		public async Task<IActionResult> Delete(int Id)
-//		{
-//			var roleDto = await _roleService.GetById(Id);
-//			var roleVM = _mapper.Map<RoleViewModel>(roleDto);
-
-//			if (roleVM != null)
-//			{
-//				return View(roleVM);
-//			}
-
-//			return RedirectToAction("Index");
-//		}
-
-//		[HttpPost, ActionName("Delete")]
-//		public async Task<IActionResult> DeleteConfirmed(int Id)
-//		{
-//			await _roleService.Delete(Id);
-
-//			return RedirectToAction("Index");
-//		}
-//	}
-//}
+            return Json(new { success = false, message = "Cập nhật dữ liệu thất bại" });
+        }
+	}
+}

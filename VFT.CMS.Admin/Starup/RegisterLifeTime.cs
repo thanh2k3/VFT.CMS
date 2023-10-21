@@ -1,7 +1,7 @@
 ﻿//using VFT.CMS.Application.Account;
 using VFT.CMS.Application.Categories;
 using VFT.CMS.Application.Products;
-//using VFT.CMS.Application.Roles;
+using VFT.CMS.Application.Roles;
 
 namespace VFT.CMS.Admin.Starup
 {
@@ -12,7 +12,7 @@ namespace VFT.CMS.Admin.Starup
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             //services.AddScoped<IAccountService, AccountService>();
-            //services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
     }
 }
