@@ -1,21 +1,7 @@
 ﻿$(document).ready(function () {
     ShowCategoryData();
 
-    $('#CategoryCreateModal #Title').text('Tạo danh mục');
-
-    $("#CategoryEditModal #Name").keypress(function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            UpdateCategory();
-        }
-    });
-
-    $("#CategoryCreateModal #Name").keypress(function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            CreateCategory();
-        }
-    });
+    $('#CategoryCreateModal .modal-title').text('Thêm mới Danh mục');
 })
 
 // View
@@ -34,7 +20,7 @@ function ShowCategoryData() {
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteCategory(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
-            $('#tblBody').html(object);
+            $('#tblCategoryBody').html(object);
         },
         error: function () {
             alert("Không thể lấy dữ liệu");
@@ -52,7 +38,7 @@ function GetCategoryEditData(id) {
         success: function (result) {
             if (result != null || result != undefined) {
                 $('#CategoryEditModal').find('.modal-content').html(result);
-                $('#CategoryEditModal #Title').text('Sửa danh mục');
+                $('#CategoryEditModal .modal-title').text('Sửa Danh mục');
                 $('#CategoryEditModal').modal('show');
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
@@ -61,33 +47,7 @@ function GetCategoryEditData(id) {
     });
 }
 
-// View Delete
-function GetCategoryDeleteData(id) {
-    $.ajax({
-        url: '/Category/Delete?id=' + id,
-        type: 'GET',
-        contentType: 'application/html;charset=utf-8',
-        dataType: 'html',
-        success: function (result) {
-            if (result != null || result != undefined) {
-                $('#CategoryDeleteModal').find('.modal-content').html(result);
-                $('#CategoryDeleteModal #Title').text('Xác nhận xóa danh mục');
-                $('#CategoryDeleteModal').modal('show');
-            } else {
-                toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
-            }
-        }
-    });
-}
-
-// Bắt sự kiện nhấn nút Enter không load lại trang
-function EnterNoLoad() {
-    return false;
-}
-
-
-
-// Delete Product
+// Delete Category
 function DeleteCategory(id) {
     Swal.fire({
         title: 'Are you sure?',
@@ -117,4 +77,9 @@ function DeleteCategory(id) {
             });
         }
     })
+}
+
+// Bắt sự kiện nhấn nút Enter không load lại trang
+function EnterNoLoad() {
+    return false;
 }

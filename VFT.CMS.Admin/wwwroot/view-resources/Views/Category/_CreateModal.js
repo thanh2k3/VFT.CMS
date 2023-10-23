@@ -1,5 +1,5 @@
 ﻿function CreateCategory() {
-    var res = ValidateCreate();
+    var res = ValidateCategoryCreate();
     if (res == false) {
         return false;
     }
@@ -16,7 +16,7 @@
         success: function (result) {
             if (result.success === true) {
                 ShowCategoryData();
-                HideCreateModal();
+                HideCategoryCreateModal();
                 toastr.success(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
             else {
@@ -26,18 +26,18 @@
     });
 }
 
-function HideCreateModal() {
-    ClearTextBox();
+function HideCategoryCreateModal() {
+    ClearTextBoxCategoryCreate();
     $('#CategoryCreateModal').modal('hide');
     $('#CategoryCreateModal #Name').css('border-color', '#ced4da');
     $('#CategoryCreateModal #errorIcon').css('display', 'none');
 }
 
-function ClearTextBox() {
+function ClearTextBoxCategoryCreate() {
     $('#CategoryCreateModal #Name').val('');
 }
 
-function ValidateCreate() {
+function ValidateCategoryCreate() {
     var isValid = true;
 
     if ($('#CategoryCreateModal #Name').val().trim() == "") {
@@ -45,17 +45,18 @@ function ValidateCreate() {
         $('#CategoryCreateModal #errorIcon').css('display', 'block');
         isValid = false;
     }
+
     return isValid;
 }
 
-function OnKeyUpCreate() {
+function OnKeyUpCategoryCreate() {
     $('#CategoryCreateModal #Name').css('border-color', 'lightgrey');
     $('#CategoryCreateModal #errorIcon').css('display', 'none');
 }
 
 // Bắt sự kiện nhấn nút Esc
-function CloseCategoryCreateModal(evt) {
+function EscCategoryCreateModal(evt) {
     if (evt.keyCode == 27) {
-        HideCreateModal();
+        HideCategoryCreateModal();
     }
 }

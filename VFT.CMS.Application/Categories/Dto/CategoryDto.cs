@@ -12,8 +12,6 @@ namespace VFT.CMS.Application.Categories.Dto
 	public class CategoryDto
 	{
 		public int Id { get; set; }
-
-		[Required(ErrorMessage = "Tên danh mục không được để trống")]
 		[DisplayName("Tên danh mục")]
 		public string Name { get; set; }
 	}

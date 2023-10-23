@@ -44,13 +44,13 @@ namespace VFT.CMS.Admin.Controllers
 				var category = await _categoryService.Create(categoryDto);
 				if (category)
 				{
-					return Json(new { success = true, message = "Tạo danh mục thành công" });
+					return Json(new { success = true, message = "Thêm mới danh mục thành công" });
 				}
 
 				return Json(new { success = false, message = "Danh mục đã tồn tại" });
 			}
 
-			return Json(new { success = false, message = "Tạo danh mục thất bại" });
+			return Json(new { success = false, message = "Thêm mới danh mục thất bại" });
 		}
 
 		public async Task<ActionResult> Edit(int id)

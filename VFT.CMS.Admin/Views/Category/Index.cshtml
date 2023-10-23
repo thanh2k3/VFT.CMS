@@ -2,7 +2,7 @@
 @model IEnumerable<CategoryViewModel>
 
 @{
-	ViewData["Title"] = "Danh sách danh mục";
+	ViewData["Title"] = "Danh mục";
 }
 
 @section scripts {
@@ -19,12 +19,10 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="float-sm-right">
-						<div>
-							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#CategoryCreateModal">
-								<i class="fa fa-plus-square"></i>
-								Thêm mới
-							</button>
-						</div>
+						<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#CategoryCreateModal">
+							<i class="fa fa-plus-square"></i>
+							Thêm mới
+						</button>
 					</div>
 				</div>
 			</div>
@@ -43,7 +41,7 @@
 							<th class="text-center" style="width: 20%">Tác vụ</th>
 						</tr>
 					</thead>
-					<tbody id="tblBody"></tbody>
+					<tbody id="tblCategoryBody"></tbody>
 				</table>
 			</div>
 		</div>
@@ -54,7 +52,7 @@
 
 @await Html.PartialAsync("~/Views/Category/_CreateModal.cshtml", Model)
 
-<div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="CategoryEditModalLabel" onkeydown="CloseCategoryEditModal(event)">
+<div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="CategoryEditModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 		</div>
