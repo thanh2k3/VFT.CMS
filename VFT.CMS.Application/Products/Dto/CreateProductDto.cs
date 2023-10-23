@@ -11,23 +11,14 @@ namespace VFT.CMS.Application.Products.Dto
 {
     public class CreateProductDto
     {
-        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         [DisplayName("Tên sản phẩm")]
         public string Name { get; set; }
-
         [DisplayName("Mô tả")]
         public string? Description { get; set; }
-
         [DisplayName("Giá")]
-        public int? Price { get; set; }
-
-        [DisplayName("Số lượng")]
-        public int? Quantity { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng chọn danh mục phù hợp!")]
+        public int Price { get; set; }
         [DisplayName("Danh mục")]
         public int CategoryId { get; set; }
-
         [DisplayName("Ảnh")]
         public string? Image { get; set; }
     }

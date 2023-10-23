@@ -21,14 +21,12 @@ namespace VFT.CMS.Admin.Controllers
 		private readonly IProductService _productService;
 		private readonly ICategoryService _categoryService;
 		private readonly IMapper _mapper;
-		private readonly AppDBContext _context;
 
-		public ProductController(IProductService productService, IMapper mapper, ICategoryService categoryService, AppDBContext context)
+		public ProductController(IProductService productService, IMapper mapper, ICategoryService categoryService)
 		{
 			_productService = productService;
 			_categoryService = categoryService;
 			_mapper = mapper;
-			_context = context;
 		}
 
 
@@ -58,13 +56,13 @@ namespace VFT.CMS.Admin.Controllers
 				var product = await _productService.Create(productDto);
 				if (product)
 				{
-					return Json(new { success = true, message = "Lưu sản phẩm thành công" });
+					return Json(new { success = true, message = "Thêm mới sản phẩm thành công" });
 				}
 
 				return Json(new { success = false, message = "Sản phẩm đã tồn tại" });
 			}
 
-			return Json(new { success = false, message = "Lưu sản phẩm thất bại" });
+			return Json(new { success = false, message = "Thêm mới sản phẩm thất bại" });
 		}
 
 		public async Task<ActionResult> Edit(int id)

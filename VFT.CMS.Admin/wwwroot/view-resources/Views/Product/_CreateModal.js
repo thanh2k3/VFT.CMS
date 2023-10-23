@@ -5,13 +5,13 @@ function CreateProduct() {
         return false
     }
 
-    var objData = new Object();
-    objData.name = $('#ProductCreateModal #Name').val();
-    objData.categoryId = $('#ProductCreateModal').find('#CategoryId option:selected').val();
-    objData.price = $('#ProductCreateModal #Price').val();
-    objData.quantity = $('#ProductCreateModal #Quantity').val();
-    objData.image = $('#ProductCreateModal #Image').val();
-    objData.description = $('#ProductCreateModal #Description').val();
+    var objData = {
+        Name: $('#ProductCreateModal #Name').val(),
+        CategoryId: $('#ProductCreateModal #CategoryId').find('option:selected').val(),
+        Price: $('#ProductCreateModal #Price').val(),
+        Image: $('#ProductCreateModal #Image').val(),
+        Description: $('#ProductCreateModal #Description').val()
+    };
 
     $.ajax({
         url: '/Product/Create',
@@ -37,13 +37,13 @@ function HideProductCreateModal() {
     $('#ProductCreateModal').modal('hide');
     $('#ProductCreateModal #Name').css('border-color', '#ced4da');
     $('#ProductCreateModal #CategoryId').css('border-color', '#ced4da');
+    $('#ProductCreateModal #Price').css('border-color', '#ced4da');
 }
 
 function ClearTextBoxProductCreate() {
     $('#ProductCreateModal #Name').val('');
     $('#ProductCreateModal #CategoryId').val(defaultOption);
     $('#ProductCreateModal #Price').val('');
-    $('#ProductCreateModal #Quantity').val('');
     $('#ProductCreateModal #Description').val('');
     $('#ProductCreateModal #Image').val('');
 }
@@ -61,10 +61,15 @@ function ValidateProductCreate() {
         isValid = false;
     }
 
+    if ($('#ProductCreateModal #Price').val().trim() == "") {
+        $('#ProductCreateModal #Price').css('border-color', '#dc3545');
+        isValid = false;
+    }
+
     return isValid;
 }
 
-function OnKeyUpCreate() {
+function OnKeyUpProductCreateName() {
     $('#ProductCreateModal #Name').css('border-color', '#ced4da');
 }
 

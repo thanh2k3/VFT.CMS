@@ -1,4 +1,4 @@
-﻿var defaultOption = $('#ProductCreateModal').find('#CategoryId option:selected').text();
+﻿var defaultOption = $('#ProductCreateModal #CategoryId').find('option:selected').text();
 
 $(document).ready(function () {
     ShowProductData();
@@ -6,28 +6,27 @@ $(document).ready(function () {
     $('#ProductCreateModal .modal-title').text('Thêm mới sản phẩm');
 })
 
-function ShowProductData() {
+function ShowProductData() { debugger
     $.ajax({
         url: '/Product/GetData',
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
-        success: function (result) {
+        success: function (result) { debugger
             var object = '';
             $.each(result, function (index, item) {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
                 object += '<td>' + item.category.name + '</td>';
                 object += '<td>' + item.image + '</td>';
-                object += '<td>' + item.description + '</td>';
                 object += '<td>' + item.price + '</td>';
-                object += '<td>' + item.quantity + '</td>';
+                object += '<td>' + item.description + '</td>';
                 object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ViewProductModal(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
                     ' <a class="btn btn-warning btn-sm" onclick="GetProductEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteProduct(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
-            $('#tblBody').html(object);
+            $('#tblProductBody').html(object);
         }
     });
 }
@@ -44,7 +43,7 @@ function GetProductEditData(id) {
                 $('#ProductEditModal').find('.modal-content').html(result);
                 $('#ProductEditModal').find('#CategoryId option:first').css('display', 'none');
                 $('#ProductEditModal').modal('show');
-                $('#ProductEditModal .modal-title').text('Chỉnh sửa sản phẩm');
+                $('#ProductEditModal .modal-title').text('Sửa sản phẩm');
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
@@ -95,7 +94,7 @@ function ViewProductModal(id) {
             if (result != null || result != undefined) {
                 $('#ProductViewModal').find('.modal-content').html(result);
                 $('#ProductViewModal').modal('show');
-                $('#ProductViewModal').find('.modal-title').text("Thông tin về sản phẩm");
+                $('#ProductViewModal').find('.modal-title').text("Xem sản phẩm");
             }
         }
     });
