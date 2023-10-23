@@ -6,13 +6,13 @@ $(document).ready(function () {
     $('#ProductCreateModal .modal-title').text('Thêm mới sản phẩm');
 })
 
-function ShowProductData() { debugger
+function ShowProductData() {
     $.ajax({
         url: '/Product/GetData',
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
-        success: function (result) { debugger
+        success: function (result) {
             var object = '';
             $.each(result, function (index, item) {
                 object += '<tr>';
