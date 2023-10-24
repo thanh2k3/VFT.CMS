@@ -1,0 +1,94 @@
+﻿@using VFT.CMS.Admin.ViewModels.Users
+@model CreateUserViewModel
+
+<!-- Modal -->
+<div class="modal fade" id="UserCreateModal" onkeydown="EscUserCreateModal(event)" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="UserCreateModalLabel">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header btn-success align-items-center">
+				<i class="fa fa-plus-square"></i>
+				<h5 class="modal-title ml-2"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="HideUserCreateModal()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post">
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="Email" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.Email)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="Email" type="text" class="form-control" onkeyup="OnKeyUpUserCreateEmail()" placeholder="Nhập Email..." autocomplete="off" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="FullName" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.FullName)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="FullName" type="text" class="form-control" placeholder="Nhập họ và tên..." autocomplete="off" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="Password" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.Password)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="Password" class="form-control" onkeyup="OnKeyUpUserCreatePassword()" type="password" required placeholder="Nhập mật khẩu..." />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="ConfirmPassword" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.ConfirmPassword)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="ConfirmPassword" class="form-control" onkeyup="OnKeyUpUserCreateConfirmPassword()" type="password" required placeholder="Nhập lại mật khẩu..." />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="Birthday" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.Birthday)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="Birthday" class="form-control" type="date" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row mb-0 required">
+								<label asp-for="CreatedDate" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
+									@Html.DisplayNameFor(model => model.CreatedDate)
+								</label>
+								<div class="col-sm-8">
+									<input asp-for="CreatedDate" class="form-control" onkeyup="OnKeyUpUserCreateCreatedDate(event)" type="date" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="HideUserCreateModal()">Hủy</button>
+				<button class="btn btn-success btn-sm" onclick="CreateUser()">Tạo</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="~/view-resources/Views/User/_CreateModal.js" asp-append-version="true"></script>

@@ -29,16 +29,18 @@ namespace VFT.CMS.Repository.Seed
 					await _roleManager.CreateAsync(new Role { Name = "Admin" });
 				}
 
-				var userName = "admin@gmail.com";
+				var admin = "admin@gmail.com";
 
-				if (!_context.Users.Any(user => user.UserName == userName))
+				if (!_context.Users.Any(user => user.UserName == admin))
 				{
 					User user = new User()
 					{
-						UserName = userName,
-						NormalizedUserName = userName.ToUpper(),
-						Email = userName,
-						NormalizedEmail = userName.ToUpper(),
+						UserName = admin,
+						NormalizedUserName = admin.ToUpper(),
+						Email = admin,
+						NormalizedEmail = admin.ToUpper(),
+						CreatedDate = DateTime.Now,
+						FullName = "Admin",
 					};
 
 					IdentityResult result = _userManager.CreateAsync(user, "qwer1234QWER!@#$").Result;

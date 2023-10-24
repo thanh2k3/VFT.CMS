@@ -1,0 +1,83 @@
+﻿@using VFT.CMS.Admin.ViewModels.Users
+@model IEnumerable<UserViewModel>
+
+@{
+	ViewData["Title"] = "Người dùng";
+}
+
+@section scripts {
+    <script src="~/view-resources/Views/User/Index.js" asp-append-version="true"></script>
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="float-sm-right">
+                        <button class="btn bg-success btn-sm" data-toggle="modal" data-target="#UserCreateModal">
+                            <i class="fa fa-plus-square"></i>
+                            Thêm mới
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table projects">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FullName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Avatar)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Birthday)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </th>
+                            <th class="text-center" style="width: 20%">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblUserBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+@await Html.PartialAsync("~/Views/User/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="UserEditModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="UserEditModalLabel">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="UserViewModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="UserViewModalLabel">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

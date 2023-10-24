@@ -12,7 +12,7 @@ using VFT.CMS.Repository.Data;
 namespace VFT.CMS.Repository.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231020150232_Initial_Migrations")]
+    [Migration("20231024085742_Initial_Migrations")]
     partial class Initial_Migrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

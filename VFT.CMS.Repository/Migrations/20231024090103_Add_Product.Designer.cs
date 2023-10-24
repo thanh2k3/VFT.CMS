@@ -12,7 +12,7 @@ using VFT.CMS.Repository.Data;
 namespace VFT.CMS.Repository.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20231020150900_Add_Product")]
+    [Migration("20231024090103_Add_Product")]
     partial class Add_Product
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

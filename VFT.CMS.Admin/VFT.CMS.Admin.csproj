@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Users\" />
     <Folder Include="wwwroot\image\product\" />
     <Folder Include="wwwroot\lib\toastr\dist\css\" />
     <Folder Include="wwwroot\lib\toastr\dist\js\" />
