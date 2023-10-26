@@ -1,5 +1,4 @@
-﻿// Create Product
-function CreateProduct() {
+﻿function CreateProduct() {
     var res = ValidateProductCreate();
     if (res == false) {
         return false

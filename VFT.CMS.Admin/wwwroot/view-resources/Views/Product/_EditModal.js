@@ -1,5 +1,4 @@
-﻿// Update Product
-function UpdateProduct() {
+﻿function UpdateProduct() {
     var res = ValidateProductEdit();
     if (res == false) {
         return false;

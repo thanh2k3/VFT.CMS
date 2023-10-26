@@ -21,8 +21,8 @@ function ShowProductData() {
                 object += '<td>' + item.image + '</td>';
                 object += '<td>' + item.price + '</td>';
                 object += '<td>' + item.description + '</td>';
-                object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ViewProductModal(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
-                    ' <a class="btn btn-warning btn-sm" onclick="GetProductEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ShowViewProductData(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
+                    ' <a class="btn btn-warning btn-sm" onclick="ShowProductEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteProduct(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
@@ -31,8 +31,25 @@ function ShowProductData() {
     });
 }
 
-// Partial View Edit
-function GetProductEditData(id) {
+// View
+function ShowViewProductData(id) {
+    $.ajax({
+        url: '/Product/ViewModal?id=' + id,
+        type: 'GET',
+        contentType: 'application/html;charset=utf-8',
+        dataType: 'html',
+        success: function (result) {
+            if (result != null || result != undefined) {
+                $('#ProductViewModal').find('.modal-content').html(result);
+                $('#ProductViewModal').modal('show');
+                $('#ProductViewModal').find('.modal-title').text("Xem sản phẩm");
+            }
+        }
+    });
+}
+
+// Edit
+function ShowProductEditData(id) {
     $.ajax({
         url: '/Product/Edit?id=' + id,
         type: 'GET',
@@ -51,7 +68,7 @@ function GetProductEditData(id) {
     });
 }
 
-// Delete Product
+// Delete
 function DeleteProduct(id) {
     Swal.fire({
         title: 'Are you sure?',
@@ -81,21 +98,4 @@ function DeleteProduct(id) {
             });
         }
     })
-}
-
-// View Modal
-function ViewProductModal(id) {
-    $.ajax({
-        url: '/Product/ViewModal?id=' + id,
-        type: 'GET',
-        contentType: 'application/html;charset=utf-8',
-        dataType: 'html',
-        success: function (result) {
-            if (result != null || result != undefined) {
-                $('#ProductViewModal').find('.modal-content').html(result);
-                $('#ProductViewModal').modal('show');
-                $('#ProductViewModal').find('.modal-title').text("Xem sản phẩm");
-            }
-        }
-    });
 }
