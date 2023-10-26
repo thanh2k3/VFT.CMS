@@ -7,7 +7,7 @@ namespace VFT.CMS.Admin.ViewModels.Roles
 	{
 		public RoleVMMapProfile()
 		{
-			CreateMap<RoleDto, RoleViewModel>();
+			CreateMap<RoleDto, RoleViewModel>().ReverseMap();
 		}
 	}
 }

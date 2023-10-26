@@ -15,7 +15,7 @@ function ShowRoleData() {
             $.each(result, function (index, item) {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
-                object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="GetRoleEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="ShowRoleEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteRole(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
@@ -28,7 +28,7 @@ function ShowRoleData() {
 }
 
 //View Edit
-function GetRoleEditData(id) {
+function ShowRoleEditData(id) {
     $.ajax({
         url: '/Role/Edit?id=' + id,
         type: 'GET',
