@@ -16,7 +16,7 @@ function ShowCategoryData() {
             $.each(result, function (index, item) {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
-                object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="GetCategoryEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick=ShowCategoryEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteCategory(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
             });
@@ -28,8 +28,8 @@ function ShowCategoryData() {
     });
 }
 
-// View Edit
-function GetCategoryEditData(id) {
+// Edit
+function ShowCategoryEditData(id) {
     $.ajax({
         url: '/Category/Edit?id=' + id,
         type: 'GET',
@@ -47,7 +47,7 @@ function GetCategoryEditData(id) {
     });
 }
 
-// Delete Category
+// Delete
 function DeleteCategory(id) {
     Swal.fire({
         title: 'Are you sure?',
