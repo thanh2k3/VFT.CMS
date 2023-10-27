@@ -33,6 +33,7 @@ namespace VFT.CMS.Admin.Controllers
             return Json(usersVM);
         }
 
+        [HttpPost]
         public async Task<JsonResult> Create(CreateUserViewModel model)
         {
             if (ModelState.IsValid)
