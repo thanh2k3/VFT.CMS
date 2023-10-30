@@ -10,7 +10,6 @@
         FullName: $('#UserCreateModal #FullName').val(),
         Password: $('#UserCreateModal #Password').val(),
         ConfirmPassword: $('#UserCreateModal #ConfirmPassword').val(),
-        CreatedDate: $('#UserCreateModal #CreatedDate').val(),
         Birthday: $('#UserCreateModal #Birthday').val()
     };
 
@@ -54,11 +53,6 @@ function ValidateUserCreate() {
 
     if ($('#UserCreateModal #ConfirmPassword').val().trim() == "") {
         $('#UserCreateModal #ConfirmPassword').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#UserCreateModal #CreatedDate').val().trim() == "") {
-        $('#UserCreateModal #CreatedDate').css('border-color', '#dc3545');
         isValid = false;
     }
 

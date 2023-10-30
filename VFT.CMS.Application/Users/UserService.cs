@@ -33,7 +33,6 @@ namespace VFT.CMS.Application.Users
 
         public async Task<bool> Create(CreateUserDto model)
         {
-            //var user = _mapper.Map<User>(model);
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists == null)
             {
@@ -42,7 +41,7 @@ namespace VFT.CMS.Application.Users
                     Email = model.Email,
                     UserName = model.Email,
                     FullName = model.FullName,
-                    CreatedDate = model.CreatedDate,
+                    CreatedDate = DateTime.Now,
                     Birthday = model.Birthday
                 };
 
