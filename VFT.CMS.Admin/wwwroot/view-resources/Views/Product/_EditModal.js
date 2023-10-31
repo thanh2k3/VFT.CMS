@@ -4,19 +4,20 @@
         return false;
     }
 
-    var objData = {
-        Id: $('#ProductEditModal #Id').val(),
-        Name: $('#ProductEditModal #Name').val(),
-        CategoryId: $('#ProductEditModal #CategoryId').find('option:selected').val(),
-        Price: $('#ProductEditModal #Price').val(),
-        Image: $('#ProductEditModal #Image').val(),
-        Description: $('#ProductEditModal #Description').val()
-    }
+    var formData = new FormData();
+    formData.append('Id', $('#ProductEditModal #Id').val())
+    formData.append('Name', $('#ProductEditModal #Name').val())
+    formData.append('CategoryId', $('#ProductEditModal #CategoryId').find('option:selected').val())
+    formData.append('Price', $('#ProductEditModal #Price').val())
+    formData.append('Description', $('#ProductEditModal #Description').val())
+    formData.append('Image', $('#ProductEditModal #Image')[0].files[0])
 
     $.ajax({
         url: '/Product/Edit',
-        data: objData,
+        data: formData,
         type: 'POST',
+        processData: false,
+        contentType: false,
         success: function (result) {
             if (result.success === true) {
                 HideProductEditModal();
@@ -51,4 +52,14 @@ function ValidateProductEdit() {
 
 function OnKeyUpProductEdit() {
     $('#ProductEditModal #Name').css('border-color', '#ced4da');
+}
+
+function LoadProductEditImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#ProductEditModal #targetImage').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }

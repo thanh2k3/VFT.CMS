@@ -23,6 +23,5 @@ namespace VFT.CMS.Application.Products.Dto
 		public int CategoryId { get; set; }
 		[DisplayName("Ảnh")]
 		public string? Image { get; set; }
-		public IFormFile? ImageFile { get; set; }
 	}
 }

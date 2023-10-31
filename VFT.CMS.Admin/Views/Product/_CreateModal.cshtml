@@ -15,59 +15,66 @@
 			<div class="modal-body">
 				<form method="post">
 					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="form-group row mb-0 required">
-								<label asp-for="Name" class="col-md col-form-label control-label text-right custom-label">
-									@Html.DisplayNameFor(model => model.Name)
-								</label>
-								<div class="col-sm-8">
-									<input asp-for="Name" class="form-control" onkeyup="OnKeyUpProductCreateName()" type="text" required placeholder="Nhập tên sản phẩm..." autocomplete="off" />
+						<div class="col-md-4">
+							<img src="~/image/product/noimage.png" class="img-responsive img-thumbnail" id="targetImage" style="width: 100%; max-height: 500px;" />
+						</div>
+						<div class="col-md-8">
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-group row mb-0 required">
+										<label asp-for="Name" class="col-md col-form-label control-label text-right custom-label">
+											@Html.DisplayNameFor(model => model.Name)
+										</label>
+										<div class="col-sm-8">
+											<input asp-for="Name" class="form-control" onkeyup="OnKeyUpProductCreateName()" type="text" required placeholder="Nhập tên sản phẩm..." autocomplete="off" />
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group row mb-0 required">
+										<label asp-for="CategoryId" class="col-md col-form-label control-label text-right custom-label">
+											@Html.DisplayNameFor(model => model.CategoryId)
+										</label>
+										<div class="col-sm-8">
+											<select asp-for="CategoryId" asp-items="ViewBag.Categories" onchange="ChangeSelect(this)" required class="form-control">
+												<option>--Chọn danh mục--</option>
+											</select>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row mb-0 required">
-								<label asp-for="CategoryId" class="col-md col-form-label control-label text-right custom-label">
-									@Html.DisplayNameFor(model => model.CategoryId)
-								</label>
-								<div class="col-sm-8">
-									<select asp-for="CategoryId" asp-items="ViewBag.Categories" onchange="ChangeSelect(this)" required class="form-control">
-										<option>--Chọn danh mục--</option>
-									</select>
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-group row mb-0 required">
+										<label asp-for="Price" class="col-md col-form-label control-label text-right custom-label">
+											@Html.DisplayNameFor(model => model.Price)
+										</label>
+										<div class="col-sm-8">
+											<input asp-for="Price" type="number" class="form-control" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group row mb-0 required">
+										<label asp-for="Image" class="col-md col-form-label control-label text-right custom-label">
+											@Html.DisplayNameFor(model => model.Image)
+										</label>
+										<div class="col-sm-8">
+											<input asp-for="Image" type="file" class="form-control" onchange="LoadProductCreateImage(this)">
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<div class="form-group row mb-0 required">
-								<label asp-for="Price" class="col-md col-form-label control-label text-right custom-label">
-									@Html.DisplayNameFor(model => model.Price)
-								</label>
-								<div class="col-sm-8">
-									<input asp-for="Price" type="number" class="form-control" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group row mb-0 required">
-								<label asp-for="Image" class="col-md col-form-label control-label text-right custom-label">
-									@Html.DisplayNameFor(model => model.Image)
-								</label>
-								<div class="col-sm-8">
-									<input asp-for="Image" type="file" class="form-control">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-md-12">
-							<div class="form-group row mb-0 required">
-								<label asp-for="Description" class="col-md col-form-label control-label text-right custom-label">
-									@Html.DisplayNameFor(model => model.Description)
-								</label>
-								<div class="col-sm-10">
-									<textarea asp-for="Description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm..."></textarea>
+							<div class="row mb-3">
+								<div class="col-md-12">
+									<div class="form-group row mb-0 required">
+										<label asp-for="Description" class="col-md col-form-label control-label text-right custom-label">
+											@Html.DisplayNameFor(model => model.Description)
+										</label>
+										<div class="col-sm-10">
+											<textarea asp-for="Description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm..."></textarea>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

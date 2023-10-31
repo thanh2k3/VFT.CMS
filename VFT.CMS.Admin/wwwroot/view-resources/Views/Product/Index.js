@@ -18,7 +18,7 @@ function ShowProductData() {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
                 object += '<td>' + item.category.name + '</td>';
-                object += '<td>' + item.image + '</td>';
+                object += '<td><img class="img-responsive img-thumbnail" style="height: 50px; width: 50px;" src="' + item.image + '" /></td>';
                 object += '<td>' + item.price + '</td>';
                 object += '<td>' + item.description + '</td>';
                 object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ShowViewProductData(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
