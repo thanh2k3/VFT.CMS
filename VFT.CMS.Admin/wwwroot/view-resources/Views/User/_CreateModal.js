@@ -4,16 +4,16 @@
         return false
     }
 
-    var objData = {
-        Email: $('#UserCreateModal #Email').val(),
-        UserName: $('#UserCreateModal #Email').val(),
-        FullName: $('#UserCreateModal #FullName').val(),
-        Password: $('#UserCreateModal #Password').val(),
-        ConfirmPassword: $('#UserCreateModal #ConfirmPassword').val(),
-        Birthday: $('#UserCreateModal #Birthday').val()
-    };
+    var formData = new FormData();
+    formData.append('Email', $('#UserCreateModal #Email').val());
+    formData.append('UserName', $('#UserCreateModal #Email').val());
+    formData.append('FullName', $('#UserCreateModal #FullName').val());
+    formData.append('Password', $('#UserCreateModal #Password').val());
+    formData.append('ConfirmPassword', $('#UserCreateModal #ConfirmPassword').val());
+    formData.append('Birthday', $('#UserCreateModal #Birthday').val());
+    formData.append('Image', $('#UserCreateModal #Image')[0].files[0]);
 
-    if (objData.Password != objData.ConfirmPassword) {
+    if ($('#UserCreateModal #Password').val() != $('#UserCreateModal #ConfirmPassword').val()) {
         toastr.error(null, "Mật khẩu không trùng khớp", { timeOut: 3000, positionClass: 'toast-bottom-right' });
         return false;
     }
@@ -21,8 +21,10 @@
     $.ajax({
         url: '/User/Create',
         type: 'POST',
-        data: objData,
+        data: formData,
         dataType: 'json',
+        processData: false,
+        contentType: false,
         success: function (result) {
             if (result.success === true) {
                 ShowUserData();
@@ -35,7 +37,7 @@
         error: function () {
 
         }
-    })
+    });
 }
 
 function ValidateUserCreate() {
@@ -75,6 +77,7 @@ function ClearTextBoxUserCreate() {
     $('#UserCreateModal #FullName').val('');
     $('#UserCreateModal #CreatedDate').val('');
     $('#UserCreateModal #Birthday').val('');
+    $('#UserCreateModal #Image').val('');
 }
 
 function EscUserCreateModal(evt) {

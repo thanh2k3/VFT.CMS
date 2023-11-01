@@ -11,13 +11,13 @@
 <div class="modal-body">
 	<div class="row mb-3">
 		<div class="col-md-4">
-			<img src="~/image/product/noimage.png" style="width: 100%" />
+			<img src="@Model.Avatar" class="img-responsive img-thumbnail" style="width: 100%" />
 		</div>
 		<div class="col-md-8">
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="form-group row mb-0 required">
-						<label asp-for="Email" class="col-md col-form-label control-label text-right custom-label">
+						<label asp-for="Email" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
 							@Html.DisplayNameFor(model => model.Email)
 						</label>
 						<div class="col-sm-8">
@@ -27,7 +27,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group row mb-0 required">
-						<label asp-for="FullName" class="col-md col-form-label control-label text-right custom-label">
+						<label asp-for="FullName" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
 							@Html.DisplayNameFor(model => model.FullName)
 						</label>
 						<div class="col-sm-8">
@@ -39,7 +39,7 @@
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="form-group row mb-0 required">
-						<label asp-for="Birthday" class="col-md col-form-label control-label text-right custom-label">
+						<label asp-for="Birthday" class="col-md col-form-label font-weight-normal control-label text-right custom-label">
 							@Html.DisplayNameFor(model => model.Birthday)
 						</label>
 						<div class="col-sm-8">

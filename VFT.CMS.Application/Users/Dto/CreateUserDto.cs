@@ -14,7 +14,7 @@ namespace VFT.CMS.Application.Users.Dto
 		public string UserName { get; set; }
 		[DisplayName("Mật khẩu")]
 		public string Password { get; set; }
-        [DisplayName("Xác minh mật khẩu")]
+        [DisplayName("Nhập lại mật khẩu")]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         [DisplayName("Họ và tên")]

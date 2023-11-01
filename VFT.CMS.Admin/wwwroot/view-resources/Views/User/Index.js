@@ -16,7 +16,7 @@ function ShowUserData() {
                 object += '<tr>';
                 object += '<td>' + item.fullName + '</td>';
                 object += '<td>' + item.email + '</td>';
-                object += '<td>' + item.avatar + '</td>';
+                object += '<td><img class="img-responsive img-thumbnail" style="height: 50px; width: 50px;" src="' + item.avatar + '" /></td>';
                 object += '<td>' + item.birthday + '</td>';
                 object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ShowUserViewModal(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
                     ' <a class="btn btn-warning btn-sm" onclick="ShowUserEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +

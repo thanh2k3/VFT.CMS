@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Web.Helpers;
 using VFT.CMS.Admin.ViewModels.Users;
 using VFT.CMS.Application.Users;
 using VFT.CMS.Application.Users.Dto;
@@ -34,12 +33,12 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Create(CreateUserViewModel model)
+        public async Task<JsonResult> Create(CreateUserViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)
             {
                 var userDto = _mapper.Map<CreateUserDto>(model);
-                var res = await _userService.Create(userDto);
+                var res = await _userService.Create(userDto, image);
                 if (res)
                 {
                     return Json(new { success = true, message = "Thêm mới người dùng thành công" });
@@ -51,7 +50,7 @@ namespace VFT.CMS.Admin.Controllers
             return Json(new { success = false, message = "Thêm mới người dùng thất bại" });
         }
 
-        public async Task<ActionResult> Edit(int id)
+		public async Task<ActionResult> Edit(int id)
         {
             var userDto = await _userService.GetById(id);
             var userVM = _mapper.Map<EditUserViewModel>(userDto);
@@ -60,12 +59,12 @@ namespace VFT.CMS.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Edit(EditUserViewModel model)
+        public async Task<JsonResult> Edit(EditUserViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)
             {
                 var userDto = _mapper.Map<EditUserDto>(model);
-                await _userService.Update(userDto);
+                await _userService.Update(userDto, image);
 
                 return Json(new { success = true, message = "Cập nhật người dùng thành công" });
 

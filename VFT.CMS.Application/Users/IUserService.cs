@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace VFT.CMS.Application.Users
     public interface IUserService
     {
         Task<IEnumerable<UserDto>> GetAll();
-        Task<bool> Create(CreateUserDto model);
+        Task<bool> Create(CreateUserDto model, IFormFile? image);
         Task<UserDto> GetById(int id);
-        Task Update(EditUserDto model);
+        Task Update(EditUserDto model, IFormFile? image);
         Task Delete(int id);
     }
 }

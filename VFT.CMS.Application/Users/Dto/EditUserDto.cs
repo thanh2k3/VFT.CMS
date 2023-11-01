@@ -17,6 +17,8 @@ namespace VFT.CMS.Application.Users.Dto
         public string? FullName { get; set; }
         [DisplayName("Ngày sinh")]
         public DateTime? Birthday { get; set; }
+        [DisplayName("Ảnh đại diện")]
+        public string? Avatar { get; set; }
         [DisplayName("Ngày sửa đổi")]
         public DateTime? ModifiedDate { get; set; }
     }
