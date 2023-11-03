@@ -74,46 +74,29 @@ namespace VFT.CMS.Application.Products
 
         public async Task Update(EditProductDto model, IFormFile? image)
         {
-            //var product = _mapper.Map<Product>(model);
-            //var data = await _context.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
-
-            //if (data != null)
-            //{
-            //    if (image != null)
-            //    {
-            //        var imageName = "product_" + Guid.NewGuid().ToString() + "_" + image.FileName;
-
-            //        var name = Path.Combine(_environment.WebRootPath + "/image/product", imageName);
-            //        await image.CopyToAsync(new FileStream(name, FileMode.Create));
-            //        product.Image = "image/product/" + imageName;
-            //    }
-            //    else
-            //    {
-            //        //product.Image = "image/user/noimage.png";
-            //        product.Image = data.Image;
-            //    }
-
-            //    _context.Products.Update(product);
-            //    await Save();
-            //}
-
             var product = _mapper.Map<Product>(model);
+            var data = await _context.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
 
-            if (image != null)
+            if (data != null)
             {
-                var imageName = "product_" + Guid.NewGuid().ToString() + "_" + image.FileName;
+                if (image != null)
+                {
+                    var imageName = "product_" + Guid.NewGuid().ToString() + "_" + image.FileName;
 
-                var name = Path.Combine(_environment.WebRootPath + "/image/product", imageName);
-                await image.CopyToAsync(new FileStream(name, FileMode.Create));
-                product.Image = "image/product/" + imageName;
-            }
-            else
-            {
-                product.Image = "image/user/noimage.png";
-            }
+                    var name = Path.Combine(_environment.WebRootPath + "/image/product", imageName);
+                    await image.CopyToAsync(new FileStream(name, FileMode.Create));
+                    data.Image = "image/product/" + imageName;
+                }
 
-            _context.Products.Update(product);
-            await Save();
+                data.Name = product.Name;
+                data.CategoryId = product.CategoryId;
+                data.Description = product.Description;
+                data.Price = product.Price;
+
+
+                _context.Products.Update(data);
+                await Save();
+            }
         }
 
         public async Task Delete(int id)
