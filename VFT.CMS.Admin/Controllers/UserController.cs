@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VFT.CMS.Admin.ViewModels.Users;
@@ -8,6 +9,7 @@ using VFT.CMS.Core;
 
 namespace VFT.CMS.Admin.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

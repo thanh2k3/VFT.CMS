@@ -14,7 +14,7 @@ using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	public class ProductController : Controller
 	{
 		private readonly IProductService _productService;

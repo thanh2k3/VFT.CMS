@@ -9,7 +9,7 @@ using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	public class CategoryController : Controller
 	{
 		private readonly ICategoryService _categoryService;

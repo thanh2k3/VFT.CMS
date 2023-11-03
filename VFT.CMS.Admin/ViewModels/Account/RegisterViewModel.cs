@@ -1,8 +1,8 @@
-﻿//using VFT.CMS.Application.Account.Dto;
+﻿using VFT.CMS.Application.Account.Dto;
 
-//namespace VFT.CMS.Admin.ViewModels.Account
-//{
-//    public class RegisterViewModel : RegisterDto
-//    {
-//    }
-//}
+namespace VFT.CMS.Admin.ViewModels.Account
+{
+    public class RegisterViewModel : RegisterDto
+    {
+    }
+}

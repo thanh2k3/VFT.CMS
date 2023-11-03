@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VFT.CMS.Admin.ViewModels.Roles;
@@ -7,7 +8,8 @@ using VFT.CMS.Application.Roles.Dto;
 
 namespace VFT.CMS.Admin.Controllers
 {
-	public class RoleController : Controller
+    [Authorize]
+    public class RoleController : Controller
 	{
 		private readonly IRoleService _roleService;
 		private readonly IMapper _mapper;
