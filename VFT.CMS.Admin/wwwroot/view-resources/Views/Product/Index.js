@@ -1,5 +1,4 @@
 ﻿var defaultOption = $('#ProductCreateModal #CategoryId').find('option:selected').text();
-var dataTable;
 
 $(document).ready(function () {
     ShowProductData();

@@ -12,7 +12,6 @@
 })
 
 function ShowUserData() {
-    let currency = new Intl.NumberFormat();
     dataTable = $('#tableUser').DataTable({
         language: {
             lengthMenu: 'Hiển thị _MENU_ bản ghi',
