@@ -1,30 +1,74 @@
-﻿$(document).ready(function () {
+﻿var dataTable;
+
+$(document).ready(function () {
+    ShowUserData();
+
     $('#UserCreateModal .modal-title').text("Thêm mới Người dùng");
 
-    ShowUserData();
+    $('#tableUser_length').addClass('pt-3 pl-4');
+    $('#tableUser_filter').addClass('pt-3 pr-4');
+    $('#tableUser_info').addClass('mt-2 pl-4');
+    $('#tableUser_paginate').addClass('pb-3 pr-4 pt-3');
 })
 
 function ShowUserData() {
-    $.ajax({
-        url: '/User/GetData',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json;charset=utf-8',
-        success: function (result) {
-            var object = '';
-            $.each(result, function (index, item) {
-                object += '<tr>';
-                object += '<td>' + item.fullName + '</td>';
-                object += '<td>' + item.email + '</td>';
-                object += '<td><img class="img-responsive img-thumbnail" style="height: 50px; width: 50px;" src="' + item.avatar + '" /></td>';
-                object += '<td>' + (item.birthday ? new Date(item.birthday).toLocaleDateString() : "") + '</td>';
-                object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ShowUserViewModal(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
-                    ' <a class="btn btn-warning btn-sm" onclick="ShowUserEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
-                    ' <a class="btn btn-danger btn-sm" onclick="DeleteUser(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
-                object += '</tr>';
-            });
-            $('#tblUserBody').html(object);
-        }
+    let currency = new Intl.NumberFormat();
+    dataTable = $('#tableUser').dataTable({
+        language: {
+            lengthMenu: 'Hiển thị _MENU_ bản ghi',
+            search: 'Tìm kiếm:',
+            info: 'Hiển thị _START_ đến _END_ của _TOTAL_ bản ghi',
+            infoEmpty: 'Chưa có bản ghi nào để hiển thị',
+            paginate: {
+                previous: 'Trước',
+                next: 'Sau',
+            },
+            emptyTable: 'Chưa có dữ liệu, vui lòng thêm dữ liệu vào',
+        },
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        filter: true,
+        ajax: {
+            url: '/User/GetUsers',
+            type: 'POST',
+            dataType: 'json'
+        },
+        columns: [
+            {
+                data: 'fullName',
+                name: 'FullName',
+                autoWidth: true
+            },
+            {
+                data: 'email',
+                name: 'Email',
+                autoWidth: true
+            },
+            {
+                data: 'avatar',
+                name: 'Avatar',
+                render: function (data) {
+                    return '<img class="img-responsive img-thumbnail" src="' + data + '" alt="Image" height="50px" width="50px" />'
+                }
+            },
+            {
+                data: 'birthday',
+                name: 'Birthday',
+                render: function (data) {
+                    return '<td>' + (data ? new Date(data).toLocaleDateString("en-AU") : "-") + '</td>'
+                }
+            },
+            {
+                data: 'id',
+                render: function (data) {
+                    return '<a class="btn btn-info btn-sm" onclick="ShowUserViewModal(' + data + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
+                        ' <a class="btn btn-warning btn-sm" onclick="ShowUserEditData(' + data + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                        ' <a class="btn btn-danger btn-sm" onclick="DeleteUser(' + data + ')"><i class="fas fa-trash"></i> Xóa</a></td >'
+                },
+                searchable: false
+            },
+        ],
     });
 }
 

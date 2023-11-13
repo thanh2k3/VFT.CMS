@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VFT.CMS.Admin.ViewModels.Users;
+using VFT.CMS.Application.Products.Dto;
 using VFT.CMS.Application.Users;
 using VFT.CMS.Application.Users.Dto;
 using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -14,11 +17,13 @@ namespace VFT.CMS.Admin.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly AppDBContext _context;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper, AppDBContext context)
         {
             _userService = userService;
             _mapper = mapper;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -26,13 +31,32 @@ namespace VFT.CMS.Admin.Controllers
             return View();
         }
 
-        public async Task<JsonResult> GetData()
+        public IActionResult GetUsers()
         {
-            var usersDto = await _userService.GetAll();
-            var usersVM = _mapper.Map<IEnumerable<UserViewModel>>(usersDto);
-
-            return Json(usersVM);
-        }
+            try
+            {
+                var draw = Request.Form["draw"].FirstOrDefault();
+                var start = Request.Form["start"].FirstOrDefault();
+				var length = Request.Form["length"].FirstOrDefault();
+				var searchValue = Request.Form["search[value]"].FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+				IQueryable<User> userData = _context.Users;
+				if (!string.IsNullOrEmpty(searchValue))
+				{
+					userData = userData.Where(m => m.UserName.Contains(searchValue));
+				}
+				recordsTotal = userData.Count();
+				var data = userData.OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+				var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
+                return Ok(jsonData);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+		}
 
         [HttpPost]
         public async Task<JsonResult> Create(CreateUserViewModel model, IFormFile? image)
