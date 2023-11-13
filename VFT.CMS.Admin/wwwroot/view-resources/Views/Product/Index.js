@@ -1,39 +1,80 @@
 ﻿var defaultOption = $('#ProductCreateModal #CategoryId').find('option:selected').text();
+var dataTable;
 
 $(document).ready(function () {
     ShowProductData();
 
     $('#ProductCreateModal .modal-title').text('Thêm mới sản phẩm');
+
+    $('#tableProduct_length').addClass('pt-3 pl-4');
+    $('#tableProduct_filter').addClass('pt-3 pr-4');
+    $('#tableProduct_info').addClass('mt-2 pl-4');
+    $('#tableProduct_paginate').addClass('pb-3 pr-4 pt-3');
 })
 
 function ShowProductData() {
-    //let USDollar = new Intl.NumberFormat('vi-VN', {
-    //    style: 'currency',
-    //    currency: 'VND',
-    //});
     let USDollar = new Intl.NumberFormat();
-
-    $.ajax({
-        url: '/Product/GetData',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json;charset=utf-8',
-        success: function (result) {
-            var object = '';
-            $.each(result, function (index, item) {
-                object += '<tr>';
-                object += '<td>' + item.name + '</td>';
-                object += '<td>' + item.category.name + '</td>';
-                object += '<td><img class="img-responsive img-thumbnail" style="height: 50px; width: 50px;" src="' + item.image + '" /></td>';
-                object += '<td class="text-right">' + USDollar.format(item.price) + '</td>';
-                object += '<td>' + (item.description ? item.description : "-") + '</td>';
-                object += '<td class="text-center"><a class="btn btn-info btn-sm" onclick="ShowViewProductData(' + item.id + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
-                    ' <a class="btn btn-warning btn-sm" onclick="ShowProductEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
-                    ' <a class="btn btn-danger btn-sm" onclick="DeleteProduct(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
-                object += '</tr>';
-            });
-            $('#tblProductBody').html(object);
-        }
+    dataTable = $('#tableProduct').DataTable({
+        language: {
+            lengthMenu: 'Hiển thị _MENU_ bản ghi',
+            search: 'Tìm kiếm:',
+            info: 'Hiển thị _START_ đến _END_ của _TOTAL_ bản ghi',
+            infoEmpty: 'Chưa có bản ghi nào để hiển thị',
+            paginate: {
+                previous: 'Trước',
+                next: 'Sau',
+            },
+            emptyTable: 'Chưa có dữ liệu, vui lòng thêm dữ liệu vào',
+        },
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        filter: true,
+        ajax: {
+            url: '/Product/GetProducts',
+            type: 'POST',
+            dataype: 'json'
+        },
+        columns: [
+            {
+                data: 'name',
+                name: 'Name',
+                autoWidth: true
+            },
+            {
+                data: 'category.name',
+                autoWidth: true
+            },
+            {
+                data: 'image',
+                name: 'Image',
+                render: function (data, type, row, meta) {
+                    return '<img class="img-responsive img-thumbnail" src="' + data + '" alt="Image" height="50px" width="50px" />';
+                }
+            },
+            {
+                data: 'price',
+                name: 'Price',
+                autoWidth: true,
+                render: function (data, type, row, meta) {
+                    return USDollar.format(data)
+                }
+            },
+            {
+                data: 'description',
+                name: 'Description',
+                autoWidth: true
+            },
+            {
+                data: 'id',
+                render: function (data) {
+                    return '<a class="btn btn-info btn-sm" onclick="ShowViewProductData(' + data + ')"><i class="fa-solid fa-eye"></i> Xem</a>' +
+                        ' <a class="btn btn-warning btn-sm" onclick="ShowProductEditData(' + data + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                        ' <a class="btn btn-danger btn-sm" onclick="DeleteProduct(' + data + ')"><i class="fas fa-trash"></i> Xóa</a></td >'
+                },
+                searchable: false
+            },
+        ],
     });
 }
 
@@ -95,7 +136,7 @@ function DeleteProduct(id) {
                 dataType: 'json',
                 success: function (result) {
                     if (result.success === true) {
-                        ShowProductData();
+                        dataTable.ajax.reload();
                         toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
                     } else {
                         toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });

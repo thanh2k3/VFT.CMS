@@ -20,8 +20,8 @@
         contentType: false,
         success: function (result) {
             if (result.success === true) {
+                dataTable.ajax.reload();
                 HideProductEditModal();
-                ShowProductData();
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             } else {
                 toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });

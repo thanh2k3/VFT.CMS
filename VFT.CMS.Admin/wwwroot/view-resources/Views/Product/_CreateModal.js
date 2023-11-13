@@ -20,7 +20,7 @@
         contentType: false,
         success: function (result) {
             if (result.success === true) {
-                ShowProductData();
+                dataTable.ajax.reload();
                 HideProductCreateModal();
                 toastr.success(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             } else {
@@ -97,3 +97,10 @@ function LoadProductCreateImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function OnKeyUpProductCreatePrice(evt) {
+    if (evt.keyCode >= 48 && evt.keyCode <= 57) {
+        $('#ProductCreateModal #Price').css('border-color', '#ced4da');
+    }
+}
+

@@ -33,7 +33,7 @@
 	<section class="content">
 		<div class="card">
 			<div class="card-body p-0">
-				<table id="tableProduct" class="table projects">
+				<table id="tableProduct" class="table table-striped table-bordered" style="width:100%">
 					<thead>
 						<tr>
 							<th>
@@ -45,13 +45,13 @@
 							<th>
 								@Html.DisplayNameFor(model => model.Image)
 							</th>
-							<th class="text-right">
+							<th>
 								@Html.DisplayNameFor(model => model.Price)
 							</th>
 							<th>
 								@Html.DisplayNameFor(model => model.Description)
 							</th>
-							<th class="text-center" style="width: 20%">Actions</th>
+							<th class="text-center" style="width: 18%">Tác vụ</th>
 						</tr>
 					</thead>
 					<tbody id="tblProductBody"></tbody>

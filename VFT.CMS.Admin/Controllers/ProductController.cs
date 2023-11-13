@@ -20,12 +20,14 @@ namespace VFT.CMS.Admin.Controllers
 		private readonly IProductService _productService;
 		private readonly ICategoryService _categoryService;
 		private readonly IMapper _mapper;
+		private readonly AppDBContext _context;
 
-		public ProductController(IProductService productService, IMapper mapper, ICategoryService categoryService)
+		public ProductController(IProductService productService, IMapper mapper, ICategoryService categoryService, AppDBContext context)
 		{
 			_productService = productService;
 			_categoryService = categoryService;
 			_mapper = mapper;
+			_context = context;
 		}
 
 		public async Task<IActionResult> Index()
@@ -37,15 +39,42 @@ namespace VFT.CMS.Admin.Controllers
 			return View();
 		}
 
-		public async Task<JsonResult> GetData()
+		[HttpPost]
+		public IActionResult GetProducts()
 		{
-			var productsDto = await _productService.GetAll();
-			var productsVM = _mapper.Map<IEnumerable<ProductViewModel>>(productsDto);
-
-			return Json(productsVM);
+			try
+			{
+				var draw = Request.Form["draw"].FirstOrDefault();
+				var start = Request.Form["start"].FirstOrDefault();
+				var length = Request.Form["length"].FirstOrDefault();
+				//var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+				//var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+				var searchValue = Request.Form["search[value]"].FirstOrDefault();
+				int pageSize = length != null ? Convert.ToInt32(length) : 0;
+				int skip = start != null ? Convert.ToInt32(start) : 0;
+				int recordsTotal = 0;
+				IQueryable<Product> productData = _context.Products.Include(x => x.Category);
+				//if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+				//{
+				//	productData = productData.OrderBy(s => sortColumn + " " + sortColumnDirection);
+				//}
+				if (!string.IsNullOrEmpty(searchValue))
+				{
+					productData = productData.Where(m => m.Name.Contains(searchValue));
+				}
+				recordsTotal = productData.Count();
+				var data = productData.OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+				var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
+				return Ok(jsonData);
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
 		}
 
-        public async Task<JsonResult> Create(CreateProductViewModel model, IFormFile? image)
+
+		public async Task<JsonResult> Create(CreateProductViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)
             {

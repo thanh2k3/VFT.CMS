@@ -53,7 +53,7 @@
 											<span class="text-danger">*</span>
 										</label>
 										<div class="col-sm-8">
-											<input asp-for="Price" type="number" class="form-control" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
+											<input asp-for="Price" type="number" class="form-control" onkeyup="OnKeyUpProductCreatePrice(event)" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
 										</div>
 									</div>
 								</div>
