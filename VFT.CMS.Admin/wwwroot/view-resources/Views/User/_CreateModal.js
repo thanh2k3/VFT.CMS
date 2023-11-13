@@ -27,7 +27,7 @@
         contentType: false,
         success: function (result) {
             if (result.success === true) {
-                ShowUserData();
+                dataTable.ajax.reload();
                 HideUserCreateModal();
                 toastr.success(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             } else {

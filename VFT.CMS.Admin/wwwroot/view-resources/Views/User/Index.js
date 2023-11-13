@@ -1,6 +1,6 @@
-﻿var dataTable;
+﻿$(document).ready(function () {
+    var dataTable;
 
-$(document).ready(function () {
     ShowUserData();
 
     $('#UserCreateModal .modal-title').text("Thêm mới Người dùng");
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 function ShowUserData() {
     let currency = new Intl.NumberFormat();
-    dataTable = $('#tableUser').dataTable({
+    dataTable = $('#tableUser').DataTable({
         language: {
             lengthMenu: 'Hiển thị _MENU_ bản ghi',
             search: 'Tìm kiếm:',
@@ -126,7 +126,7 @@ function DeleteUser(id) {
                 dataType: 'json',
                 success: function (result) {
                     if (result.success === true) {
-                        ShowUserData();
+                        dataTable.ajax.reload();
                         toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
                     } else {
                         toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
