@@ -5,7 +5,8 @@
     }
 
     var objData = {
-        Name: $('#RoleCreateModal #Name').val()
+        Name: $('#RoleCreateModal #Name').val(),
+        Description: $('#RoleCreateModal #Description').val()
     }
 
     $.ajax({
@@ -45,6 +46,7 @@ function HideRoleCreateModal() {
 
 function ClearTextBoxRoleCreate() {
     $('#RoleCreateModal #Name').val('');
+    $('#RoleCreateModal #Description').val('');
     $('#RoleCreateModal #Name').css('border-color', '#ced4da');
 }
 

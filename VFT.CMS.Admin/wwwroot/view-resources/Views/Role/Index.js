@@ -15,6 +15,7 @@ function ShowRoleData() {
             $.each(result, function (index, item) {
                 object += '<tr>';
                 object += '<td>' + item.name + '</td>';
+                object += '<td>' + item.description + '</td>';
                 object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="ShowRoleEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
                     ' <a class="btn btn-danger btn-sm" onclick="DeleteRole(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
                 object += '</tr>';
@@ -59,7 +60,20 @@ function DeleteRole(id) {
         reverseButtons: true
     }).then((res) => {
         if (res.isConfirmed) {
-            alert("Xóa thành công");
+            $.ajax({
+                url: '/Role/Delete?id=' + id,
+                type: 'POST',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success === true) {
+                        ShowRoleData();
+                        toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
+                    } else {
+                        toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
+                    }
+                }
+            })
         }
     })
 }

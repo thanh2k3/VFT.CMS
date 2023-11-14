@@ -9,8 +9,8 @@ namespace VFT.CMS.Core
 {
 	public class Role : IdentityRole<int>
 	{
-		//public Role() : base() { }
-
-		//public Role(string roleName) : base(roleName) { }
-	}
+        public string? Description { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
 }

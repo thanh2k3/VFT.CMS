@@ -33,12 +33,14 @@ namespace VFT.CMS.Application.Roles
 		public async Task<bool> Create(RoleDto model)
 		{
 			var role = _mapper.Map<Role>(model);
-			var roleExists = await _roleManager.RoleExistsAsync(role.Name);
+			var roleExists = await _roleManager.RoleExistsAsync(model.Name);
 			if (!roleExists)
 			{
 				Role data = new Role
 				{
-					Name = role.Name
+					Name = role.Name,
+					Description = role.Description,
+					CreatedDate = DateTime.Now,
 				};
 				await _roleManager.CreateAsync(data);
 
@@ -63,8 +65,17 @@ namespace VFT.CMS.Application.Roles
 			if (role != null)
 			{
 				role.Name = data.Name;
+				role.Description = data.Description;
+				role.ModifiedDate = DateTime.Now;
+
 				await _roleManager.UpdateAsync(role);
 			}
         }
-	}
+
+        public async Task Delete(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            await _roleManager.DeleteAsync(role);
+        }
+    }
 }

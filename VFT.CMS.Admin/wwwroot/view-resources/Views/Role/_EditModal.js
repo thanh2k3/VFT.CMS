@@ -7,7 +7,8 @@ function UpdateRole() {
 
     var objData = {
         id: $('#RoleEditModal #Id').val(),
-        Name: $('#RoleEditModal #Name').val()
+        Name: $('#RoleEditModal #Name').val(),
+        Description: $('#RoleEditModal #Description').val()
     };
 
     $.ajax({

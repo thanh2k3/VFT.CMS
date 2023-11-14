@@ -13,5 +13,9 @@ namespace VFT.CMS.Application.Roles.Dto
 		public int Id { get; set; }
 		[DisplayName("Tên quyền")]
 		public string Name { get; set; }
-	}
+        [DisplayName("Mô tả")]
+        public string? Description { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
 }

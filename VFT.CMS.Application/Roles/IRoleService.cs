@@ -13,5 +13,6 @@ namespace VFT.CMS.Application.Roles
 		Task<RoleDto> GetById(int Id);
 		Task<bool> Create(RoleDto model);
 		Task Update(RoleDto model);
-	}
+        Task Delete(int id);
+    }
 }

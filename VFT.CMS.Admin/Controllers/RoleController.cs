@@ -73,5 +73,17 @@ namespace VFT.CMS.Admin.Controllers
 
             return Json(new { success = false, message = "Cập nhật dữ liệu thất bại" });
         }
-	}
+
+        [HttpPost]
+        public async Task<JsonResult> Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                await _roleService.Delete(id);
+
+                return Json(new { success = true, message = "Xóa thành công" });
+            }
+            return Json(new { success = false, message = "Xóa thất bại" });
+        }
+    }
 }

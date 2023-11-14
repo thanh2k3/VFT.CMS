@@ -19,6 +19,12 @@
 			</label>
 			<input type="text" asp-for="Name" class="form-control" onkeyup="OnKeyUpRoleEdit()" required placeholder="Nhập tên quyền..." autocomplete="off" />
 		</div>
+		<div class="form-group">
+			<label asp-for="Description">
+				@Html.DisplayNameFor(model => model.Description)
+			</label>
+			<textarea asp-for="Description" class="form-control" placeholder="Nhập mô tả..."></textarea>
+		</div>
 	</form>
 </div>
 <div class="modal-footer">
