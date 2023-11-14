@@ -2,30 +2,56 @@
     ShowRoleData();
 
     $('#RoleCreateModal .modal-title').text("Thêm mới Quyền");
+
+    $('#tableRole_length').addClass('pt-3 pl-4');
+    $('#tableRole_filter').addClass('pt-3 pr-4');
+    $('#tableRole_info').addClass('mt-2 pl-4');
+    $('#tableRole_paginate').addClass('pb-3 pr-4 pt-3');
 })
 
 function ShowRoleData() {
-    $.ajax({
-        url: '/Role/GetData',
-        type: 'GET',
-        dataType: 'json',
-        contentType: 'application/json;charset=utf-8',
-        success: function (result) {
-            var object = '';
-            $.each(result, function (index, item) {
-                object += '<tr>';
-                object += '<td>' + item.name + '</td>';
-                object += '<td>' + item.description + '</td>';
-                object += '<td class="text-center"><a class="btn btn-warning btn-sm" onclick="ShowRoleEditData(' + item.id + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
-                    ' <a class="btn btn-danger btn-sm" onclick="DeleteRole(' + item.id + ')"><i class="fas fa-trash"></i> Xóa</a></td>';
-                object += '</tr>';
-            });
-            $('#tblRoleBody').html(object);
+    $('#tableRole').DataTable({
+        language: {
+            lengthMenu: 'Hiển thị _MENU_ bản ghi',
+            search: 'Tìm kiếm:',
+            info: 'Hiển thị _START_ đến _END_ của _TOTAL_ bản ghi',
+            infoEmpty: 'Chưa có bản ghi nào để hiển thị',
+            paginate: {
+                previous: 'Trước',
+                next: 'Sau',
+            },
+            emptyTable: 'Chưa có dữ liệu, vui lòng thêm dữ liệu vào',
         },
-        error: function () {
-            alert('Không thể lấy dữ liệu');
-        }
-    });
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        filter: true,
+        ajax: {
+            url: '/Role/GetRoles',
+            type: 'POST',
+            dataType: 'json'
+        },
+        columns: [
+            {
+                data: 'name',
+                autoWidth: true
+            },
+            {
+                data: 'description',
+                autoWidth: true,
+                render: function (data) {
+                    return '<td>' + (data ? data : "-") + '</td>'
+                }
+            },
+            {
+                data: 'id',
+                render: function (data) {
+                    return '<a class="btn btn-warning btn-sm" onclick="ShowRoleEditData(' + data + ')"><i class="fas fa-pencil-alt"></i> Sửa</a>' +
+                        ' <a class="btn btn-danger btn-sm" onclick="DeleteRole(' + data + ')"><i class="fas fa-trash"></i> Xóa</a></td >'
+                }
+            },
+        ]
+    })
 }
 
 //View Edit

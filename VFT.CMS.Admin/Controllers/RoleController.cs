@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using VFT.CMS.Admin.ViewModels.Roles;
 using VFT.CMS.Application.Roles;
 using VFT.CMS.Application.Roles.Dto;
+using VFT.CMS.Core;
+using VFT.CMS.Repository.Data;
 
 namespace VFT.CMS.Admin.Controllers
 {
@@ -13,11 +15,13 @@ namespace VFT.CMS.Admin.Controllers
 	{
 		private readonly IRoleService _roleService;
 		private readonly IMapper _mapper;
+		private readonly AppDBContext _context;
 
-		public RoleController(IRoleService roleService, IMapper mapper)
+		public RoleController(IRoleService roleService, IMapper mapper, AppDBContext context)
 		{
 			_roleService = roleService;
 			_mapper = mapper;
+			_context = context;
 		}
 
 		public IActionResult Index()
@@ -25,12 +29,31 @@ namespace VFT.CMS.Admin.Controllers
 			return View();
 		}
 
-		public async Task<JsonResult> GetData()
+		public IActionResult GetRoles()
 		{
-			var roleDto = await _roleService.GetAll();
-			var roleVM = _mapper.Map<IEnumerable<RoleViewModel>>(roleDto);
-
-			return Json(roleVM);
+			try
+			{
+				var draw = Request.Form["draw"].FirstOrDefault();
+				var start = Request.Form["start"].FirstOrDefault();
+				var length = Request.Form["length"].FirstOrDefault();
+				var searchValue = Request.Form["search[value]"].FirstOrDefault();
+				int pageSize = length != null ? Convert.ToInt32(length) : 0;
+				int skip = start != null ? Convert.ToInt32(start) : 0;
+				int recordsTotal = 0;
+				IQueryable<Role> roleData = _context.Roles;
+				if (!string.IsNullOrEmpty(searchValue))
+				{
+					roleData = roleData.Where(m => m.Name.Contains(searchValue));
+				}
+				recordsTotal = roleData.Count();
+				var data = roleData.OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
+                var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
+				return Ok(jsonData);
+            }
+			catch (Exception ex)
+			{
+				throw;
+			}
 		}
 
 		[HttpPost]
