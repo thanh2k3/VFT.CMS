@@ -16,7 +16,7 @@
         dataType: 'json',
         success: function (result) {
             if (result.success === true) {
-                ShowRoleData();
+                roleTable.ajax.reload();
                 HideRoleCreateModal();
                 toastr.success(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }

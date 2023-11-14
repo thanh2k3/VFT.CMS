@@ -17,8 +17,8 @@ function UpdateRole() {
         type: 'POST',
         success: function (result) {
             if (result.success === true) {
+                roleTable.ajax.reload();
                 HideRoleEditModal();
-                ShowRoleData();
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             } else {
                 toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })

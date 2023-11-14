@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    var roleTable;
+
     ShowRoleData();
 
     $('#RoleCreateModal .modal-title').text("Thêm mới Quyền");
@@ -10,7 +12,7 @@
 })
 
 function ShowRoleData() {
-    $('#tableRole').DataTable({
+    roleTable = $('#tableRole').DataTable({
         language: {
             lengthMenu: 'Hiển thị _MENU_ bản ghi',
             search: 'Tìm kiếm:',
@@ -93,7 +95,7 @@ function DeleteRole(id) {
                 dataType: 'json',
                 success: function (result) {
                     if (result.success === true) {
-                        ShowRoleData();
+                        roleTable.ajax.reload();
                         toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
                     } else {
                         toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
