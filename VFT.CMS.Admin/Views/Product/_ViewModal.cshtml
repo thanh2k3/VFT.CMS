@@ -45,7 +45,7 @@
 							@Html.DisplayNameFor(model => model.Price)
 						</label>
 						<div class="col-sm-8">
-							<input asp-for="Price" disabled type="number" class="form-control" >
+							<input asp-for="Price" disabled type="text" class="form-control input-amount">
 						</div>
 					</div>
 				</div>
@@ -68,3 +68,5 @@
 <div class="modal-footer">
 	<button class="btn btn-default btn-sm" data-dismiss="modal">Trờ về</button>
 </div>
+
+<script src="~/view-resources/Views/Product/_ViewModal.js" asp-append-version="true"></script>

@@ -88,6 +88,7 @@ function ShowViewProductData(id) {
             if (result != null || result != undefined) {
                 $('#ProductViewModal').find('.modal-content').html(result);
                 $('#ProductViewModal').modal('show');
+                $('#ProductViewModal').registerInputAmount();
                 $('#ProductViewModal').find('.modal-title').text("Xem sản phẩm");
             }
         }
@@ -106,6 +107,7 @@ function ShowProductEditData(id) {
                 $('#ProductEditModal').find('.modal-content').html(result);
                 $('#ProductEditModal').find('#CategoryId option:first').css('display', 'none');
                 $('#ProductEditModal').modal('show');
+                $('#ProductEditModal').find('form').registerInputAmount();
                 $('#ProductEditModal .modal-title').text('Sửa sản phẩm');
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
@@ -145,3 +147,10 @@ function DeleteProduct(id) {
         }
     })
 }
+
+(function ($) {
+    var _$modal = $('#ProductCreateModal'),
+        _$form = _$modal.find('form');
+
+    _$form.registerInputAmount();
+})(jQuery);

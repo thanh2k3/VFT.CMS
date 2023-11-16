@@ -7,7 +7,7 @@
     var formData = new FormData();
     formData.append('Name', $('#ProductCreateModal #Name').val());
     formData.append('CategoryId', $('#ProductCreateModal #CategoryId').find('option:selected').val());
-    formData.append('Price', $('#ProductCreateModal #Price').val());
+    formData.append('Price', ($('#ProductCreateModal #Price').val()).replaceAll('.', ''));
     formData.append('Description', $('#ProductCreateModal #Description').val());
     formData.append('Image', $('#ProductCreateModal #Image')[0].files[0]);
 

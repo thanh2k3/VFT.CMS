@@ -8,7 +8,7 @@
     formData.append('Id', $('#ProductEditModal #Id').val())
     formData.append('Name', $('#ProductEditModal #Name').val())
     formData.append('CategoryId', $('#ProductEditModal #CategoryId').find('option:selected').val())
-    formData.append('Price', $('#ProductEditModal #Price').val())
+    formData.append('Price', ($('#ProductEditModal #Price').val()).replaceAll('.', ''));
     formData.append('Description', $('#ProductEditModal #Description').val())
     formData.append('Image', $('#ProductEditModal #Image')[0].files[0])
 
