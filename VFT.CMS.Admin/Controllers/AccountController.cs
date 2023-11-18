@@ -20,7 +20,7 @@ namespace VFT.CMS.Admin.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly RoleManager<Role> _roleManager;
-        private readonly IMapper _mapper;
+		private readonly IMapper _mapper;
 
         public AccountController(IAccountService accountService, IMapper mapper, RoleManager<Role> roleManager)
         {
@@ -44,22 +44,20 @@ namespace VFT.CMS.Admin.Controllers
             return View();
         }
 
-		[HttpPost]
-		public async Task<ActionResult> Login(LoginViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-				var loginDto = _mapper.Map<LoginDto>(model);
-				var result = await _accountService.Login(loginDto);
-				if (result)
-				{
-                    return RedirectToAction("Index", "Home");
-				}
+        [HttpPost]
+        public async Task<JsonResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var loginDto = _mapper.Map<LoginDto>(model);
+                var result = await _accountService.Login(loginDto);
+                if (result)
+                {
+                    return Json(new { success = true });
+                }
+			}
 
-                return RedirectToAction("Login", "Account");
-            }
-
-            return RedirectToAction("Login", "Account");
+            return Json(new { success = false });
         }
 
         [Authorize]
