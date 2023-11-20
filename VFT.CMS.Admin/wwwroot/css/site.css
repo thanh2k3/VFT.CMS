@@ -20,3 +20,9 @@ html {
     right: 30px;
     display: none;
 }
+
+/* custom validation */
+.form-control:valid {
+    border-color: #ced4da !important;
+    background-image: none !important;
+}

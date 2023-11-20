@@ -1,8 +1,11 @@
 ﻿function Login() {
-    var res = ValidateLoginAdmin();
-    if (res == false) {
-        return false
-    }
+    $('#formLogin').submit(function (e) {
+        e.preventDefault();
+    })
+
+    var isValid = $("#formLogin").valid();
+    if (!isValid)
+        return
 
     var objData = {
         UserName: $('#UserName').val(),
@@ -30,37 +33,25 @@
     });
 }
 
-function ValidateLoginAdmin() {
-    var isValid = true;
-
-    if ($('#formLogin #UserName').val().trim() == "") {
-        $('#formLogin #UserName').css('border-color', '#dc3545');
-        isValid = false;
+$('#formLogin').validate({
+    errorPlacement: function (error, element) {
+        return true;
     }
+})
 
-    if ($('#formLogin #Password').val().trim() == "") {
-        $('#formLogin #Password').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-$("#formLogin #UserName").keypress(function (e) {
-    if (e.keyCode != 13) {
-        $('#formLogin #UserName').css('border-color', '#ced4da');
-    }
-});
-
-$("#formLogin #Password").keypress(function (e) {
-    if (e.keyCode != 13) {
-        $('#formLogin #Password').css('border-color', '#ced4da');
-    }
-});
-
-$("#formLogin #UserName,#Password").keypress(function (e) {
-    if (e.keyCode == 13) {
-        e.preventDefault();
-        Login();
-    }
-});
+// Dùng để validation hoạt động
+$(document).ready(function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})
