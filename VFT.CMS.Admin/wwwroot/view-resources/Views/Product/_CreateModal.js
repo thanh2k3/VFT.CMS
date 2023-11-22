@@ -1,8 +1,15 @@
 ﻿function CreateProduct() {
-    var res = ValidateProductCreate();
-    if (res == false) {
-        return false
-    }
+    $('#formCreateProduct').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formCreateProduct').addClass('was-validated')
+
+    var isValid = $("#formCreateProduct").valid();
+    if (!isValid)
+        return
 
     var formData = new FormData();
     formData.append('Name', $('#ProductCreateModal #Name').val());
@@ -32,53 +39,19 @@
     });
 }
 
-function HideProductCreateModal() {
-    ClearTextBoxProductCreate();
-    $('#ProductCreateModal').modal('hide');
-    $('#ProductCreateModal #Name').css('border-color', '#ced4da');
-    $('#ProductCreateModal #CategoryId').css('border-color', '#ced4da');
-    $('#ProductCreateModal #Price').css('border-color', '#ced4da');
-    $('#ProductCreateModal #targetImage').attr('src', "/image/product/noimage.png");
-}
-
 function ClearTextBoxProductCreate() {
     $('#ProductCreateModal #Name').val('');
-    $('#ProductCreateModal #CategoryId').val(defaultOption);
+    $('#ProductCreateModal #CategoryId').prop('selectedIndex', 0)
     $('#ProductCreateModal #Price').val('');
     $('#ProductCreateModal #Description').val('');
     $('#ProductCreateModal #Image').val('');
 }
 
-function ValidateProductCreate() {
-    var isValid = true;
 
-    if ($('#ProductCreateModal #Name').val().trim() == "") {
-        $('#ProductCreateModal #Name').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#ProductCreateModal #CategoryId').val().trim() == defaultOption) {
-        $('#ProductCreateModal #CategoryId').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#ProductCreateModal #Price').val().trim() == "") {
-        $('#ProductCreateModal #Price').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function OnKeyUpProductCreateName() {
-    $('#ProductCreateModal #Name').css('border-color', '#ced4da');
-}
-
-function ChangeSelect(obj) {
-    var value = obj.value;
-    if (value != "" && value != defaultOption) {
-        $('#ProductCreateModal #CategoryId').css('border-color', '#ced4da');
-    }
+function HideProductCreateModal() {
+    ClearTextBoxProductCreate();
+    $('#ProductCreateModal').modal('hide');
+    $('#formCreateProduct').removeClass('was-validated');
 }
 
 // Bắt sự kiện nhất nút Esc
@@ -97,10 +70,3 @@ function LoadProductCreateImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-function OnKeyUpProductCreatePrice(evt) {
-    if (evt.keyCode >= 48 && evt.keyCode <= 57) {
-        $('#ProductCreateModal #Price').css('border-color', '#ced4da');
-    }
-}
-

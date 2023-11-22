@@ -13,7 +13,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post">
+				<form id="formCreateProduct" class="needs-validation" novalidate method="post">
 					<div class="row mb-3">
 						<div class="col-md-4">
 							<img src="~/image/product/noimage.png" class="img-responsive img-thumbnail" id="targetImage" style="width: 100%; max-height: 500px;" />
@@ -27,7 +27,7 @@
 											<span class="text-danger">*</span>
 										</label>
 										<div class="col-sm-8">
-											<input asp-for="Name" class="form-control" onkeyup="OnKeyUpProductCreateName()" type="text" required placeholder="Nhập tên sản phẩm..." autocomplete="off" />
+											<input asp-for="Name" name="name" class="form-control" type="text" required placeholder="Nhập tên sản phẩm..." autocomplete="off" />
 										</div>
 									</div>
 								</div>
@@ -38,8 +38,8 @@
 											<span class="text-danger">*</span>
 										</label>
 										<div class="col-sm-8">
-											<select asp-for="CategoryId" asp-items="ViewBag.Categories" onchange="ChangeSelect(this)" required class="form-control">
-												<option>--Chọn danh mục--</option>
+											<select asp-for="CategoryId" asp-items="ViewBag.Categories" required class="form-control">
+												<option value="">--Chọn danh mục--</option>
 											</select>
 										</div>
 									</div>
@@ -53,7 +53,7 @@
 											<span class="text-danger">*</span>
 										</label>
 										<div class="col-sm-8">
-											<input asp-for="Price" type="text" class="form-control input-amount" onkeyup="OnKeyUpProductCreatePrice(event)" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
+											<input asp-for="Price" name="price" type="text" class="form-control input-amount" required placeholder="Nhập giá sản phẩm..." autocomplete="off">
 										</div>
 									</div>
 								</div>
@@ -86,7 +86,7 @@
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="HideProductCreateModal()">Hủy</button>
-				<button class="btn btn-success btn-sm" onclick="CreateProduct()">Tạo</button>
+				<button type="submit" class="btn btn-success btn-sm" onclick="CreateProduct()">Tạo</button>
 			</div>
 		</div>
 	</div>

@@ -73,7 +73,7 @@ namespace VFT.CMS.Admin.Controllers
 			}
 		}
 
-
+		[HttpPost]
 		public async Task<JsonResult> Create(CreateProductViewModel model, IFormFile? image)
         {
             if (ModelState.IsValid)

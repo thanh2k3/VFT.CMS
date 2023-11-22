@@ -1,8 +1,15 @@
 ﻿function UpdateProduct() {
-    var res = ValidateProductEdit();
-    if (res == false) {
-        return false;
-    }
+    $('#formEditProduct').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formEditProduct').addClass('was-validated')
+
+    var isValid = $("#formEditProduct").valid();
+    if (!isValid)
+        return
 
     var formData = new FormData();
     formData.append('Id', $('#ProductEditModal #Id').val())
@@ -21,37 +28,13 @@
         success: function (result) {
             if (result.success === true) {
                 dataTable.ajax.reload();
-                HideProductEditModal();
+                $('#ProductEditModal').modal('hide');
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             } else {
                 toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
         }
     });
-}
-
-function HideProductEditModal() {
-    $('#ProductEditModal').modal('hide');
-}
-
-function ValidateProductEdit() {
-    var isValid = true;
-
-    if ($('#ProductEditModal #Name').val().trim() == "") {
-        $('#ProductEditModal #Name').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#ProductEditModal #Price').val().trim() == "") {
-        $('#ProductEditModal #Price').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function OnKeyUpProductEdit() {
-    $('#ProductEditModal #Name').css('border-color', '#ced4da');
 }
 
 function LoadProductEditImage(input) {
