@@ -26,3 +26,7 @@ html {
     border-color: #ced4da !important;
     background-image: none !important;
 }
+
+.form-control.is-valid, .was-validated .form-control:valid {
+    padding-right: 12px !important;
+}

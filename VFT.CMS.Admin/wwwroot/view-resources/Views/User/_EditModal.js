@@ -1,4 +1,16 @@
 ﻿function UpdateUser() {
+    $('#formEditUser').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formEditUser').addClass('was-validated')
+
+    var isValid = $("#formEditUser").valid();
+    if (!isValid)
+        return
+
     var formData = new FormData();
     formData.append('Id', $('#UserEditModal #Id').val());
     formData.append('Email', $('#UserEditModal #Email').val());
@@ -15,17 +27,13 @@
         success: function (result) {
             if (result.success === true) {
                 dataTable.ajax.reload();
-                HideUserEditModal();
+                $('#UserEditModal').modal('hide');
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             } else {
                 toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
         }
     });
-}
-
-function HideUserEditModal() {
-    $('#UserEditModal').modal('hide');
 }
 
 function LoadUserEditImage(input) {

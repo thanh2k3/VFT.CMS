@@ -1,8 +1,15 @@
 ﻿function CreateUser() {
-    var res = ValidateUserCreate();
-    if (res == false) {
-        return false
-    }
+    $("#formCreateUser").validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    });
+
+    $('#formCreateUser').addClass('was-validated')
+
+    var isValid = $("#formCreateUser").valid();
+    if (!isValid)
+        return
 
     var formData = new FormData();
     formData.append('Email', $('#UserCreateModal #Email').val());
@@ -40,34 +47,10 @@
     });
 }
 
-function ValidateUserCreate() {
-    var isValid = true;
-
-    if ($('#UserCreateModal #Email').val().trim() == "") {
-        $('#UserCreateModal #Email').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#UserCreateModal #Password').val().trim() == "") {
-        $('#UserCreateModal #Password').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    if ($('#UserCreateModal #ConfirmPassword').val().trim() == "") {
-        $('#UserCreateModal #ConfirmPassword').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
 function HideUserCreateModal() {
     ClearTextBoxUserCreate();
     $('#UserCreateModal').modal('hide');
-    $('#UserCreateModal #Email').css('border-color', '#ced4da');
-    $('#UserCreateModal #Password').css('border-color', '#ced4da');
-    $('#UserCreateModal #ConfirmPassword').css('border-color', '#ced4da');
-    $('#UserCreateModal #CreatedDate').css('border-color', '#ced4da');
+    $('#formCreateUser').removeClass('was-validated');
 }
 
 function ClearTextBoxUserCreate() {
@@ -83,23 +66,5 @@ function ClearTextBoxUserCreate() {
 function EscUserCreateModal(evt) {
     if (evt.keyCode == 27) {
         HideUserCreateModal();
-    }
-}
-
-function OnKeyUpUserCreateEmail() {
-    $('#UserCreateModal #Email').css('border-color', '#ced4da');
-}
-
-function OnKeyUpUserCreatePassword() {
-    $('#UserCreateModal #Password').css('border-color', '#ced4da');
-}
-
-function OnKeyUpUserCreateConfirmPassword() {
-    $('#UserCreateModal #ConfirmPassword').css('border-color', '#ced4da');
-}
-
-function OnKeyUpUserCreateCreatedDate(evt) {
-    if (evt.keyCode >= 48 && evt.keyCode <= 57) {
-        $('#UserCreateModal #CreatedDate').css('border-color', '#ced4da');
     }
 }
