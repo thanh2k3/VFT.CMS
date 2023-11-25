@@ -66,7 +66,6 @@ function ShowRoleEditData(id) {
         success: function (result) {
             if (result != null || result != undefined) {
                 $('#RoleEditModal').find('.modal-content').html(result);
-                $('#RoleEditModal .modal-title').text('Sửa quyền');
                 $('#RoleEditModal').modal('show');
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });

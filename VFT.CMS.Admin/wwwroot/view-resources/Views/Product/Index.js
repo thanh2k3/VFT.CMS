@@ -3,7 +3,7 @@
 $(document).ready(function () {
     ShowProductData();
 
-    $('#ProductCreateModal .modal-title').text('Thêm mới sản phẩm');
+    $('#ProductCreateModal .modal-title').text('Thêm mới Sản phẩm');
 
     $('#tableProduct_length').addClass('pt-3 pl-4');
     $('#tableProduct_filter').addClass('pt-3 pr-4');
