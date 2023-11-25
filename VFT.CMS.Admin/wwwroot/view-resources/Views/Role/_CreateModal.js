@@ -1,8 +1,15 @@
 ﻿function CreateRole() {
-    var res = ValidateRoleCreate();
-    if (res == false) {
-        return false;
-    }
+    $('#formCreateRole').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formCreateRole').addClass('was-validated')
+
+    var isValid = $("#formCreateRole").valid();
+    if (!isValid)
+        return
 
     var objData = {
         Name: $('#RoleCreateModal #Name').val(),
@@ -27,35 +34,19 @@
     });
 }
 
-function ValidateRoleCreate() {
-    var isValid = true;
-
-    if ($('#RoleCreateModal #Name').val().trim() == "") {
-        $('#RoleCreateModal #Name').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
 function HideRoleCreateModal() {
     ClearTextBoxRoleCreate();
     $('#RoleCreateModal').modal('hide');
-    $('#RoleCreateModal #Name').css('border-color', '#ced4da');
+    $('#formCreateRole').removeClass('was-validated');
 }
 
 function ClearTextBoxRoleCreate() {
     $('#RoleCreateModal #Name').val('');
     $('#RoleCreateModal #Description').val('');
-    $('#RoleCreateModal #Name').css('border-color', '#ced4da');
 }
 
 function EscRoleCreateModal(evt) {
     if (evt.keyCode == 27) {
         HideRoleCreateModal();
     }
-}
-
-function OnKeyUpRoleCreate() {
-    $('#RoleCreateModal #Name').css('border-color', '#ced4da');
 }

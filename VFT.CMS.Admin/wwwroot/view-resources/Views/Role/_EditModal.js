@@ -1,9 +1,16 @@
 ﻿// Update
 function UpdateRole() {
-    var res = ValidateRoleEdit();
-    if (res == false) {
-        return false;
-    }
+    $('#formEditRole').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formEditRole').addClass('was-validated')
+
+    var isValid = $('#formEditRole').valid();
+    if (!isValid)
+        return
 
     var objData = {
         id: $('#RoleEditModal #Id').val(),
@@ -18,31 +25,11 @@ function UpdateRole() {
         success: function (result) {
             if (result.success === true) {
                 roleTable.ajax.reload();
-                HideRoleEditModal();
+                $('#RoleEditModal').modal('hide');
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             } else {
                 toastr.error(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             }
         }
     });
-}
-
-function ValidateRoleEdit() {
-    var isValid = true;
-
-    if ($('#RoleEditModal #Name').val().trim() == "") {
-        $('#RoleEditModal #Name').css('border-color', '#dc3545');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function HideRoleEditModal() {
-    $('#RoleEditModal').modal('hide');
-    $('#RoleEditModal #Name').css('border-color', '#ced4da');
-}
-
-function OnKeyUpRoleEdit() {
-    $('#RoleEditModal #Name').css('border-color', 'lightgrey');
 }
