@@ -9,7 +9,8 @@ namespace VFT.CMS.Application.Products
 		Task<IEnumerable<ProductDto>> GetAll();
 		Task<ProductDto> GetById(int id);
 		Task<bool> Create(CreateProductDto model, IFormFile? image);
-		Task Update(EditProductDto model, IFormFile? image);
+		Task<bool> Update(EditProductDto model, IFormFile? image);
+		Task<bool> CheckExists(EditProductDto model);
 		Task Delete(int id);
 	}
 }

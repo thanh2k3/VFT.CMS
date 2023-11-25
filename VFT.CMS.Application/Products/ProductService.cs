@@ -72,7 +72,18 @@ namespace VFT.CMS.Application.Products
             return false;
         }
 
-        public async Task Update(EditProductDto model, IFormFile? image)
+        public async Task<bool> CheckExists(EditProductDto model)
+        {
+            var product = _mapper.Map<Product>(model);
+            var exists = await _context.Products.AnyAsync(x => x.Name == model.Name && x.Id != model.Id);
+            if (exists)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> Update(EditProductDto model, IFormFile? image)
         {
             var product = _mapper.Map<Product>(model);
             var data = await _context.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
@@ -96,7 +107,11 @@ namespace VFT.CMS.Application.Products
 
                 _context.Products.Update(data);
                 await Save();
+                
+                return true;
             }
+
+            return false;
         }
 
         public async Task Delete(int id)

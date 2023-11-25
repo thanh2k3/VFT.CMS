@@ -121,9 +121,16 @@ namespace VFT.CMS.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				var productDto = _mapper.Map<EditProductDto>(model);
+
+				var exists = await _productService.CheckExists(productDto);
+				if (!exists)
+				{
+					return Json(new { success = false, message = "Sản phẩm đã tồn tại" });
+                }
+
 				await _productService.Update(productDto, image);
 
-				return Json(new { success = true, message = "Cập nhật sản phẩm thành công" });
+                return Json(new { success = true, message = "Cập nhật sản phẩm thành công" });
 			}
 
 			return Json(new { success = false, message = "Cập nhật sản phẩm thất bại" });
