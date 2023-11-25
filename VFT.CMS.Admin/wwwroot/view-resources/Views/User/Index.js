@@ -81,7 +81,7 @@ function ShowUserEditData(id) {
             if (result != null || result != undefined) {
                 $('#UserEditModal').find('.modal-content').html(result);
                 $('#UserEditModal').modal('show');
-                $('#UserEditModal').find('.modal-title').text("Sửa " + "[" + id + "]");
+                //$('#UserEditModal').find('.modal-title').text("Sửa " + "[" + id + "]");
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
