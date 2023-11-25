@@ -81,7 +81,6 @@ function ShowUserEditData(id) {
             if (result != null || result != undefined) {
                 $('#UserEditModal').find('.modal-content').html(result);
                 $('#UserEditModal').modal('show');
-                //$('#UserEditModal').find('.modal-title').text("Sửa " + "[" + id + "]");
             } else {
                 toastr.error(null, "không thể đọc dữ liệu", { timeOut: 3000, positionClass: 'toast-bottom-right' });
             }
@@ -99,7 +98,6 @@ function ShowUserViewModal(id) {
             if (result != null || result != undefined) {
                 $('#UserViewModal').find('.modal-content').html(result);
                 $('#UserViewModal').modal('show');
-                $('#UserViewModal').find('.modal-title').text("Xem " + "[" + id + "]");
             }
         }
     });
