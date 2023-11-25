@@ -1,8 +1,15 @@
 ﻿function CreateCategory() {
-    var res = ValidateCategoryCreate();
-    if (res == false) {
-        return false;
-    }
+    $('#formCreateCategory').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formCreateCategory').addClass('was-validated')
+
+    var isValid = $("#formCreateCategory").valid();
+    if (!isValid)
+        return
 
     var objData = {
         Name: $('#CategoryCreateModal #Name').val()
@@ -29,29 +36,11 @@
 function HideCategoryCreateModal() {
     ClearTextBoxCategoryCreate();
     $('#CategoryCreateModal').modal('hide');
-    $('#CategoryCreateModal #Name').css('border-color', '#ced4da');
-    $('#CategoryCreateModal #errorIcon').css('display', 'none');
+    $('#formCreateCategory').removeClass('was-validated');
 }
 
 function ClearTextBoxCategoryCreate() {
     $('#CategoryCreateModal #Name').val('');
-}
-
-function ValidateCategoryCreate() {
-    var isValid = true;
-
-    if ($('#CategoryCreateModal #Name').val().trim() == "") {
-        $('#CategoryCreateModal #Name').css('border-color', '#dc3545');
-        $('#CategoryCreateModal #errorIcon').css('display', 'block');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function OnKeyUpCategoryCreate() {
-    $('#CategoryCreateModal #Name').css('border-color', 'lightgrey');
-    $('#CategoryCreateModal #errorIcon').css('display', 'none');
 }
 
 // Bắt sự kiện nhấn nút Esc

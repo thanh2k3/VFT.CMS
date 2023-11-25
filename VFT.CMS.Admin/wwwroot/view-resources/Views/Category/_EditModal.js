@@ -1,9 +1,16 @@
 ﻿// Update
 function UpdateCategory() {
-    var res = ValidateCategoryUpdate();
-    if (res == false) {
-        return false;
-    }
+    $('#formEditCategory').validate({
+        errorPlacement: function (error, element) {
+            return true;
+        },
+    })
+
+    $('#formEditCategory').addClass('was-validated')
+
+    var isValid = $("#formEditCategory").valid();
+    if (!isValid)
+        return
 
     var objData = {
         Id: $('#CategoryEditModal #Id').val(),
@@ -16,7 +23,7 @@ function UpdateCategory() {
         type: 'POST',
         success: function (result) {
             if (result.success === true) {
-                HideCategoryEditModal();
+                $('#CategoryEditModal').modal('hide');
                 ShowCategoryData();
                 toastr.info(result.message, null, { timeOut: 3000, positionClass: 'toast-bottom-right' })
             } else {
@@ -24,27 +31,4 @@ function UpdateCategory() {
             }
         }
     });
-}
-
-function HideCategoryEditModal() {
-    $('#CategoryEditModal').modal('hide');
-    $('#CategoryEditModal #Name').css('border-color', '#ced4da');
-    $('#CategoryEditModal #errorIcon').css('display', 'none');
-}
-
-function ValidateCategoryUpdate() {
-    var isValid = true;
-
-    if ($('#CategoryEditModal #Name').val().trim() == "") {
-        $('#CategoryEditModal #Name').css('border-color', '#dc3545');
-        $('#CategoryEditModal #errorIcon').css('display', 'block');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function OnKeyUpCategoryEdit() {
-    $('#CategoryEditModal #Name').css('border-color', '#ced4da');
-    $('#CategoryEditModal #errorIcon').css('display', 'none');
 }

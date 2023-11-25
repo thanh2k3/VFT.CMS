@@ -13,20 +13,18 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" onsubmit="return EnterNoLoad()">
-					<input type="hidden" asp-for="Id" />
+				<form id="formCreateCategory" class="needs-validation" novalidate method="post">
 					<div class="form-group">
 						<label asp-for="Name">
 							@Html.DisplayNameFor(model => model.Name)
 						</label>
-						<input asp-for="Name" class="form-control" onkeyup="OnKeyUpCategoryCreate()" type="text" required placeholder="Nhập tên danh mục..." autocomplete="off" />
-						<i class="fa-solid fa-circle-exclamation" id="errorIcon"></i>
+						<input asp-for="Name" class="form-control" type="text" required placeholder="Nhập tên danh mục..." autocomplete="off" />
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal" onclick="HideCategoryCreateModal()">Hủy</button>
-				<button class="btn btn-success btn-sm" onclick="CreateCategory()">Tạo</button>
+				<button type="submit" class="btn btn-success btn-sm" onclick="CreateCategory()">Tạo</button>
 			</div>
 		</div>
 	</div>

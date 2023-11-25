@@ -10,20 +10,18 @@
 	</button>
 </div>
 <div class="modal-body">
-	<form method="post" onsubmit="return EnterNoLoad()">
-		<input type="hidden" asp-for="Id" />
+	<form id="formEditCategory" class="needs-validation" novalidate method="post">
 		<div class="form-group">
 			<label asp-for="Name">
 				@Html.DisplayNameFor(model => model.Name)
 			</label>
-			<input type="text" asp-for="Name" class="form-control" onkeyup="OnKeyUpCategoryEdit()" required placeholder="Nhập tên danh mục..." autocomplete="off" />
-			<i class="fa-solid fa-circle-exclamation" id="errorIcon"></i>
+			<input type="text" asp-for="Name" class="form-control" required placeholder="Nhập tên danh mục..." autocomplete="off" />
 		</div>
 	</form>
 </div>
 <div class="modal-footer">
 	<button class="btn btn-danger btn-sm btn-default" data-dismiss="modal">Hủy</button>
-	<button class="btn btn-success btn-sm" onclick="UpdateCategory()">Lưu</button>
+	<button type="submit" class="btn btn-success btn-sm" onclick="UpdateCategory()">Lưu</button>
 </div>
 
 
