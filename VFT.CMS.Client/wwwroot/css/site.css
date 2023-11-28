@@ -13,14 +13,39 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.btn-basic {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.bd-basic {
+    border-color: var(--primary);
+}
+
+.bg-basic {
+    background-color: var(--bg-basic);
+}
+
+.text-basic {
+    color: var(--primary);
+}
+
+.bg-tag {
+    background-color: var(--secondary);
+}
+
+.text-tag {
+    color: var(--secondary);
 }
